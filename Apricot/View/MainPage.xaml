@@ -6,26 +6,39 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:converters="using:Apricot.Converters"
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
     x:Class="Apricot.View.MainPage"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MainSampleData}">
 
     <Page.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Page.Resources>
     
     <Page.Background>
-        <ImageBrush ImageSource="ms-appx:///Assets/SplashScreen.png"/>
+
+        <ImageBrush ImageSource="ms-appx:///Assets/SplashScreen.scale-240.invert.png"/>
     </Page.Background>
 
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
+            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <StackPanel VerticalAlignment="Center" Visibility="{Binding RetryIsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-        <TextBlock x:Uid="MainView_NoCommunicationEstablished" TextAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Text="Test"/>
-        <Button x:Uid="MainView_TryAgain" HorizontalAlignment="Center" Content="Try Again" Command="{Binding RetryCommand}"/>
-    </StackPanel>
+    <Grid>
+        <ProgressRing Margin="0,200,0,0" Foreground="White" IsActive="{Binding Model.IsLoading}" Background="{x:Null}"/>
+        <StackPanel Margin="12" VerticalAlignment="Bottom" Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <TextBlock x:Uid="MainView_NoCommunicationEstablished"
+                       TextAlignment="Center" 
+                       Style="{StaticResource BaseTextBlockStyle}" 
+                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis. "/>
+            <Button x:Uid="MainView_TryAgain"
+                    Margin="0,12"
+                    HorizontalAlignment="Center"
+                    Content="Try Again"
+                    Command="{Binding Model.RetryCommand}"/>
+        </StackPanel>
+    </Grid>
 </Page>

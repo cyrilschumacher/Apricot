@@ -1,9 +1,10 @@
-﻿using Apricot.Shared.Service.Apricot;
+﻿using Apricot.Shared.Model;
+using Apricot.Shared.Model.Service;
+using Apricot.Shared.Service.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
-using Apricot.Shared.Model;
-using Apricot.Shared.Model.Service;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -13,6 +14,11 @@ namespace Apricot.Shared.ViewModel
     public class MainViewModel : ViewModelBase
     {
         #region Members.
+
+        /// <summary>
+        ///     Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
 
         /// <summary>
         ///     Server service.
@@ -35,9 +41,11 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public MainViewModel()
+        /// <param name="navigationService">A navigation service.</param>
+        public MainViewModel(INavigationService navigationService)
         {
             // Initialize members.
+            _navigationService = navigationService;
             _serverService = new ServerService();
 
             // Initialize properties.
@@ -48,6 +56,14 @@ namespace Apricot.Shared.ViewModel
         #endregion Constructors.
 
         #region Methods.
+
+        /// <summary>
+        ///     Go to a Plant Chooser view.
+        /// </summary>
+        private void _GoToPlantChooserView()
+        {
+            _navigationService.NavigateTo("PlantChooser");
+        }
 
         /// <summary>
         ///     Initialize commands.
@@ -71,18 +87,30 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private async void _TestServerConnection()
         {
+            Model.RetryIsVisible = false;
+            Model.IsLoading = true;
+
             try
             {
-                Model.RetryIsVisible = false;
+                // Obtains the health of server
+                // and checks if the server is up.
                 var health = await _serverService.GetHealth();
-                if (health.Status == ServerHealthModel.HealthStatus.Down)
+
+                // If the server is up, it navigate to a next view,
+                // otherwise, it show a error message.
+                Model.RetryIsVisible = health.Status == ServerHealthModel.HealthStatus.Down;
+                if (health.Status == ServerHealthModel.HealthStatus.Up)
                 {
-                    throw new Exception();
+                    _GoToPlantChooserView();
                 }
             }
             catch (Exception)
             {
                 Model.RetryIsVisible = true;
+            }
+            finally
+            {
+                Model.IsLoading = false;
             }
         }
 

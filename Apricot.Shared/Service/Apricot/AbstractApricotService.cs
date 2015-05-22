@@ -42,6 +42,8 @@ namespace Apricot.Shared.Service.Apricot
         protected AbstractApricotService()
         {
             _httpClient = new HttpClient();
+            _httpClient.DefaultRequestHeaders.IfModifiedSince = new DateTimeOffset(DateTime.UtcNow);
+
             _serverUriAddress = new Uri(ServerAddress, UriKind.Absolute);
         }
 
@@ -73,7 +75,7 @@ namespace Apricot.Shared.Service.Apricot
             }
             if (!jsonData.IsJsonValue())
             {
-                throw new ArgumentException("The data isn't a JSON data valid.");
+                throw new ArgumentException("The data isn't a JSON data valid.", "jsonData");
             }
 
             return JsonConvert.DeserializeObject<TModel>(jsonData);

@@ -25,9 +25,15 @@ namespace Apricot.Shared.Model
         /// </summary>
         public bool IsLoading
         {
-            get { return _isLoading; }
-            set { SetValueProperty(ref _isLoading, value); }
-        } 
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                SetValueProperty(ref _isLoading, value);
+            }
+        }
 
         /// <summary>
         ///     Command for OnLoaded event.
@@ -44,9 +50,15 @@ namespace Apricot.Shared.Model
         /// </summary>
         public bool RetryIsVisible
         {
-            get { return _retryIsVisible; }
-            set { SetValueProperty(ref _retryIsVisible, value); }
-        } 
+            get
+            {
+                return _retryIsVisible;
+            }
+            set
+            {
+                SetValueProperty(ref _retryIsVisible, value);
+            }
+        }
 
         #endregion Properties.
     }

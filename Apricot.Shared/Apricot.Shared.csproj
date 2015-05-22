@@ -85,12 +85,12 @@
     <Compile Include="Model\Service\ServerHealthModel.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleData\MainSampleData.cs" />
     <Compile Include="Service\Apricot\AbstractApricotService.cs" />
     <Compile Include="Service\Apricot\PlantService.cs" />
     <Compile Include="Service\Apricot\ServerService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PlantChooserViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">
