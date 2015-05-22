@@ -80,8 +80,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\Service\DetailsPlantModel.cs" />
     <Compile Include="Model\Service\ServerHealthModel.cs" />
+    <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Apricot\AbstractApricotService.cs" />
     <Compile Include="Service\Apricot\PlantService.cs" />
