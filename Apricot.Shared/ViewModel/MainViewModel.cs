@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Windows.Input;
+using Apricot.Shared.Model;
 using Apricot.Shared.Model.Service;
 
 namespace Apricot.Shared.ViewModel
@@ -19,37 +19,14 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private readonly ServerService _serverService;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private bool _retryIsVisible;
-
         #endregion Members.
 
         #region Properties.
 
         /// <summary>
-        ///     Command for OnLoaded event.
+        ///     Gets the model.
         /// </summary>
-        public ICommand OnLoadedCommand { get; private set; }
-
-        /// <summary>
-        ///     Command for retry connection to server.
-        /// </summary>
-        public ICommand RetryCommand { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool RetryIsVisible
-        {
-            get { return _retryIsVisible; }
-            private set
-            {
-                _retryIsVisible = value;
-                RaisePropertyChanged();
-            }
-        }
+        public MainModel Model { get; private set; }
 
         #endregion Properties.
 
@@ -60,7 +37,11 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            // Initialize members.
             _serverService = new ServerService();
+
+            // Initialize properties.
+            Model = new MainModel();
             _InitializeCommands();
         }
 
@@ -73,8 +54,8 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private void _InitializeCommands()
         {
-            OnLoadedCommand = new RelayCommand(_OnLoaded);
-            RetryCommand = new RelayCommand(_TestServerConnection);
+            Model.OnLoadedCommand = new RelayCommand(_OnLoaded);
+            Model.RetryCommand = new RelayCommand(_TestServerConnection);
         }
 
         /// <summary>
@@ -92,7 +73,7 @@ namespace Apricot.Shared.ViewModel
         {
             try
             {
-                RetryIsVisible = false;
+                Model.RetryIsVisible = false;
                 var health = await _serverService.GetHealth();
                 if (health.Status == ServerHealthModel.HealthStatus.Down)
                 {
@@ -101,7 +82,7 @@ namespace Apricot.Shared.ViewModel
             }
             catch (Exception)
             {
-                RetryIsVisible = true;
+                Model.RetryIsVisible = true;
             }
         }
 
