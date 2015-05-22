@@ -1,5 +1,6 @@
-﻿<Application
-    x:Class="Apricot.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Application x:Class="Apricot.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModel="using:Apricot.Shared.ViewModel">
+  <Application.Resources>
+    <viewModel:ViewModelLocator x:Key="Locator" />
+  </Application.Resources>
 </Application>
