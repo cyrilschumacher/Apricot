@@ -1,4 +1,4 @@
-﻿using Apricot.View;
+﻿using Apricot.Views;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -14,10 +14,16 @@ namespace Apricot
     /// </summary>
     public sealed partial class App
     {
+        #region Members.
+
         /// <summary>
         ///     Transition.
         /// </summary>
         private TransitionCollection _transitions;
+
+        #endregion Members.
+
+        #region Constructors.
 
         /// <summary>
         ///     Initializes the singleton application object.  This is the first line of authored code
@@ -28,6 +34,10 @@ namespace Apricot
             InitializeComponent();
             Suspending += OnSuspending;
         }
+
+        #endregion Constructors.
+
+        #region Methods.
 
         /// <summary>
         ///     Invoked when the application is launched normally by the end user.  Other entry points
@@ -99,8 +109,10 @@ namespace Apricot
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = _transitions ?? new TransitionCollection { new NavigationThemeTransition() };
-            rootFrame.Navigated -= RootFrame_FirstNavigated;
+            if (rootFrame != null)
+            {
+                rootFrame.Navigated -= RootFrame_FirstNavigated;
+            }
         }
 
         /// <summary>
@@ -113,9 +125,12 @@ namespace Apricot
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
-            // TODO: Save application state and stop any background activity
-            deferral.Complete();
+            if (deferral != null)
+            {
+                deferral.Complete();
+            }
         }
+
+        #endregion Methods.
     }
 }

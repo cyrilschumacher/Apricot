@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Apricot.View.PlantChooserPage"
+    x:Class="Apricot.Views.PlantChooserPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,7 +17,7 @@
             <AppBarButton x:Uid="New" Icon="Add">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="Apricot.View.NewPlantPage"/>
+                        <core:NavigateToPageAction TargetPage="Apricot.Views.NewPlantPage"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>

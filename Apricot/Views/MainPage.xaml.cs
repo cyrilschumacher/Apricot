@@ -1,14 +1,14 @@
-﻿namespace Apricot.View
+﻿namespace Apricot.Views
 {
     /// <summary>
-    ///     Plant chooser View.
+    ///     Main View.
     /// </summary>
-    public sealed partial class PlantChooserPage
+    public sealed partial class MainPage
     {
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public PlantChooserPage()
+        public MainPage()
         {
             InitializeComponent();
         }

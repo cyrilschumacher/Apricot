@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="ApricotPrimaryColor">#FF6600</Color>
+    <Color x:Key="ApricotSecondaryColor">#FFF</Color>
+    <Color x:Key="ApricotFontPrimaryColor">#333333</Color>
+    
+    <SolidColorBrush x:Key="ApricotPrimaryBrush" Color="{StaticResource ApricotPrimaryColor}"/>
+    <SolidColorBrush x:Key="ApricotSecondaryBrush" Color="{StaticResource ApricotSecondaryColor}"/>
+    <SolidColorBrush x:Key="ApricotFontPrimaryBrush" Color="{StaticResource ApricotFontPrimaryColor}"/>
+    
+</ResourceDictionary>
