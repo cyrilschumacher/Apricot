@@ -120,6 +120,9 @@
   <data name="Favorites.Header" xml:space="preserve">
     <value>Favorites</value>
   </data>
+  <data name="MyGarden.Title" xml:space="preserve">
+    <value>My Garden</value>
+  </data>
   <data name="New.Label" xml:space="preserve">
     <value>New</value>
   </data>

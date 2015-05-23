@@ -48,6 +48,7 @@ namespace Apricot
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(_InitializeNavigationService);
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<PlantChooserViewModel>();
         }
 
         #endregion Constructors.

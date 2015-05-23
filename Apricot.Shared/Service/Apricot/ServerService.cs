@@ -22,7 +22,7 @@ namespace Apricot.Shared.Service.Apricot
         /// <returns>The health server.</returns>
         public async Task<ServerHealthModel> GetHealth()
         {
-            return await GetResponse<ServerHealthModel>(ServerHealthServiceName);
+            return await Get<ServerHealthModel>(ServerHealthServiceName);
         }
 
         #endregion Methods.

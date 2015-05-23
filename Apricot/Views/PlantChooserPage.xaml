@@ -6,13 +6,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    mc:Ignorable="d"> 
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
+    DataContext="{Binding PlantChooser, Source={StaticResource Locator}}"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantChooserSampleData}">
     
     <Page.Background>
         <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/PlantChooser.jpg"/>
     </Page.Background>
 
-    <Page.BottomAppBar >
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <Page.BottomAppBar>
         <CommandBar Background="#744C28" Foreground="White">
             <AppBarButton x:Uid="New" Icon="Add">
                 <interactivity:Interaction.Behaviors>
@@ -24,12 +33,20 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Pivot Title="Apricot">
+    <Pivot x:Uid="MyGarden" Title="Maecenas ut">
         <PivotItem x:Uid="Plant" Header="Vestibulum">
-            <ListBox Background="{x:Null}" ItemsSource="{Binding Plant}"/>
+            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Plant}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
-            <ListBox Background="{x:Null}" ItemsSource="{Binding Favorites}"/>
+            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Favorites}"/>
         </PivotItem>
     </Pivot>
 </Page>

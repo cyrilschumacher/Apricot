@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Apricot.Shared.Model.Service;
 using System.Collections.Generic;
+using System.Windows.Input;
 
 namespace Apricot.Shared.Model
 {
@@ -8,21 +9,22 @@ namespace Apricot.Shared.Model
     /// </summary>
     public class PlantChooserModel : NotifyPropertyChanged
     {
-        #region Members.
-
-        #endregion Members.
-
         #region Properties.
 
         /// <summary>
         ///     Gets or sets favorite plant.
         /// </summary>
-        public List<Object> Favorites { get; set; }
+        public IList<PlantModel> Favorites { get; set; }
+
+        /// <summary>
+        ///     Command for OnLoaded event.
+        /// </summary>
+        public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
         ///     Gets or sets plant.
         /// </summary>
-        public List<Object> Plant { get; set; }
+        public IList<PlantModel> Plant { get; set; }
 
         #endregion Properties.
     }
