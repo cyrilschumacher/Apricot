@@ -2,6 +2,9 @@
 
 namespace Apricot.Shared.Model
 {
+    /// <summary>
+    ///     Model for main view.
+    /// </summary>
     public class MainModel : NotifyPropertyChanged
     {
         #region Members.

@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
+using System.Threading.Tasks;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -77,8 +78,10 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
-        private void _OnLoaded()
+        private async void _OnLoaded()
         {
+            // Wait 2 seconds to avoid a graphical artifact (black screen with spinner).
+            await Task.Delay(2000);
             _TestServerConnection();
         }
 

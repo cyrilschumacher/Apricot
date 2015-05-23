@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainView_NoCommunicationEstablished.Text" xml:space="preserve">
+  <data name="Favorites.Header" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="New.Label" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NoCommunicationEstablished.Text" xml:space="preserve">
     <value>No communication is established with the server.</value>
   </data>
-  <data name="MainView_TryAgain.Content" xml:space="preserve">
+  <data name="Plant.Header" xml:space="preserve">
+    <value>Plant</value>
+  </data>
+  <data name="TryAgain.Content" xml:space="preserve">
     <value>Try again</value>
   </data>
 </root>

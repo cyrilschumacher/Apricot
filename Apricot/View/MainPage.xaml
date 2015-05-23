@@ -17,8 +17,7 @@
     </Page.Resources>
     
     <Page.Background>
-
-        <ImageBrush ImageSource="ms-appx:///Assets/SplashScreen.scale-240.invert.png"/>
+        <ImageBrush ImageSource="ms-appx:///Assets/SplashScreen.scale-240.png"/>
     </Page.Background>
 
     <interactivity:Interaction.Behaviors>
@@ -28,16 +27,16 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid>
-        <ProgressRing Margin="0,200,0,0" Foreground="White" IsActive="{Binding Model.IsLoading}" Background="{x:Null}"/>
+        <ProgressRing Margin="0,200,0,0" Foreground="#FF6600" IsActive="{Binding Model.IsLoading}" Background="{x:Null}"/>
         <StackPanel Margin="12" VerticalAlignment="Bottom" Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-            <TextBlock x:Uid="MainView_NoCommunicationEstablished"
+            <TextBlock x:Uid="NoCommunicationEstablished"
                        TextAlignment="Center" 
                        Style="{StaticResource BaseTextBlockStyle}" 
-                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis. "/>
-            <Button x:Uid="MainView_TryAgain"
+                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis."/>
+            <Button x:Uid="TryAgain"
                     Margin="0,12"
                     HorizontalAlignment="Center"
-                    Content="Try Again"
+                    Content="Aenean interdum "
                     Command="{Binding Model.RetryCommand}"/>
         </StackPanel>
     </Grid>

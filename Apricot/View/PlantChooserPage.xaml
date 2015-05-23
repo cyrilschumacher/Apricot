@@ -4,10 +4,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    mc:Ignorable="d"> 
+    
+    <Page.Background>
+        <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/PlantChooser.jpg"/>
+    </Page.Background>
 
-    <Grid>
+    <Page.BottomAppBar >
+        <CommandBar Background="#744C28" Foreground="White">
+            <AppBarButton x:Uid="New" Icon="Add">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="Apricot.View.NewPlantPage"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 
-    </Grid>
+    <Pivot Title="Apricot">
+        <PivotItem x:Uid="Plant" Header="Vestibulum">
+            <ListBox Background="{x:Null}" ItemsSource="{Binding Plant}"/>
+        </PivotItem>
+        <PivotItem x:Uid="Favorites" Header="Ante">
+            <ListBox Background="{x:Null}" ItemsSource="{Binding Favorites}"/>
+        </PivotItem>
+    </Pivot>
 </Page>

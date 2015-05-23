@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\PlantChooserModel.cs" />
     <Compile Include="Model\Service\DetailsPlantModel.cs" />
     <Compile Include="Model\Service\ServerHealthModel.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
