@@ -3,7 +3,7 @@
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
-    ///     Fake ViewModel for Main view.
+    ///     Fake view model for the "Main" view.
     /// </summary>
     public class MainSampleData
     {

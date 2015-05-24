@@ -8,9 +8,6 @@ namespace Apricot.Shared
     /// <summary>
     ///     Classe de notification entre la vue et le vue-modèle.
     /// </summary>
-    /// <copyright file="/ViewModels/NotifyPropertyChanged.cs">Copyright (c) 2012-2013 All Rights Reserved</copyright>
-    /// <author>Cyril Schumacher</author>
-    /// <date>01/04/2013T14:37:31+01:00</date>
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged
     {
         #region Événements.

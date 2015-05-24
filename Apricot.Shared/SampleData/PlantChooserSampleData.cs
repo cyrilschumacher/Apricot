@@ -5,7 +5,7 @@ using Apricot.Shared.Model.Service;
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
-    ///     Fake ViewModel for Plant chooser view.
+    ///     Fake view model for the "Plant chooser" view.
     /// </summary>
     public class PlantChooserSampleData
     {

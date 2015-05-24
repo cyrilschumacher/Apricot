@@ -24,9 +24,9 @@ namespace Apricot.Shared.Service.Apricot
         ///     Get details of a plant.
         /// </summary>
         /// <returns>Details of a plant.</returns>
-        public async Task<IList<PlantModel>> GetPlant()
+        public async Task<List<PlantModel>> GetPlant()
         {
-            return await Get<IList<PlantModel>>(DetailsPlantServiceName);
+            return await Get<List<PlantModel>>(DetailsPlantServiceName);
         }
 
         #endregion Methods.

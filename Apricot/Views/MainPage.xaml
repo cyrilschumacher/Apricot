@@ -5,14 +5,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:converters="using:Apricot.Converters"
     xmlns:sampleData="using:Apricot.Shared.SampleData"
+    xmlns:converters="using:WinRTXamlToolkit.Converters"
     x:Class="Apricot.Views.MainPage"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MainSampleData}">
 
     <Page.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
         <Style x:Key="TryAgainButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,12" />
@@ -82,19 +82,19 @@
 
     <Grid>
         <ProgressRing Margin="0,200,0,0"
-                      Foreground="{StaticResource ApricotFontPrimaryBrush}"
-                      IsActive="{Binding Model.IsLoading}"
-                      Background="{x:Null}" />
-        <StackPanel Margin="12" VerticalAlignment="Bottom" Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+			Foreground="{StaticResource ApricotFontPrimaryBrush}"
+			IsActive="{Binding Model.IsLoading}"
+			Background="{x:Null}" />
+        <StackPanel Margin="12" VerticalAlignment="Bottom" Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock x:Uid="NoCommunicationEstablished"
-                       TextAlignment="Center"
-                       Style="{StaticResource BaseTextBlockStyle}"
-                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis."
-                       Foreground="{StaticResource ApricotFontPrimaryBrush}" />
+				TextAlignment="Center"
+				Style="{StaticResource BaseTextBlockStyle}"
+				Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis."
+				Foreground="{StaticResource ApricotFontPrimaryBrush}" />
             <Button x:Uid="TryAgain"
-                    Style="{StaticResource TryAgainButtonStyle}"
-                    Content="Aenean interdum"
-                    Command="{Binding Model.RetryCommand}" />
+				Style="{StaticResource TryAgainButtonStyle}"
+				Content="Aenean interdum"
+				Command="{Binding Model.RetryCommand}" />
         </StackPanel>
     </Grid>
 </Page>

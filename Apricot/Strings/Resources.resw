@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreateNewPlant.Text" xml:space="preserve">
+    <value>Create new plant</value>
+  </data>
   <data name="Favorites.Header" xml:space="preserve">
     <value>Favorites</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="Plant.Header" xml:space="preserve">
     <value>Plant</value>
+  </data>
+  <data name="PlantName.Text" xml:space="preserve">
+    <value>Plant name</value>
   </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Try again</value>

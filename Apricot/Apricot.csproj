@@ -90,6 +90,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\TextUpperConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -169,6 +170,7 @@
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Logo\Square71x71Logo.scale-240.jpg" />
     <Content Include="Assets\Logo\StoreLogo.scale-240.jpg" />
+    <Content Include="Assets\UnknownPlant.jpg" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

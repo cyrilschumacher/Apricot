@@ -26,6 +26,7 @@ namespace Apricot.Shared.Model
         /// <summary>
         ///     Gets or sets a value that indicates a loading.
         /// </summary>
+        /// <value>Tthe value that indicates a loading.</value>
         public bool IsLoading
         {
             get
@@ -39,18 +40,21 @@ namespace Apricot.Shared.Model
         }
 
         /// <summary>
-        ///     Command for OnLoaded event.
+        ///     Get or sets a command for OnLoaded event.
         /// </summary>
+        /// <value>The command for OnLoaded event</value>
         public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
-        ///     Command for retry connection to server.
+        ///     Get or sets a command for retry connection to server.
         /// </summary>
+        /// <value>The command for retry connection to server</value>
         public ICommand RetryCommand { get; set; }
 
         /// <summary>
-        ///     Gets the visibility of the retry action.
+        ///     Gets or sets a visibility of the retry action.
         /// </summary>
+        /// <value>The visibility of the retry action</value>
         public bool RetryIsVisible
         {
             get

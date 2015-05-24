@@ -1,15 +1,16 @@
-﻿using System.Linq;
-using Apricot.Shared.Model;
+﻿using Apricot.Shared.Model;
 using Apricot.Shared.Service;
 using Apricot.Shared.Service.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Apricot.Shared.ViewModel
 {
     /// <summary>
-    ///     ViewModel for Plant chooser view.
+    ///     View model for the "Plant chooser" view.
     /// </summary>
     public class PlantChooserViewModel : ViewModelBase
     {
@@ -49,14 +50,20 @@ namespace Apricot.Shared.ViewModel
         /// <param name="navigationService">A navigation service.</param>
         public PlantChooserViewModel(INavigationService navigationService)
         {
-            // Initialize members.
-            _navigationService = navigationService;
-            _plantService = new PlantService();
-            _plantFavoriteService = new PlantFavoriteService();
+            // Don't execute the following code in design mode.
+            // This condition avoids this error: "Object reference not set to an instance of an object" during
+            // the visualizing of the XAML code in the design mode.
+            if (!IsInDesignMode)
+            {
+                // Initialize members.
+                _navigationService = navigationService;
+                _plantService = new PlantService();
+                _plantFavoriteService = new PlantFavoriteService();
 
-            // Initialize properties.
-            Model = new PlantChooserModel();
-            _InitializeCommands();
+                // Initialize properties.
+                Model = new PlantChooserModel();
+                _InitializeCommands();
+            }
         }
 
         #endregion Constructors.
@@ -74,10 +81,9 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Loads existing plant.
         /// </summary>
-        private async void _LoadPlant()
+        private async Task _LoadPlant()
         {
             Model.Plant = await _plantService.GetPlant();
-            _LoadFavoritePlant();
         }
 
         /// <summary>
@@ -92,12 +98,11 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
-        private void _OnLoaded()
+        private async void _OnLoaded()
         {
-            _LoadPlant();
+            await _LoadPlant();
+            _LoadFavoritePlant();
         }
-
-
 
         #endregion Methods.
     }

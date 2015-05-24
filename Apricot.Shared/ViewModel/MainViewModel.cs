@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Apricot.Shared.ViewModel
 {
     /// <summary>
-    ///     ViewModel for Main view.
+    ///     View model for the "main" view.
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
@@ -45,13 +45,19 @@ namespace Apricot.Shared.ViewModel
         /// <param name="navigationService">A navigation service.</param>
         public MainViewModel(INavigationService navigationService)
         {
-            // Initialize members.
-            _navigationService = navigationService;
-            _serverService = new ServerService();
+            // Don't execute the following code in design mode.
+            // This condition avoids this error: "Object reference not set to an instance of an object" during
+            // the visualizing of the XAML code in the design mode.
+            if (!IsInDesignMode)
+            {
+                // Initialize members.
+                _navigationService = navigationService;
+                _serverService = new ServerService();
 
-            // Initialize properties.
-            Model = new MainModel();
-            _InitializeCommands();
+                // Initialize properties.
+                Model = new MainModel();
+                _InitializeCommands();
+            }
         }
 
         #endregion Constructors.

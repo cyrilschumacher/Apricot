@@ -1,14 +1,33 @@
 ﻿<Page
-    x:Class="Apricot.Views.NewPlantPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Apricot.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:converters="using:Apricot.Converters"
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="Apricot.Views.NewPlantPage"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:NewPlantSampleData}"
+    DataContext="{Binding NewPlant, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Page.Resources>
+        <converters:TextUpperConverter x:Key="TextUpperConverter"/>
+    </Page.Resources>
 
-    </Grid>
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+        </core:EventTriggerBehavior>
+        <core:EventTriggerBehavior EventName="Unloaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnUnloadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <StackPanel Margin="12">
+        <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBlock x:Uid="PlantName" Text="{Binding Model.Name}" Style="{StaticResource ControlHeaderTextBlockStyle}"/>
+        <TextBox />
+    </StackPanel>
 </Page>
