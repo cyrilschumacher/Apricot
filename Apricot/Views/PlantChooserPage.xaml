@@ -11,10 +11,6 @@
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantChooserSampleData}"
     DataContext="{Binding PlantChooser, Source={StaticResource Locator}}">
 
-    <Page.Background>
-        <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/PlantChooser.jpg" />
-    </Page.Background>
-
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
@@ -24,7 +20,7 @@
     <Page.Resources>
         <DataTemplate x:Key="PlantDataTemplate">
             <ListBoxItem>
-                <TextBlock Text="{Binding Name}" FontWeight="Black" Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
             </ListBoxItem>
         </DataTemplate>
         <Style x:Key="PlantStyle" TargetType="ListBoxItem">
