@@ -1,9 +1,4 @@
-﻿using Apricot.Shared.Extension;
-using Apricot.Shared.Model;
-using Apricot.Shared.Service.Apricot;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
@@ -14,6 +9,11 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Apricot.Shared.Extension;
+using Apricot.Shared.Model;
+using Apricot.Shared.Service.Apricot;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -30,29 +30,6 @@ namespace Apricot.Shared.ViewModel
         private const int MaxPhoto = 5;
 
         #endregion Constants.
-
-        #region Members.
-
-        /// <summary>
-        ///     Application windows (with its thread).
-        /// </summary>
-        private readonly CoreApplicationView _coreApplicationView;
-
-        /// <summary>
-        ///     Plant service.
-        /// </summary>
-        private readonly PlantService _plantService;
-
-        #endregion Members.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets the model.
-        /// </summary>
-        public CreatePlantModel Model { get; private set; }
-
-        #endregion Properties.
 
         #region Constructor.
 
@@ -83,6 +60,29 @@ namespace Apricot.Shared.ViewModel
         }
 
         #endregion Constructor.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets the model.
+        /// </summary>
+        public CreatePlantModel Model { get; private set; }
+
+        #endregion Properties.
+
+        #region Members.
+
+        /// <summary>
+        ///     Application windows (with its thread).
+        /// </summary>
+        private readonly CoreApplicationView _coreApplicationView;
+
+        /// <summary>
+        ///     Plant service.
+        /// </summary>
+        private readonly PlantService _plantService;
+
+        #endregion Members.
 
         #region Methods.
 
@@ -174,11 +174,10 @@ namespace Apricot.Shared.ViewModel
             stream.Seek(0);
             var base64Data = await stream.ToBase64();
 
-            Model.Photos.Add(new PlantPhotoModel { Image = photo, Base64Data = base64Data });
+            Model.Photos.Add(new PlantPhotoModel {Image = photo, Base64Data = base64Data});
         }
 
         /// <summary>
-        /// 
         /// </summary>
         public async void _CreateNewPlantAsync()
         {
@@ -187,12 +186,13 @@ namespace Apricot.Shared.ViewModel
         }
 
         /// <summary>
-        /// 
+        ///     Returns a value indicating whether the command to create a new plant is available.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the command is available, otherwise, False.</returns>
         public bool _CreateNewPlantCanExecute()
         {
-            return !string.IsNullOrEmpty(Model.Name) && (Model.SelectedVariety != null);
+            return !string.IsNullOrEmpty(Model.Name) && (Model.SelectedVariety != null) &&
+                   (Model.SelectedDevice != null);
         }
 
         /// <summary>
@@ -219,7 +219,11 @@ namespace Apricot.Shared.ViewModel
         {
             _coreApplicationView.Activated += _OnViewActivated;
 
-            var filePicker = new FileOpenPicker { SuggestedStartLocation = PickerLocationId.PicturesLibrary, ViewMode = PickerViewMode.Thumbnail };
+            var filePicker = new FileOpenPicker
+            {
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                ViewMode = PickerViewMode.Thumbnail
+            };
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
             filePicker.FileTypeFilter.Add(".gif");

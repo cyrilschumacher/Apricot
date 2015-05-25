@@ -135,6 +135,9 @@
   <data name="NoCommunicationEstablished.Text" xml:space="preserve">
     <value>No communication is established with the server.</value>
   </data>
+  <data name="Photos.Text" xml:space="preserve">
+    <value>Photos</value>
+  </data>
   <data name="Plant.Header" xml:space="preserve">
     <value>Plant</value>
   </data>

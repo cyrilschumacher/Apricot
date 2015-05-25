@@ -31,11 +31,50 @@ namespace Apricot.Shared.Model
 
         #region Properties.
 
+        #region Commands.
+
         /// <summary>
         ///     Gets or sets a command for create a new plant.
         /// </summary>
         /// <value>The command for create a new plant.</value>
         public RelayCommand CreateCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for add a photo.
+        /// </summary>
+        /// <value>The command for add a photo.</value>
+        public ICommand AddPhotoCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for OnLoaded event.
+        /// </summary>
+        /// <value>The command for OnLoaded event.</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or set a command for OnUnloaded event.
+        /// </summary>
+        /// <value>The command for OnUnloaded event.</value>
+        public ICommand OnUnloadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for remove a photo.
+        /// </summary>
+        /// <value>The command for remove a photo.</value>
+        public ICommand RemovePhotoCommand { get; set; }
+
+        #endregion Commands.
+
+        /// <summary>
+        ///     Gets or sets devices.
+        /// </summary>
+        public ObservableCollection<DeviceModel> Devices { get; set; } 
+
+        /// <summary>
+        ///     Gets or sets a device identifier.
+        /// </summary>
+        /// <value>The device identifier.</value>
+        public DeviceModel SelectedDevice { get; set; }
 
         /// <summary>
         ///     Gets or sets a plant name.
@@ -52,12 +91,6 @@ namespace Apricot.Shared.Model
                 SetValueProperty(ref _name, value);
             }
         }
-
-        /// <summary>
-        ///     Gets or sets a command for OnLoaded event.
-        /// </summary>
-        /// <value>The command for OnLoaded event.</value>
-        public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
         ///     Gets or sets a photos.
@@ -103,24 +136,6 @@ namespace Apricot.Shared.Model
             }
         }
 
-        /// <summary>
-        ///     Gets or set a command for OnUnloaded event.
-        /// </summary>
-        /// <value>The command for OnUnloaded event.</value>
-        public ICommand OnUnloadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for add a photo.
-        /// </summary>
-        /// <value>The command for add a photo.</value>
-        public ICommand AddPhotoCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for remove a photo.
-        /// </summary>
-        /// <value>The command for remove a photo.</value>
-        public ICommand RemovePhotoCommand { get; set; }
-
         #endregion Properties.
 
         #region Constructor.
@@ -130,6 +145,11 @@ namespace Apricot.Shared.Model
         /// </summary>
         public CreatePlantModel()
         {
+            Devices = new ObservableCollection<DeviceModel>
+            {
+                new DeviceModel {Id = "ARD1", Name = "Arduino 1"},
+                new DeviceModel {Id = "ARD2", Name = "Arduino 2"},
+            };
             Photos = new ObservableCollection<PlantPhotoModel>();
             SelectedPhotoIndex = -1;
             Varieties = new ObservableCollection<VarietyPlantServiceModel>();

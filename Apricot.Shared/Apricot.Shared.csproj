@@ -84,6 +84,7 @@
     <Compile Include="Extension\ObservableCollectionExtensions.cs" />
     <Compile Include="Extension\StreamExtensions.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
+    <Compile Include="Model\DeviceModel.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\CreatePlantModel.cs" />
     <Compile Include="Model\PlantChooserModel.cs" />
