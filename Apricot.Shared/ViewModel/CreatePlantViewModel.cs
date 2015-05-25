@@ -178,6 +178,7 @@ namespace Apricot.Shared.ViewModel
         }
 
         /// <summary>
+        ///     Creates a new plant by user informations.
         /// </summary>
         public async void _CreateNewPlantAsync()
         {

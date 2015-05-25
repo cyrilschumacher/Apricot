@@ -10,30 +10,6 @@ namespace Apricot.Shared.ViewModel
     /// </summary>
     public class PlantViewModel : ViewModelBase
     {
-        #region Members.
-
-        /// <summary>
-        ///     Service for manage plant favorite.
-        /// </summary>
-        private readonly PlantFavoriteService _plantFavoriteService;
-
-        /// <summary>
-        ///     Plant identifier.
-        /// </summary>
-        private string _plantId;
-
-        #endregion Members.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets or sets a model.
-        /// </summary>
-        /// <value>The model.</value>
-        public PlantModel Model { get; private set; }
-
-        #endregion Properties.
-
         #region Constructors.
 
         /// <summary>
@@ -53,13 +29,37 @@ namespace Apricot.Shared.ViewModel
                 Model = new PlantModel
                 {
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
-                    PinCommand = new RelayCommand(_Pin),
-                    UnpinCommand = new RelayCommand(_Unpin)
+                    PinCommand = new RelayCommand(_Pin, _PinCanExecute),
+                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
                 };
             }
         }
 
         #endregion Constructors.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets or sets a model.
+        /// </summary>
+        /// <value>The model.</value>
+        public PlantModel Model { get; private set; }
+
+        #endregion Properties.
+
+        #region Members.
+
+        /// <summary>
+        ///     Service for manage plant favorite.
+        /// </summary>
+        private readonly PlantFavoriteService _plantFavoriteService;
+
+        /// <summary>
+        ///     Plant identifier.
+        /// </summary>
+        private string _plantId;
+
+        #endregion Members.
 
         #region Methods.
 
@@ -86,7 +86,7 @@ namespace Apricot.Shared.ViewModel
         #endregion Events.
 
         /// <summary>
-        ///     Pin the plant as a favorite plant.
+        ///     Pins the plant as a favorite plant.
         /// </summary>
         private void _Pin()
         {
@@ -94,11 +94,29 @@ namespace Apricot.Shared.ViewModel
         }
 
         /// <summary>
-        ///     Unpin the plant.
+        ///     Returns a value indicating whether the command to pins a plant is available.
+        /// </summary>
+        /// <returns>True if the command is available, otherwise, False.</returns>
+        private bool _PinCanExecute()
+        {
+            return _plantFavoriteService.Exists(_plantId);
+        }
+
+        /// <summary>
+        ///     Unpins the plant.
         /// </summary>
         private void _Unpin()
         {
             _plantFavoriteService.Remove(_plantId);
+        }
+
+        /// <summary>
+        ///     Returns a value indicating whether the command to unpins a plant is available.
+        /// </summary>
+        /// <returns>True if the command is available, otherwise, False.</returns>
+        private bool _UnpinCanExecute()
+        {
+            return !_plantFavoriteService.Exists(_plantId);
         }
 
         #endregion Methods.

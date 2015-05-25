@@ -1,22 +1,41 @@
 ﻿<Page
-    x:Class="Apricot.Views.PlantPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Apricot.Converters"
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="Apricot.Views.PlantPage"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantSampleData}"
+    DataContext="{Binding Plant, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Page.Resources>
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Page.BottomAppBar>
         <CommandBar Background="{StaticResource ApricotPrimaryBrush}" Foreground="White">
-            <AppBarButton x:Uid="Add"
+            <AppBarButton x:Name="PinAppBarButton"
+                          x:Uid="Add"
                           Icon="Pin"
                           Label="Euismod"
-                          Command="{Binding Model.CreateCommand}"/>
-            <AppBarButton x:Uid="Add"
+                          Command="{Binding Model.PinCommand}"
+                          Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVisibilityConverter}, ElementName=PinAppBarButton}"/>
+            <AppBarButton x:Name="UnpinAppBarButton"
+                          x:Uid="Add"
                           Icon="UnPin"
                           Label="Commodo"
-                          Command="{Binding Model.CreateCommand}"/>
+                          Command="{Binding Model.UnpinCommand}"
+                          Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVisibilityConverter}, ElementName=UnpinAppBarButton}"/>
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -33,8 +52,6 @@
         </StackPanel>
 
         <!--TODO: Content should be placed within the following grid-->
-        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
-
-        </Grid>
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0"/>
     </Grid>
 </Page>

@@ -15,17 +15,6 @@ namespace Apricot
         #region Properties.
 
         /// <summary>
-        ///     Gets the main view model.
-        /// </summary>
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-
-        /// <summary>
         ///     Gets the new plant view model.
         /// </summary>
         public CreatePlantViewModel CreatePlant
@@ -33,6 +22,28 @@ namespace Apricot
             get
             {
                 return ServiceLocator.Current.GetInstance<CreatePlantViewModel>();
+            }
+        }
+
+        /// <summary>
+        ///     Gets the plant view model.
+        /// </summary>
+        public PlantViewModel Plant
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PlantViewModel>();
+            }
+        }
+
+        /// <summary>
+        ///     Gets the main view model.
+        /// </summary>
+        public MainViewModel Main
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
 
@@ -74,6 +85,7 @@ namespace Apricot
         private static INavigationService _InitializeNavigationService()
         {
             var navigationService = new NavigationService();
+            navigationService.Configure("Plant", typeof(PlantPage));
             navigationService.Configure("PlantChooser", typeof(PlantChooserPage));
 
             return navigationService;

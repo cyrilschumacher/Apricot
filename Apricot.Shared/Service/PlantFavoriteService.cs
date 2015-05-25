@@ -40,6 +40,8 @@ namespace Apricot.Shared.Service
 
         #region Methods.
 
+        #region Private methods.
+
         /// <summary>
         ///     Gets plant favorites.
         /// </summary>
@@ -54,6 +56,8 @@ namespace Apricot.Shared.Service
             return new List<string>();
         }
 
+        #endregion Private methods.
+
         /// <summary>
         ///     Adds a plant in the favorites.
         /// </summary>
@@ -67,15 +71,14 @@ namespace Apricot.Shared.Service
         }
 
         /// <summary>
-        ///     Remove a plant in the favorites.
+        ///     Determines whether a plant was set as a favorite. 
         /// </summary>
         /// <param name="id">The plant identifier.</param>
-        public void Remove(string id)
+        /// <returns>True if the plant is favorite, otherwise, False.</returns>
+        public bool Exists(string id)
         {
             var favorites = _GetFavorites();
-            favorites.Remove(id);
-
-            _settingsDataContainer.Values[PlantFavoritesSettingsName] = favorites;
+            return favorites.Contains(id);
         }
 
         /// <summary>
@@ -85,6 +88,18 @@ namespace Apricot.Shared.Service
         public IList<string> Get()
         {
             return _GetFavorites();
+        }
+
+        /// <summary>
+        ///     Removes a plant in the favorites.
+        /// </summary>
+        /// <param name="id">The plant identifier.</param>
+        public void Remove(string id)
+        {
+            var favorites = _GetFavorites();
+            favorites.Remove(id);
+
+            _settingsDataContainer.Values[PlantFavoritesSettingsName] = favorites;
         }
 
         #endregion Methods.
