@@ -37,7 +37,7 @@ namespace Apricot.Shared.Model
         ///     Gets or sets a command for select a plant.
         /// </summary>
         /// <value>The command for select a plant.</value>
-        public RelayCommand<PlantServiceModel> SelectPlant { get; set; }
+        public RelayCommand<PlantServiceModel> SelectPlantCommand { get; set; }
 
         #endregion Commands.
 

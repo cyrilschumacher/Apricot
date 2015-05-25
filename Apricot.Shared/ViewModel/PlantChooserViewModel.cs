@@ -64,7 +64,7 @@ namespace Apricot.Shared.ViewModel
                 Model = new PlantChooserModel
                 {
                     OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
-                    SelectPlant = new RelayCommand(_SelectPlant)
+                    SelectPlantCommand = new RelayCommand(_SelectPlant)
                 };
             }
         }
