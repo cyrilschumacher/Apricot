@@ -1,11 +1,11 @@
-﻿using Apricot.Shared.Model;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Apricot.Shared.Extension;
+using Apricot.Shared.Model;
 using Apricot.Shared.Service;
 using Apricot.Shared.Service.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System.Linq;
-using System.Threading.Tasks;
-using Apricot.Shared.Extension;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -14,29 +14,6 @@ namespace Apricot.Shared.ViewModel
     /// </summary>
     public class PlantChooserViewModel : ViewModelBase
     {
-        #region Members.
-
-        /// <summary>
-        ///     Plant service.
-        /// </summary>
-        private readonly PlantService _plantService;
-
-        /// <summary>
-        ///     Favorite plant management service.
-        /// </summary>
-        private readonly PlantFavoriteService _plantFavoriteService;
-
-        #endregion Members.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets the model.
-        /// </summary>
-        public PlantChooserModel Model { get; private set; }
-
-        #endregion Properties.
-
         #region Constructors.
 
         /// <summary>
@@ -63,6 +40,29 @@ namespace Apricot.Shared.ViewModel
 
         #endregion Constructors.
 
+        #region Properties.
+
+        /// <summary>
+        ///     Gets the model.
+        /// </summary>
+        public PlantChooserModel Model { get; private set; }
+
+        #endregion Properties.
+
+        #region Members.
+
+        /// <summary>
+        ///     Plant service.
+        /// </summary>
+        private readonly PlantService _plantService;
+
+        /// <summary>
+        ///     Favorite plant management service.
+        /// </summary>
+        private readonly PlantFavoriteService _plantFavoriteService;
+
+        #endregion Members.
+
         #region Methods.
 
         /// <summary>
@@ -71,7 +71,9 @@ namespace Apricot.Shared.ViewModel
         private async Task _LoadPlantAsync()
         {
             var plant = await _plantService.GetPlant();
-            Model.Plant.AddUnique(plant);
+
+            Model.Plant.Clear();
+            Model.Plant.AddRange(plant);
         }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace Apricot.Shared.ViewModel
             var idsFavorite = _plantFavoriteService.Get();
             var favorites = (from x in Model.Plant join y in idsFavorite on x.Id equals y select x).ToList();
 
+            Model.Favorites.Clear();
             Model.Favorites.AddUnique(favorites);
         }
 

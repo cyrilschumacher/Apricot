@@ -174,7 +174,7 @@ namespace Apricot.Shared.ViewModel
             stream.Seek(0);
             var base64Data = await stream.ToBase64();
 
-            Model.Photos.Add(new PlantPhotoModel { Image = null, Base64Data = base64Data });
+            Model.Photos.Add(new PlantPhotoModel { Image = photo, Base64Data = base64Data });
         }
 
         /// <summary>

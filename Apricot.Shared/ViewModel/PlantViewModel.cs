@@ -17,6 +17,11 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private readonly PlantFavoriteService _plantFavoriteService;
 
+        /// <summary>
+        ///     Plant identifier.
+        /// </summary>
+        private string _plantId;
+
         #endregion Members.
 
         #region Properties.
@@ -24,6 +29,7 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Gets or sets a model.
         /// </summary>
+        /// <value>The model.</value>
         public PlantModel Model { get; private set; }
 
         #endregion Properties.
@@ -40,6 +46,9 @@ namespace Apricot.Shared.ViewModel
             // the visualizing of the XAML code in the design mode.
             if (!IsInDesignMode)
             {
+                // Initialize members.
+                _plantFavoriteService = new PlantFavoriteService();
+
                 // Initialize properties.
                 Model = new PlantModel
                 {
@@ -54,19 +63,34 @@ namespace Apricot.Shared.ViewModel
 
         #region Methods.
 
+        #region Events.
+
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
         {
-
+            // Register messengers.
+            MessengerInstance.Register<string>(this, _OnPlantChooserMessage);
         }
+
+        /// <summary>
+        ///     Receives the plant identifier.
+        /// </summary>
+        /// <param name="plantId"></param>
+        private void _OnPlantChooserMessage(string plantId)
+        {
+            _plantId = plantId;
+        }
+
+        #endregion Events.
 
         /// <summary>
         ///     Pin the plant as a favorite plant.
         /// </summary>
         private void _Pin()
         {
+            _plantFavoriteService.Add(_plantId);
         }
 
         /// <summary>
@@ -74,6 +98,7 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private void _Unpin()
         {
+            _plantFavoriteService.Remove(_plantId);
         }
 
         #endregion Methods.

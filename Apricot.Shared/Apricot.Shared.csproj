@@ -87,6 +87,7 @@
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\CreatePlantModel.cs" />
     <Compile Include="Model\PlantChooserModel.cs" />
+    <Compile Include="Model\PlantModel.cs" />
     <Compile Include="Model\PlantPhotoModel.cs" />
     <Compile Include="Model\Service\CreatePlantServiceModel.cs" />
     <Compile Include="Model\Service\PlantServiceModel.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="SampleData\MainSampleData.cs" />
     <Compile Include="SampleData\CreatePlantSampleData.cs" />
     <Compile Include="SampleData\PlantChooserSampleData.cs" />
+    <Compile Include="SampleData\PlantSampleData.cs" />
     <Compile Include="Service\Apricot\AbstractApricotService.cs" />
     <Compile Include="Service\Apricot\PlantService.cs" />
     <Compile Include="Service\Apricot\ServerService.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\CreatePlantViewModel.cs" />
     <Compile Include="ViewModel\PlantChooserViewModel.cs" />
+    <Compile Include="ViewModel\PlantViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight">

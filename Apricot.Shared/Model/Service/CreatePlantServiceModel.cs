@@ -9,6 +9,12 @@ namespace Apricot.Shared.Model.Service
     public class CreatePlantServiceModel
     {
         /// <summary>
+        ///     Gets or sets a device identifier.
+        /// </summary>
+        [JsonProperty("idArd")]
+        public string DeviceId { get; set; }
+
+        /// <summary>
         ///     Gets or sets a plant name.
         /// </summary>
         /// <value>The plant name.</value>
