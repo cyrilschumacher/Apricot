@@ -61,13 +61,7 @@ namespace Apricot
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page.
-                // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame = new Frame { CacheSize = 1 };
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    // TODO: Load state from previously suspended application
-                }
+                rootFrame = new Frame { CacheSize = 0 };
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
