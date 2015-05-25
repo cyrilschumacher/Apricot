@@ -5,7 +5,7 @@
   <Properties>
     <DisplayName>Apricot</DisplayName>
     <PublisherDisplayName>Cyril</PublisherDisplayName>
-    <Logo>Assets\Logo\StoreLogo.jpg</Logo>
+    <Logo>Assets\Logo\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.3.1</OSMinVersion>
@@ -16,8 +16,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Apricot.App">
-      <m3:VisualElements DisplayName="Apricot" Square150x150Logo="Assets\Logo\Logo.jpg" Square44x44Logo="Assets\Logo\SmallLogo.jpg" Description="Apricot" ForegroundText="light" BackgroundColor="#FF6600">
-        <m3:DefaultTile Wide310x150Logo="Assets\Logo\WideLogo.jpg" Square71x71Logo="Assets\Logo\Square71x71Logo.jpg">
+      <m3:VisualElements DisplayName="Apricot" Square150x150Logo="Assets\Logo\Logo.png" Square44x44Logo="Assets\Logo\SmallLogo.png" Description="Apricot" ForegroundText="light" BackgroundColor="transparent">
+        <m3:DefaultTile Wide310x150Logo="Assets\Logo\WideLogo.png" Square71x71Logo="Assets\Logo\Square71x71Logo.png">
           <m3:ShowNameOnTiles>
             <m3:ShowOn Tile="square150x150Logo" />
             <m3:ShowOn Tile="wide310x150Logo" />
