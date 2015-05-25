@@ -57,7 +57,6 @@ namespace Apricot.Shared.ViewModel
                 // Initialize properties.
                 Model = new MainModel
                 {
-
                     OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
                     RetryCommand = new RelayCommand(_TestServerConnectionAsync)
                 };

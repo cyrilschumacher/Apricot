@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Apricot.Shared.Extension;
+using Apricot.Shared.Model;
+using Apricot.Shared.Service.Apricot;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
@@ -9,11 +15,6 @@ using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
-using Apricot.Shared.Extension;
-using Apricot.Shared.Model;
-using Apricot.Shared.Service.Apricot;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -31,12 +32,40 @@ namespace Apricot.Shared.ViewModel
 
         #endregion Constants.
 
+        #region Members.
+
+        /// <summary>
+        ///     Application windows (with its thread).
+        /// </summary>
+        private readonly CoreApplicationView _coreApplicationView;
+
+        /// <summary>
+        ///     Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
+
+        /// <summary>
+        ///     Plant service.
+        /// </summary>
+        private readonly PlantService _plantService;
+
+        #endregion Members.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets the model.
+        /// </summary>
+        public CreatePlantModel Model { get; private set; }
+
+        #endregion Properties.
+
         #region Constructor.
 
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public CreatePlantViewModel()
+        public CreatePlantViewModel(INvigationService navigationService)
         {
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
@@ -45,6 +74,7 @@ namespace Apricot.Shared.ViewModel
             {
                 // Initialize members.
                 _coreApplicationView = CoreApplication.GetCurrentView();
+                _navigationService = navigationService;
                 _plantService = new PlantService();
 
                 // Initialize properties.
@@ -61,29 +91,6 @@ namespace Apricot.Shared.ViewModel
 
         #endregion Constructor.
 
-        #region Properties.
-
-        /// <summary>
-        ///     Gets the model.
-        /// </summary>
-        public CreatePlantModel Model { get; private set; }
-
-        #endregion Properties.
-
-        #region Members.
-
-        /// <summary>
-        ///     Application windows (with its thread).
-        /// </summary>
-        private readonly CoreApplicationView _coreApplicationView;
-
-        /// <summary>
-        ///     Plant service.
-        /// </summary>
-        private readonly PlantService _plantService;
-
-        #endregion Members.
-
         #region Methods.
 
         #region Events.
@@ -95,6 +102,7 @@ namespace Apricot.Shared.ViewModel
         /// <param name="e">The parameters.</param>
         private void _OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            // Test if the command of create a new plant is available.
             Model.CreateCommand.RaiseCanExecuteChanged();
         }
 
@@ -174,7 +182,7 @@ namespace Apricot.Shared.ViewModel
             stream.Seek(0);
             var base64Data = await stream.ToBase64();
 
-            Model.Photos.Add(new PlantPhotoModel {Image = photo, Base64Data = base64Data});
+            Model.Photos.Add(new PlantPhotoModel { Image = photo, Base64Data = base64Data });
         }
 
         /// <summary>
@@ -182,8 +190,20 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         public async void _CreateNewPlantAsync()
         {
+            // Obtains, only, the photos in Base64 format.
             var photos = Model.Photos.Select(p => p.Base64Data);
-            await _plantService.CreateNewPlant(Model.Name, Model.SelectedVariety.Id, photos);
+
+            try
+            {
+                // Create a new plant by user informations.
+                await _plantService.CreateNewPlant(Model.Name, Model.SelectedVariety.Id, photos);
+                // Return to the previous page.
+                _GoToPreviousPage();
+            }
+            catch (Exception)
+            {
+                //todo: Manage Exception.
+            }
         }
 
         /// <summary>
@@ -194,6 +214,14 @@ namespace Apricot.Shared.ViewModel
         {
             return !string.IsNullOrEmpty(Model.Name) && (Model.SelectedVariety != null) &&
                    (Model.SelectedDevice != null);
+        }
+
+        /// <summary>
+        ///     Go to previous page.
+        /// </summary>
+        private void _GoToPreviousPage()
+        {
+            _navigationService.GoBack();
         }
 
         /// <summary>
