@@ -3,6 +3,9 @@ using Apricot.Shared.Model.Service;
 
 namespace Apricot.Shared.Service.Apricot
 {
+    /// <summary>
+    ///     Server service.
+    /// </summary>
     public class ServerService : AbstractApricotService
     {
         #region Constants.
@@ -22,7 +25,7 @@ namespace Apricot.Shared.Service.Apricot
         /// <returns>The health server.</returns>
         public async Task<ServerHealthModel> GetHealth()
         {
-            return await Get<ServerHealthModel>(ServerHealthServiceName);
+            return await GetAsync<ServerHealthModel>(ServerHealthServiceName);
         }
 
         #endregion Methods.

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Apricot.Shared.Model;
 using Apricot.Shared.Model.Service;
 
@@ -27,15 +28,15 @@ namespace Apricot.Shared.SampleData
         {
             Model = new PlantChooserModel
             {
-                Plant = new List<PlantModel>
+                Plant = new ObservableCollection<PlantServiceModel>
                 {
-                    new PlantModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3},
-                    new PlantModel{Id = "5560eba236e1ff544bb6eaf6", Name = "nostrud id", Variety = 11},
-                    new PlantModel{Id = "5560eba25de8b401a33533aa", Name = "excepteur sunt", Variety = 4}
+                    new PlantServiceModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3},
+                    new PlantServiceModel{Id = "5560eba236e1ff544bb6eaf6", Name = "nostrud id", Variety = 11},
+                    new PlantServiceModel{Id = "5560eba25de8b401a33533aa", Name = "excepteur sunt", Variety = 4}
                 },
-                Favorites = new List<PlantModel>
+                Favorites = new ObservableCollection<PlantServiceModel>
                 {
-                    new PlantModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3}
+                    new PlantServiceModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3}
                 }
             };
         }

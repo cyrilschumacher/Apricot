@@ -1,6 +1,6 @@
-﻿using Apricot.Shared.Model.Service;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Apricot.Shared.Model.Service;
 
 namespace Apricot.Shared.Model
 {
@@ -9,17 +9,30 @@ namespace Apricot.Shared.Model
     /// </summary>
     public class PlantChooserModel : NotifyPropertyChanged
     {
+        #region Constructors.
+
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
+        public PlantChooserModel()
+        {
+            Favorites = new ObservableCollection<PlantServiceModel>();
+            Plant = new ObservableCollection<PlantServiceModel>();
+        }
+
+        #endregion Constructors.
+
         #region Members.
 
         /// <summary>
         ///     Favorites plant.
         /// </summary>
-        private IList<PlantModel> _favorites;
+        private ObservableCollection<PlantServiceModel> _favorites;
 
         /// <summary>
         ///     Plant.
         /// </summary>
-        private IList<PlantModel> _plant;
+        private ObservableCollection<PlantServiceModel> _plant;
 
         #endregion Members.
 
@@ -28,16 +41,10 @@ namespace Apricot.Shared.Model
         /// <summary>
         ///     Gets or sets favorites plant.
         /// </summary>
-        public IList<PlantModel> Favorites
+        public ObservableCollection<PlantServiceModel> Favorites
         {
-            get
-            {
-                return _favorites;
-            }
-            set
-            {
-                SetValueProperty(ref _favorites, value);
-            }
+            get { return _favorites; }
+            set { SetValueProperty(ref _favorites, value); }
         }
 
         /// <summary>
@@ -48,31 +55,12 @@ namespace Apricot.Shared.Model
         /// <summary>
         ///     Gets or sets plant.
         /// </summary>
-        public IList<PlantModel> Plant
+        public ObservableCollection<PlantServiceModel> Plant
         {
-            get
-            {
-                return _plant;
-            }
-            set
-            {
-                SetValueProperty(ref _plant, value);
-            }
+            get { return _plant; }
+            set { SetValueProperty(ref _plant, value); }
         }
 
         #endregion Properties.
-
-        #region Constructors.
-
-        /// <summary>
-        ///     Constructor.
-        /// </summary>
-        public PlantChooserModel()
-        {
-            Favorites = new List<PlantModel>();
-            Plant = new List<PlantModel>();
-        }
-
-        #endregion Constructors.
     }
 }

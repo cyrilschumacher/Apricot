@@ -77,24 +77,24 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private void _InitializeCommands()
         {
-            Model.OnLoadedCommand = new RelayCommand(_OnLoaded);
-            Model.RetryCommand = new RelayCommand(_TestServerConnection);
+            Model.OnLoadedCommand = new RelayCommand(_OnLoadedAsync);
+            Model.RetryCommand = new RelayCommand(_TestServerConnectionAsync);
         }
 
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
-        private async void _OnLoaded()
+        private async void _OnLoadedAsync()
         {
             // Wait 2 seconds to avoid a graphical artifact (black screen with spinner).
             await Task.Delay(2000);
-            _TestServerConnection();
+            _TestServerConnectionAsync();
         }
 
         /// <summary>
         ///     Test the server connection.
         /// </summary>
-        private async void _TestServerConnection()
+        private async void _TestServerConnectionAsync()
         {
             Model.RetryIsVisible = false;
             Model.IsLoading = true;

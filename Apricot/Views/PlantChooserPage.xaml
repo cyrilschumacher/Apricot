@@ -34,10 +34,10 @@
 
     <Page.BottomAppBar>
         <CommandBar Background="#744C28" Foreground="White">
-            <AppBarButton x:Uid="New" Icon="Add">
+            <AppBarButton x:Uid="New" Icon="Add" Label="Tortor">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="Apricot.Views.NewPlantPage" />
+                        <core:NavigateToPageAction TargetPage="Apricot.Views.CreatePlantPage" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </AppBarButton>
@@ -47,7 +47,6 @@
     <Pivot x:Uid="MyGarden" Title="Maecenas ut">
         <PivotItem x:Uid="Plant" Header="Vestibulum">
             <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Plant}" ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}"/>
-
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
             <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Favorites}" ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}"/>

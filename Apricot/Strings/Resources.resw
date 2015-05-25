@@ -120,6 +120,9 @@
   <data name="CreateNewPlant.Text" xml:space="preserve">
     <value>Create new plant</value>
   </data>
+  <data name="Delete.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="Favorites.Header" xml:space="preserve">
     <value>Favorites</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="PlantName.Text" xml:space="preserve">
     <value>Plant name</value>
+  </data>
+  <data name="PlantVariety.Text" xml:space="preserve">
+    <value>Variety</value>
   </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Try again</value>

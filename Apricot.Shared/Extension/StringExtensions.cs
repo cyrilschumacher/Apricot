@@ -5,7 +5,7 @@ namespace Apricot.Shared.Extension
     /// <summary>
     ///     Extension class for <see cref="string"/>.
     /// </summary>
-    public static class StringExtension
+    public static class StringExtensions
     {
         /// <summary>
         ///     Indicates whether the specified string is JSON data valid.

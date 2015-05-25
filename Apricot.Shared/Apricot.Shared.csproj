@@ -79,23 +79,30 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="Extension\BitmapImageExtensions.cs" />
+    <Compile Include="Extension\IRandomAccessStreamExtensions.cs" />
+    <Compile Include="Extension\ObservableCollectionExtensions.cs" />
+    <Compile Include="Extension\StreamExtensions.cs" />
+    <Compile Include="Extension\StringExtensions.cs" />
     <Compile Include="Model\MainModel.cs" />
-    <Compile Include="Model\NewPlantModel.cs" />
+    <Compile Include="Model\CreatePlantModel.cs" />
     <Compile Include="Model\PlantChooserModel.cs" />
-    <Compile Include="Model\Service\PlantModel.cs" />
-    <Compile Include="Model\Service\ServerHealthModel.cs" />
+    <Compile Include="Model\PlantPhotoModel.cs" />
+    <Compile Include="Model\Service\CreatePlantServiceModel.cs" />
+    <Compile Include="Model\Service\PlantServiceModel.cs" />
+    <Compile Include="Model\Service\ServerHealthServiceModel.cs" />
+    <Compile Include="Model\Service\VarietyPlantServiceModel.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleData\MainSampleData.cs" />
-    <Compile Include="SampleData\NewPlantSampleData.cs" />
+    <Compile Include="SampleData\CreatePlantSampleData.cs" />
     <Compile Include="SampleData\PlantChooserSampleData.cs" />
     <Compile Include="Service\Apricot\AbstractApricotService.cs" />
     <Compile Include="Service\Apricot\PlantService.cs" />
     <Compile Include="Service\Apricot\ServerService.cs" />
     <Compile Include="Service\PlantFavoriteService.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NewPlantViewModel.cs" />
+    <Compile Include="ViewModel\CreatePlantViewModel.cs" />
     <Compile Include="ViewModel\PlantChooserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

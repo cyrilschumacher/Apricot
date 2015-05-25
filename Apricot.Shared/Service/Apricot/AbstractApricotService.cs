@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -103,13 +104,24 @@ namespace Apricot.Shared.Service.Apricot
         }
 
         /// <summary>
-        ///     Obtains a response of a service.
+        ///     Sends a GET request to the specified Uri as an asynchronous operation. 
+        /// </summary>
+        /// <param name="serviceUri">The service Uri.</param>
+        /// <param name="cancellationToken">The token for the cancellation request.</param>
+        /// <returns>The response of service.</returns>
+        protected async Task GetAsync(string serviceUri, CancellationToken? cancellationToken = null)
+        {
+            await GetAsync<Object>(serviceUri, cancellationToken);
+        }
+
+        /// <summary>
+        ///     Sends a GET request to the specified Uri as an asynchronous operation. 
         /// </summary>
         /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="serviceUri">The service Uri.</param>
         /// <param name="cancellationToken">The token for the cancellation request.</param>
         /// <returns>The response of service.</returns>
-        protected async Task<TModel> Get<TModel>(string serviceUri, CancellationToken? cancellationToken = null)
+        protected async Task<TModel> GetAsync<TModel>(string serviceUri, CancellationToken? cancellationToken = null)
         {
             // Creates a token if no token hasn't been defined.
             cancellationToken = cancellationToken ?? new CancellationToken();
@@ -122,14 +134,13 @@ namespace Apricot.Shared.Service.Apricot
         }
 
         /// <summary>
-        ///
+        ///     Sends a POST request to the specified Uri as an asynchronous operation.
         /// </summary>
-        /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="serviceUri">The service Uri.</param>
-        /// <param name="parameters"></param>
+        /// <param name="content">The content.</param>
         /// <param name="cancellationToken">The token for the cancellation request.</param>
         /// <returns>The response of service.</returns>
-        protected async Task<TModel> Post<TModel>(string serviceUri, IDictionary<string, string> parameters, CancellationToken? cancellationToken = null)
+        protected async Task PostAsync(string serviceUri, string content, CancellationToken? cancellationToken = null)
         {
             // Creates a token if no token hasn't been defined.
             cancellationToken = cancellationToken ?? new CancellationToken();
@@ -137,10 +148,9 @@ namespace Apricot.Shared.Service.Apricot
             // Obtains the absolute URL (with the URI address of service),
             // adds content and sends a HTTP request.
             var requestUri = _GetServerAddress(serviceUri);
-            var content = new FormUrlEncodedContent(parameters);
-            var response = await _httpClient.PostAsync(requestUri, content, cancellationToken.Value);
+            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-            return await _ReadContentHttpResponse<TModel>(response);
+            await _httpClient.PostAsync(requestUri, httpContent, cancellationToken.Value);
         }
 
         #endregion Methods.

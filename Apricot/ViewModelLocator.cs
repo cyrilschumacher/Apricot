@@ -28,11 +28,11 @@ namespace Apricot
         /// <summary>
         ///     Gets the new plant view model.
         /// </summary>
-        public NewPlantViewModel NewPlant
+        public CreatePlantViewModel CreatePlant
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NewPlantViewModel>();
+                return ServiceLocator.Current.GetInstance<CreatePlantViewModel>();
             }
         }
 
@@ -59,7 +59,7 @@ namespace Apricot
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(_InitializeNavigationService);
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<NewPlantViewModel>();
+            SimpleIoc.Default.Register<CreatePlantViewModel>();
             SimpleIoc.Default.Register<PlantChooserViewModel>();
         }
 

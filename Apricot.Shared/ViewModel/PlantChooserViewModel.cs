@@ -3,9 +3,9 @@ using Apricot.Shared.Service;
 using Apricot.Shared.Service.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
 using System.Linq;
 using System.Threading.Tasks;
+using Apricot.Shared.Extension;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -15,11 +15,6 @@ namespace Apricot.Shared.ViewModel
     public class PlantChooserViewModel : ViewModelBase
     {
         #region Members.
-
-        /// <summary>
-        ///     Navigation service.
-        /// </summary>
-        private readonly INavigationService _navigationService;
 
         /// <summary>
         ///     Plant service.
@@ -47,8 +42,7 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Constructor.
         /// </summary>
-        /// <param name="navigationService">A navigation service.</param>
-        public PlantChooserViewModel(INavigationService navigationService)
+        public PlantChooserViewModel()
         {
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
@@ -56,13 +50,14 @@ namespace Apricot.Shared.ViewModel
             if (!IsInDesignMode)
             {
                 // Initialize members.
-                _navigationService = navigationService;
                 _plantService = new PlantService();
                 _plantFavoriteService = new PlantFavoriteService();
 
                 // Initialize properties.
-                Model = new PlantChooserModel();
-                _InitializeCommands();
+                Model = new PlantChooserModel
+                {
+                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync)
+                };
             }
         }
 
@@ -71,19 +66,12 @@ namespace Apricot.Shared.ViewModel
         #region Methods.
 
         /// <summary>
-        ///     Initialize commands.
-        /// </summary>
-        private void _InitializeCommands()
-        {
-            Model.OnLoadedCommand = new RelayCommand(_OnLoaded);
-        }
-
-        /// <summary>
         ///     Loads existing plant.
         /// </summary>
-        private async Task _LoadPlant()
+        private async Task _LoadPlantAsync()
         {
-            Model.Plant = await _plantService.GetPlant();
+            var plant = await _plantService.GetPlant();
+            Model.Plant.AddUnique(plant);
         }
 
         /// <summary>
@@ -91,16 +79,18 @@ namespace Apricot.Shared.ViewModel
         /// </summary>
         private void _LoadFavoritePlant()
         {
-            var favorites = _plantFavoriteService.Get();
-            Model.Favorites = (from x in Model.Plant join y in favorites on x.Id equals y select x).ToList();
+            var idsFavorite = _plantFavoriteService.Get();
+            var favorites = (from x in Model.Plant join y in idsFavorite on x.Id equals y select x).ToList();
+
+            Model.Favorites.AddUnique(favorites);
         }
 
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
-        private async void _OnLoaded()
+        private async void _OnLoadedAsync()
         {
-            await _LoadPlant();
+            await _LoadPlantAsync();
             _LoadFavoritePlant();
         }
 
