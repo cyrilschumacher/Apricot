@@ -6,6 +6,8 @@ using Apricot.Shared.Service;
 using Apricot.Shared.Service.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using Apricot.Shared.Model.Service;
 
 namespace Apricot.Shared.ViewModel
 {
@@ -64,7 +66,7 @@ namespace Apricot.Shared.ViewModel
                 Model = new PlantChooserModel
                 {
                     OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
-                    SelectPlantCommand = new RelayCommand(_SelectPlant)
+                    SelectPlantCommand = new RelayCommand<PlantServiceModel>(_SelectPlant)
                 };
             }
         }
@@ -112,7 +114,7 @@ namespace Apricot.Shared.ViewModel
         private void _SelectPlant(PlantServiceModel plant)
         {
             MessengerInstance.Send(plant);
-            _navigationService.NavigateTo("Plant")
+            _navigationService.NavigateTo("Plant");
         }
 
         #endregion Methods.

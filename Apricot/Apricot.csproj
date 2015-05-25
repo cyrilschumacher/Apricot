@@ -89,7 +89,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\TextUpperConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -172,7 +171,6 @@
   <ItemGroup>
     <Content Include="Assets\Logo\Logo.scale-240.jpg" />
     <Content Include="Assets\Logo\WideLogo.scale-240.jpg" />
-    <Content Include="Assets\PlantChooser.jpg" />
     <Content Include="Assets\Logo\SmallLogo.scale-240.jpg" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Logo\Square71x71Logo.scale-240.jpg" />

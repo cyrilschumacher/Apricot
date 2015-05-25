@@ -65,7 +65,7 @@ namespace Apricot.Shared.ViewModel
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public CreatePlantViewModel(INvigationService navigationService)
+        public CreatePlantViewModel(INavigationService navigationService)
         {
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
