@@ -1,10 +1,13 @@
 ﻿namespace Apricot.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    ///     Page for creating a new plant.
     /// </summary>
     public sealed partial class CreatePlantPage
     {
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
         public CreatePlantPage()
         {
             InitializeComponent();

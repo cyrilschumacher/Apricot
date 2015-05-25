@@ -5,7 +5,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;

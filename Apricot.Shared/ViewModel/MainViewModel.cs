@@ -55,8 +55,12 @@ namespace Apricot.Shared.ViewModel
                 _serverService = new ServerService();
 
                 // Initialize properties.
-                Model = new MainModel();
-                _InitializeCommands();
+                Model = new MainModel
+                {
+
+                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
+                    RetryCommand = new RelayCommand(_TestServerConnectionAsync)
+                };
             }
         }
 
@@ -71,16 +75,7 @@ namespace Apricot.Shared.ViewModel
         {
             _navigationService.NavigateTo("PlantChooser");
         }
-
-        /// <summary>
-        ///     Initialize commands.
-        /// </summary>
-        private void _InitializeCommands()
-        {
-            Model.OnLoadedCommand = new RelayCommand(_OnLoadedAsync);
-            Model.RetryCommand = new RelayCommand(_TestServerConnectionAsync);
-        }
-
+    
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>

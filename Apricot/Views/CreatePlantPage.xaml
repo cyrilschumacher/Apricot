@@ -46,7 +46,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <StackPanel Margin="12">
+    <StackPanel Margin="19">
         <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor"
                    Style="{StaticResource TitleTextBlockStyle}" />
 

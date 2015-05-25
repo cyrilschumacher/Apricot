@@ -1,7 +1,7 @@
 ﻿namespace Apricot.Views
 {
     /// <summary>
-    ///     Main View.
+    ///     Main page.
     /// </summary>
     public sealed partial class MainPage
     {

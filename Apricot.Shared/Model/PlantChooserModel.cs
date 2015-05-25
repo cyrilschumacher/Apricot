@@ -9,19 +9,6 @@ namespace Apricot.Shared.Model
     /// </summary>
     public class PlantChooserModel : NotifyPropertyChanged
     {
-        #region Constructors.
-
-        /// <summary>
-        ///     Constructor.
-        /// </summary>
-        public PlantChooserModel()
-        {
-            Favorites = new ObservableCollection<PlantServiceModel>();
-            Plant = new ObservableCollection<PlantServiceModel>();
-        }
-
-        #endregion Constructors.
-
         #region Members.
 
         /// <summary>
@@ -62,5 +49,17 @@ namespace Apricot.Shared.Model
         }
 
         #endregion Properties.
+        #region Constructors.
+
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
+        public PlantChooserModel()
+        {
+            Favorites = new ObservableCollection<PlantServiceModel>();
+            Plant = new ObservableCollection<PlantServiceModel>();
+        }
+
+        #endregion Constructors.
     }
 }
