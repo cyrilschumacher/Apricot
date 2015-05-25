@@ -23,9 +23,9 @@
 
     <Page.Resources>
         <DataTemplate x:Key="PlantDataTemplate">
-            <StackPanel>
+            <ListBoxItem>
                 <TextBlock Text="{Binding Name}" FontWeight="Black" Style="{StaticResource TitleTextBlockStyle}" />
-            </StackPanel>
+            </ListBoxItem>
         </DataTemplate>
         <Style x:Key="PlantStyle" TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
