@@ -14,42 +14,12 @@ namespace Apricot.Shared.ViewModel
     /// </summary>
     public class PlantChooserViewModel : ViewModelBase
     {
-        #region Constructors.
-
-        /// <summary>
-        ///     Constructor.
-        /// </summary>
-        public PlantChooserViewModel()
-        {
-            // Don't execute the following code in design mode.
-            // This condition avoids this error: "Object reference not set to an instance of an object" during
-            // the visualizing of the XAML code in the design mode.
-            if (!IsInDesignMode)
-            {
-                // Initialize members.
-                _plantService = new PlantService();
-                _plantFavoriteService = new PlantFavoriteService();
-
-                // Initialize properties.
-                Model = new PlantChooserModel
-                {
-                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync)
-                };
-            }
-        }
-
-        #endregion Constructors.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets the model.
-        /// </summary>
-        public PlantChooserModel Model { get; private set; }
-
-        #endregion Properties.
-
         #region Members.
+
+        /// <summary>
+        ///     Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
 
         /// <summary>
         ///     Plant service.
@@ -62,6 +32,44 @@ namespace Apricot.Shared.ViewModel
         private readonly PlantFavoriteService _plantFavoriteService;
 
         #endregion Members.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets the model.
+        /// </summary>
+        public PlantChooserModel Model { get; private set; }
+
+        #endregion Properties.
+
+        #region Constructors.
+
+        /// <summary>
+        ///     Constructor.
+        /// </summary>
+        /// <param name="navigationService">A navigation service.</param>
+        public PlantChooserViewModel(INavigationService navigationService)
+        {
+            // Don't execute the following code in design mode.
+            // This condition avoids this error: "Object reference not set to an instance of an object" during
+            // the visualizing of the XAML code in the design mode.
+            if (!IsInDesignMode)
+            {
+                // Initialize members.
+                _navigationService = navigationService;
+                _plantService = new PlantService();
+                _plantFavoriteService = new PlantFavoriteService();
+
+                // Initialize properties.
+                Model = new PlantChooserModel
+                {
+                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
+                    SelectPlant = new RelayCommand(_SelectPlant)
+                };
+            }
+        }
+
+        #endregion Constructors.
 
         #region Methods.
 
@@ -95,6 +103,16 @@ namespace Apricot.Shared.ViewModel
         {
             await _LoadPlantAsync();
             _LoadFavoritePlant();
+        }
+
+        /// <summary>
+        ///     Select a plant.
+        /// </summary>
+        /// <param name="plant">The plant selectionned.</param>
+        private void _SelectPlant(PlantServiceModel plant)
+        {
+            MessengerInstance.Send(plant);
+            _navigationService.NavigateTo("Plant")
         }
 
         #endregion Methods.

@@ -25,6 +25,22 @@ namespace Apricot.Shared.Model
 
         #region Properties.
 
+        #region Commands.
+
+        /// <summary>
+        ///     Gets or sets a command for OnLoaded event.
+        /// </summary>
+        /// <value>The command for OnLoaded event.</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for select a plant.
+        /// </summary>
+        /// <value>The command for select a plant.</value>
+        public RelayCommand<PlantServiceModel> SelectPlant { get; set; }
+
+        #endregion Commands.
+
         /// <summary>
         ///     Gets or sets favorites plant.
         /// </summary>
@@ -33,11 +49,6 @@ namespace Apricot.Shared.Model
             get { return _favorites; }
             set { SetValueProperty(ref _favorites, value); }
         }
-
-        /// <summary>
-        ///     Command for OnLoaded event.
-        /// </summary>
-        public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
         ///     Gets or sets plant.
@@ -49,6 +60,7 @@ namespace Apricot.Shared.Model
         }
 
         #endregion Properties.
+
         #region Constructors.
 
         /// <summary>

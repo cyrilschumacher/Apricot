@@ -10,6 +10,30 @@ namespace Apricot.Shared.ViewModel
     /// </summary>
     public class PlantViewModel : ViewModelBase
     {
+        #region Members.
+
+        /// <summary>
+        ///     Service for manage plant favorite.
+        /// </summary>
+        private readonly PlantFavoriteService _plantFavoriteService;
+
+        /// <summary>
+        ///     Plant identifier.
+        /// </summary>
+        private string _plantId;
+
+        #endregion Members.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets or sets a model.
+        /// </summary>
+        /// <value>The model.</value>
+        public PlantModel Model { get; private set; }
+
+        #endregion Properties.
+
         #region Constructors.
 
         /// <summary>
@@ -36,30 +60,6 @@ namespace Apricot.Shared.ViewModel
         }
 
         #endregion Constructors.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets or sets a model.
-        /// </summary>
-        /// <value>The model.</value>
-        public PlantModel Model { get; private set; }
-
-        #endregion Properties.
-
-        #region Members.
-
-        /// <summary>
-        ///     Service for manage plant favorite.
-        /// </summary>
-        private readonly PlantFavoriteService _plantFavoriteService;
-
-        /// <summary>
-        ///     Plant identifier.
-        /// </summary>
-        private string _plantId;
-
-        #endregion Members.
 
         #region Methods.
 
