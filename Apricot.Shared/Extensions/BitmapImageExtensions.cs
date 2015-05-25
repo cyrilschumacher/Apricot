@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Apricot.Shared.Extension
+namespace Apricot.Shared.Extensions
 {
     /// <summary>
     ///     Extension class for <see cref="BitmapImage"/>.

@@ -1,4 +1,4 @@
-﻿namespace Apricot.Shared.Model.Service
+﻿namespace Apricot.Shared.Models.Service
 {
     /// <summary>
     ///     Model for server health.
@@ -10,13 +10,21 @@
         /// </summary>
         public enum HealthStatus
         {
-            Up,
-            Down
+            /// <summary>
+            ///     Serveur is down.
+            /// </summary>
+            Down,
+
+            /// <summary>
+            ///     Server is up.
+            /// </summary>
+            Up
         }
 
         /// <summary>
-        ///     Gets or sets the status of health server.
+        ///     Gets or sets a status of health server.
         /// </summary>
+        /// <value>The status of health server.</value>
         public HealthStatus Status { get; set; }
     }
 }

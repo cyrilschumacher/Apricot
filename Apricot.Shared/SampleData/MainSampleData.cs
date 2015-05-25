@@ -1,4 +1,4 @@
-﻿using Apricot.Shared.Model;
+﻿using Apricot.Shared.Models;
 
 namespace Apricot.Shared.SampleData
 {

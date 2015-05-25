@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Apricot.Shared.Extension
+namespace Apricot.Shared.Extensions
 {
     /// <summary>
     ///     Extension class for <see cref="ObservableCollection{T}"/>.

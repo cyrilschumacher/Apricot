@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Apricot.Shared.Extension;
-using Apricot.Shared.Model;
-using Apricot.Shared.Service;
-using Apricot.Shared.Service.Apricot;
+using Apricot.Shared.Extensions;
+using Apricot.Shared.Models;
+using Apricot.Shared.Services;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using Apricot.Shared.Model.Service;
+using Apricot.Shared.Models.Service;
 
-namespace Apricot.Shared.ViewModel
+namespace Apricot.Shared.ViewModels
 {
     /// <summary>
     ///     View model for the "Plant chooser" view.

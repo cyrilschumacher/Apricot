@@ -1,6 +1,6 @@
-﻿using Apricot.Shared.Extension;
-using Apricot.Shared.Model;
-using Apricot.Shared.Service.Apricot;
+﻿using Apricot.Shared.Extensions;
+using Apricot.Shared.Models;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -16,11 +16,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Apricot.Shared.ViewModel
+namespace Apricot.Shared.ViewModels
 {
     /// <summary>
     ///     View model for the "create plant" view.
     /// </summary>
+    [CLSCompliant(false)]
     public class CreatePlantViewModel : ViewModelBase
     {
         #region Constants.

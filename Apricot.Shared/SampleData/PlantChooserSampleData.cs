@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Apricot.Shared.Model;
-using Apricot.Shared.Model.Service;
+﻿using System.Collections.ObjectModel;
+using Apricot.Shared.Models;
+using Apricot.Shared.Models.Service;
 
 namespace Apricot.Shared.SampleData
 {

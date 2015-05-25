@@ -1,4 +1,4 @@
-﻿namespace Apricot.Shared.Model
+﻿namespace Apricot.Shared.Models
 {
     /// <summary>
     ///     Model for device.

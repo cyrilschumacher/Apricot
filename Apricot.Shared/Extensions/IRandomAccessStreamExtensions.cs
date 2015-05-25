@@ -3,11 +3,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
 
-namespace Apricot.Shared.Extension
+namespace Apricot.Shared.Extensions
 {
     /// <summary>
     ///     Extension class for <see cref="IRandomAccessStream" />.
     /// </summary>
+    [CLSCompliant(false)]
     public static class IRandomAccessStreamExtensions
     {
         #region Methods.

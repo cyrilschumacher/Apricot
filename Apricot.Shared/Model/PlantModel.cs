@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.Model
+namespace Apricot.Shared.Models
 {
     /// <summary>
     ///     Model for "plant information" page.

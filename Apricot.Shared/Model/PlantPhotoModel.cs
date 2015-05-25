@@ -1,7 +1,12 @@
-﻿using Windows.UI.Xaml.Media.Imaging;
+﻿using System;
+using Windows.UI.Xaml.Media.Imaging;
 
-namespace Apricot.Shared.Model
+namespace Apricot.Shared.Models
 {
+    /// <summary>
+    ///     Model for photo of plant.
+    /// </summary>
+    [CLSCompliant(false)]
     public class PlantPhotoModel
     {
         /// <summary>

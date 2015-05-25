@@ -1,10 +1,10 @@
 ﻿using System.IO;
 
-namespace Apricot.Shared.Extension
+namespace Apricot.Shared.Extensions
 {
     /// <summary>
     ///     Extension class for <see cref="Stream" />.
-    /// </summary
+    /// </summary>
     public static class StreamExtensions
     {
         /// <summary>

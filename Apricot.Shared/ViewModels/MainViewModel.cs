@@ -1,13 +1,13 @@
-﻿using Apricot.Shared.Model;
-using Apricot.Shared.Model.Service;
-using Apricot.Shared.Service.Apricot;
+﻿using Apricot.Shared.Models;
+using Apricot.Shared.Models.Service;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Threading.Tasks;
 
-namespace Apricot.Shared.ViewModel
+namespace Apricot.Shared.ViewModels
 {
     /// <summary>
     ///     View model for the "main" view.

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Apricot.Shared.Model.Service
+namespace Apricot.Shared.Models.Service
 {
     /// <summary>
     ///     Model for the details of a plant.

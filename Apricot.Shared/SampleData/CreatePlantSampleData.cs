@@ -1,13 +1,15 @@
-﻿using System.Collections.ObjectModel;
-using Apricot.Shared.Extension;
-using Apricot.Shared.Model;
-using Apricot.Shared.Model.Service;
+﻿using System;
+using System.Collections.ObjectModel;
+using Apricot.Shared.Extensions;
+using Apricot.Shared.Models;
+using Apricot.Shared.Models.Service;
 
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
     ///     Fake view model for the "New plant" view.
     /// </summary>
+    [CLSCompliant(false)]
     public class CreatePlantSampleData
     {
         #region Constants.

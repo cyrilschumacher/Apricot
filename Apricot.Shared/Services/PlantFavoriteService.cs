@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows.Storage;
 
-namespace Apricot.Shared.Service
+namespace Apricot.Shared.Services
 {
     /// <summary>
     ///     Favorite plant management service.

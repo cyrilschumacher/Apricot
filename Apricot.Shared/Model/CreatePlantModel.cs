@@ -1,13 +1,15 @@
-﻿using Apricot.Shared.Model.Service;
+﻿using System;
+using Apricot.Shared.Models.Service;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.Model
+namespace Apricot.Shared.Models
 {
     /// <summary>
     ///     Model for the "Create plant" view.
     /// </summary>
+    [CLSCompliant(false)]
     public class CreatePlantModel : NotifyPropertyChanged
     {
         #region Members.

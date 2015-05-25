@@ -1,14 +1,13 @@
-﻿using Apricot.Shared.Extension;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Apricot.Shared.Extensions;
+using Newtonsoft.Json;
 
-namespace Apricot.Shared.Service.Apricot
+namespace Apricot.Shared.Services.Apricot
 {
     /// <summary>
     ///     Abstract Apricot Service.

@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace Apricot.Shared.Model.Service
+namespace Apricot.Shared.Models.Service
 {
+    /// <summary>
+    ///     Model for variety plant.
+    /// </summary>
     public class VarietyPlantServiceModel
     {
         #region Properties.

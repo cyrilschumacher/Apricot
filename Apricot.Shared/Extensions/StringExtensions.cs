@@ -1,6 +1,6 @@
 ﻿using Windows.Data.Json;
 
-namespace Apricot.Shared.Extension
+namespace Apricot.Shared.Extensions
 {
     /// <summary>
     ///     Extension class for <see cref="string"/>.

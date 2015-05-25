@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Apricot.Shared.Model.Service;
+using Apricot.Shared.Models.Service;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.Model
+namespace Apricot.Shared.Models
 {
     /// <summary>
     ///     Model for the "Plant chooser" view.

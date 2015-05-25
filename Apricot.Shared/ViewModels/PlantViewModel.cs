@@ -1,9 +1,9 @@
-﻿using Apricot.Shared.Model;
-using Apricot.Shared.Service;
+﻿using Apricot.Shared.Models;
+using Apricot.Shared.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.ViewModel
+namespace Apricot.Shared.ViewModels
 {
     /// <summary>
     ///     View model for the "plant information" view.
