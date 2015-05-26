@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Apricot.Shared.Models.Services
 {
@@ -12,7 +11,7 @@ namespace Apricot.Shared.Models.Services
         /// </summary>
         /// <value>The date.</value>
         [JsonProperty("timestamp")]
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         /// <summary>
         ///     Gets or sets a humidity.

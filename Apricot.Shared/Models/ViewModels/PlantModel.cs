@@ -2,7 +2,7 @@
 using Apricot.Shared.Models.Services;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.Models
+namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
     ///     Model for "plant information" page.
@@ -12,14 +12,14 @@ namespace Apricot.Shared.Models
         #region Members.
 
         /// <summary>
-        ///     Plant.
-        /// </summary>
-        private PlantServiceModel _plant;
-
-        /// <summary>
         ///     Details of the plant.
         /// </summary>
         private PlantDetailsModel _details;
+
+        /// <summary>
+        ///     Latest measure.
+        /// </summary>
+        private MeasureServiceModel _latestMeasure;
 
         #endregion Members.
 
@@ -54,22 +54,6 @@ namespace Apricot.Shared.Models
         #endregion Commands.
 
         /// <summary>
-        ///     Gets or sets a plant.
-        /// </summary>
-        /// <value>The plant.</value>
-        public PlantServiceModel Plant
-        {
-            get
-            {
-                return _plant;
-            }
-            set
-            {
-                SetValueProperty(ref _plant, value);
-            }
-        }
-
-        /// <summary>
         ///     Gets or sets a plant details.
         /// </summary>
         /// <value>The plant details.</value>
@@ -85,11 +69,51 @@ namespace Apricot.Shared.Models
             }
         }
 
-        public object T
+        /// <summary>
+        ///     Gets or sets the plant identifier.
+        /// </summary>
+        /// <value>The plant identifier.</value>
+        public int Identifier { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the latest measure.
+        /// </summary>
+        public MeasureServiceModel LatestMeasure
         {
-            
+            get
+            {
+                return _latestMeasure;
+            }
+            set
+            {
+                SetValueProperty(ref _latestMeasure, value);
+            }
         }
 
+        /// <summary>
+        ///     Gets or set the name.
+        /// </summary>
+        public string Name { get; set; }
+
         #endregion Properties.
+
+        #region Methods.
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public static explicit operator PlantModel(PlantServiceModel model)
+        {
+            return new PlantModel
+            {
+                Details = new PlantDetailsModel(), 
+                Identifier = model.Identifier,
+                Name = model.Name
+            };
+        }
+
+        #endregion Methods.
     }
 }

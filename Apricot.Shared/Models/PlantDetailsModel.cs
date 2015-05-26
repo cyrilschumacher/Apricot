@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -7,6 +7,7 @@ namespace Apricot.Shared.Models
     /// <summary>
     /// 
     /// </summary>
+    [CLSCompliant(false)]
     public class PlantDetailsModel : NotifyPropertyChanged
     {
         #region Properties.

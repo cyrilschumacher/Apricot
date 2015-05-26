@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:WinRTXamlToolkit.Converters"
+    xmlns:convertersA="using:Apricot.Converters"
     xmlns:sampleData="using:Apricot.Shared.SampleData"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -14,6 +15,7 @@
 
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <convertersA:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter" />
     </Page.Resources>
 
     <interactivity:Interaction.Behaviors>
@@ -45,15 +47,16 @@
     <Pivot Title="Sollicitudin">
         <PivotItem Header="Volutpat">
             <StackPanel>
-                <TextBlock Text="{Binding Model.Details}"/>
-                <Image Source="{Binding Model.Details.Photos[0]}"/>
+                <Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200"/>
+                <TextBlock Text="{Binding Model.Name}"/>
             </StackPanel>
         </PivotItem>
         <PivotItem Header="Phasellus">
             <StackPanel>
-                <TextBlock/>
-                <TextBlock/>
-                <TextBlock/>
+                <TextBlock Text="{Binding Model.LatestMeasure.Date, Converter={StaticResource TimeStampToDateTimeConverter}}"/>
+                <TextBlock Text="{Binding Model.LatestMeasure.Humidity}"/>
+                <TextBlock Text="{Binding Model.LatestMeasure.Luminosity}"/>
+                <TextBlock Text="{Binding Model.LatestMeasure.Temperature}"/>
             </StackPanel>
         </PivotItem>
         <PivotItem Header="Dapibus"/>

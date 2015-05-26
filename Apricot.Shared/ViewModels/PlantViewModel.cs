@@ -1,10 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.Services;
+using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
@@ -15,8 +17,17 @@ namespace Apricot.Shared.ViewModels
     /// <summary>
     ///     View model for the "plant information" view.
     /// </summary>
+    [CLSCompliant(false)]
     public class PlantViewModel : ViewModelBase
     {
+        #region Constants.
+
+        /// <summary>
+        /// </summary>
+        private const long TimeRefresh = 5;
+
+        #endregion Constants.
+
         #region Members.
 
         /// <summary>
@@ -25,9 +36,19 @@ namespace Apricot.Shared.ViewModels
         private readonly PlantFavoriteService _plantFavoriteService;
 
         /// <summary>
-        ///     
+        ///     Service for manage plant.
         /// </summary>
         private readonly PlantService _plantService;
+
+        /// <summary>
+        ///     Service for manage measure.
+        /// </summary>
+        private readonly MeasureService _measureService;
+
+        /// <summary>
+        ///     Real time measure.
+        /// </summary>
+        private readonly DispatcherTimer _realTimeMeasureTimer;
 
         #endregion Members.
 
@@ -56,19 +77,26 @@ namespace Apricot.Shared.ViewModels
             if (!IsInDesignMode)
             {
                 // Initialize members.
+                _measureService = new MeasureService();
                 _plantService = new PlantService();
                 _plantFavoriteService = new PlantFavoriteService();
+                _realTimeMeasureTimer = new DispatcherTimer { Interval = new TimeSpan(TimeRefresh * TimeSpan.TicksPerSecond) };
 
                 // Initialize properties.
                 Model = new PlantModel
                 {
+                    Details = new PlantDetailsModel(),
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
+                    OnUnloadedCommand = new RelayCommand(_OnUnloaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
                     UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute),
-                    OnUnloadedCommand = new RelayCommand(_OnUnloaded)
                 };
-                Model.Details = new PlantDetailsModel();
             }
+        }
+
+        private void _RefreshMeasure(object sender, object o)
+        {
+            _LoadLatestMeasureAsync();
         }
 
         #endregion Constructors.
@@ -100,7 +128,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadDetailsAsync()
         {
-            var details = await _plantService.GetDetailsPlantAsync(Model.Plant.Identifier);
+            var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
             foreach (var photo in details.Photos)
             {
                 _AddPhoto(photo);
@@ -121,9 +149,12 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _OnLoaded()
         {
+            // Initializes events.
+            _realTimeMeasureTimer.Tick += _RefreshMeasure;
+            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+
             // Register messengers.
             MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
         }
 
         /// <summary>
@@ -132,8 +163,20 @@ namespace Apricot.Shared.ViewModels
         /// <param name="plant">The plant information.</param>
         private void _OnPlantChooserMessage(PlantServiceModel plant)
         {
-            Model.Plant = plant;
+            Model = (PlantModel)plant;
+
             _LoadDetailsAsync();
+            _LoadLatestMeasureAsync();
+            _realTimeMeasureTimer.Start();
+        }
+
+        /// <summary>
+        ///     Loads the latest measure.
+        /// </summary>
+        private async void _LoadLatestMeasureAsync()
+        {
+            var measure = await _measureService.GetLast(Model.Identifier);
+            Model.LatestMeasure = measure;
         }
 
         /// <summary>
@@ -141,7 +184,10 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _OnUnloaded()
         {
+            // Removes events.
+            _realTimeMeasureTimer.Tick -= _RefreshMeasure;
             HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
+
             MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
@@ -152,7 +198,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Pin()
         {
-            _plantFavoriteService.Add(Model.Plant.Identifier);
+            _plantFavoriteService.Add(Model.Identifier);
 
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
@@ -164,7 +210,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _PinCanExecute()
         {
-            return !_plantFavoriteService.Exists(Model.Plant.Identifier);
+            return !_plantFavoriteService.Exists(Model.Identifier);
         }
 
         /// <summary>
@@ -172,7 +218,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Unpin()
         {
-            _plantFavoriteService.Remove(Model.Plant.Identifier);
+            _plantFavoriteService.Remove(Model.Identifier);
 
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
@@ -184,7 +230,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _UnpinCanExecute()
         {
-            return _plantFavoriteService.Exists(Model.Plant.Identifier);
+            return _plantFavoriteService.Exists(Model.Identifier);
         }
 
         #endregion Methods.
