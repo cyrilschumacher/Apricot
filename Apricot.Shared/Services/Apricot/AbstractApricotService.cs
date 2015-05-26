@@ -19,7 +19,8 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Server address.
         /// </summary>
-        private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
+        //private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
+        private const string ServerAddress = "http://192.168.154.134:3000/";
 
         #endregion Constants.
 
@@ -99,7 +100,7 @@ namespace Apricot.Shared.Services.Apricot
 
             // Reads the HTTP request response and converts into a model.
             var response = await httpResponse.Content.ReadAsStringAsync();
-            return _JsonResponseToObject<TModel>(response);
+            return string.IsNullOrEmpty(response) ? default(TModel) : _JsonResponseToObject<TModel>(response);
         }
 
         /// <summary>

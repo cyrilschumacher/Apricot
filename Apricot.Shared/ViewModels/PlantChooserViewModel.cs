@@ -113,8 +113,8 @@ namespace Apricot.Shared.ViewModels
         /// <param name="plant">The plant selectionned.</param>
         private void _SelectPlant(PlantServiceModel plant)
         {
-            MessengerInstance.Send(plant);
             _navigationService.NavigateTo("Plant");
+            MessengerInstance.Send(plant);
         }
 
         #endregion Methods.

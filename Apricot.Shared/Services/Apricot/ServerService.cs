@@ -12,9 +12,9 @@ namespace Apricot.Shared.Services.Apricot
         #region Constants.
 
         /// <summary>
-        ///     Service name for obtains the details of a plant.
+        ///     Service name for obtains the health of server.
         /// </summary>
-        private const string ServerHealthServiceName = "server/health";
+        private const string ServerHealthServiceName = "/";
 
         #endregion Constants.
 

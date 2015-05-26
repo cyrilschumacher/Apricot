@@ -101,11 +101,13 @@ namespace Apricot.Shared.ViewModels
 
                 // If the server is up, it navigate to a next view,
                 // otherwise, it show a error message.
-                Model.RetryIsVisible = health.Status == ServerHealthModel.HealthStatus.Down;
-                if (health.Status == ServerHealthModel.HealthStatus.Up)
+                Model.RetryIsVisible = health.Status != ServerHealthModel.HealthStatus.Up;
+                if (health.Status == ServerHealthModel.HealthStatus.Down)
                 {
-                    _GoToPlantChooserView();
+                    throw new Exception("The server is down.");
                 }
+
+                _GoToPlantChooserView();
             }
             catch (Exception)
             {

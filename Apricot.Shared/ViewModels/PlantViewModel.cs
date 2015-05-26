@@ -1,4 +1,5 @@
 ﻿using Apricot.Shared.Models;
+using Apricot.Shared.Models.Service;
 using Apricot.Shared.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -10,30 +11,6 @@ namespace Apricot.Shared.ViewModels
     /// </summary>
     public class PlantViewModel : ViewModelBase
     {
-        #region Members.
-
-        /// <summary>
-        ///     Service for manage plant favorite.
-        /// </summary>
-        private readonly PlantFavoriteService _plantFavoriteService;
-
-        /// <summary>
-        ///     Plant identifier.
-        /// </summary>
-        private string _plantId;
-
-        #endregion Members.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets or sets a model.
-        /// </summary>
-        /// <value>The model.</value>
-        public PlantModel Model { get; private set; }
-
-        #endregion Properties.
-
         #region Constructors.
 
         /// <summary>
@@ -41,6 +18,8 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         public PlantViewModel()
         {
+            MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
+
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
             // the visualizing of the XAML code in the design mode.
@@ -61,6 +40,30 @@ namespace Apricot.Shared.ViewModels
 
         #endregion Constructors.
 
+        #region Properties.
+
+        /// <summary>
+        ///     Gets or sets a model.
+        /// </summary>
+        /// <value>The model.</value>
+        public PlantModel Model { get; private set; }
+
+        #endregion Properties.
+
+        #region Members.
+
+        /// <summary>
+        ///     Service for manage plant favorite.
+        /// </summary>
+        private readonly PlantFavoriteService _plantFavoriteService;
+
+        /// <summary>
+        ///     Plant.
+        /// </summary>
+        private PlantServiceModel _plant;
+
+        #endregion Members.
+
         #region Methods.
 
         #region Events.
@@ -71,16 +74,16 @@ namespace Apricot.Shared.ViewModels
         private void _OnLoaded()
         {
             // Register messengers.
-            MessengerInstance.Register<string>(this, _OnPlantChooserMessage);
+            MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
         /// <summary>
-        ///     Receives the plant identifier.
+        ///     Receives the plant.
         /// </summary>
-        /// <param name="plantId"></param>
-        private void _OnPlantChooserMessage(string plantId)
+        /// <param name="plant">The plant information.</param>
+        private void _OnPlantChooserMessage(PlantServiceModel plant)
         {
-            _plantId = plantId;
+            _plant = plant;
         }
 
         #endregion Events.
@@ -90,7 +93,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Pin()
         {
-            _plantFavoriteService.Add(_plantId);
+            _plantFavoriteService.Add(_plant.Id);
         }
 
         /// <summary>
@@ -99,7 +102,8 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _PinCanExecute()
         {
-            return _plantFavoriteService.Exists(_plantId);
+            return true;
+            //return _plantFavoriteService.Exists(_plant.Id);
         }
 
         /// <summary>
@@ -107,7 +111,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Unpin()
         {
-            _plantFavoriteService.Remove(_plantId);
+            _plantFavoriteService.Remove(_plant.Id);
         }
 
         /// <summary>
@@ -116,7 +120,8 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _UnpinCanExecute()
         {
-            return !_plantFavoriteService.Exists(_plantId);
+            return true;
+            //return !_plantFavoriteService.Exists(_plant.Id);
         }
 
         #endregion Methods.

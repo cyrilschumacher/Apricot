@@ -22,7 +22,8 @@
     </interactivity:Interaction.Behaviors>
 
     <Page.BottomAppBar>
-        <CommandBar Background="{StaticResource ApricotPrimaryBrush}" Foreground="White">
+        <CommandBar Background="{StaticResource ApricotPrimaryBrush}"
+                    Foreground="{StaticResource ApricotSecondaryBrush}">
             <AppBarButton x:Uid="Add"
                           Icon="Add"
                           Label="Suspendisse"

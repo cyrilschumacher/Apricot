@@ -30,7 +30,8 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar Background="#744C28" Foreground="White">
+        <CommandBar Background="{StaticResource ApricotPrimaryBrush}"
+                    Foreground="{StaticResource ApricotSecondaryBrush}">
             <AppBarButton x:Uid="New" Icon="Add" Label="Tortor">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
@@ -43,10 +44,22 @@
 
     <Pivot x:Uid="MyGarden" Title="Maecenas ut">
         <PivotItem x:Uid="Plant" Header="Vestibulum">
-            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Plant}" ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}"/>
+            <ListBox x:Name="PlantListBox"
+                     Background="{x:Null}"
+                     ItemsSource="{Binding Model.Plant}"
+                     ItemContainerStyle="{StaticResource PlantStyle}"
+                     ItemTemplate="{StaticResource PlantDataTemplate}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}" 
+                                                  CommandParameter="{Binding ElementName=PlantListBox, Path=SelectedItem}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ListBox>
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
-            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Favorites}" ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}"/>
+            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Favorites}"
+                     ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}" />
         </PivotItem>
     </Pivot>
 </Page>

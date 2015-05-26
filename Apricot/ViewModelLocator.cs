@@ -73,6 +73,7 @@ namespace Apricot
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CreatePlantViewModel>();
             SimpleIoc.Default.Register<PlantChooserViewModel>();
+            SimpleIoc.Default.Register<PlantViewModel>();
         }
 
         #endregion Constructors.
