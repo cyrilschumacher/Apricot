@@ -98,7 +98,7 @@ namespace Apricot.Shared.ViewModels
                 Model = new PlantModel
                 {
                     Details = new PlantDetailsModel(),
-                    GoToChartPageCommand = new RelayCommand<string>(_SeeMeasureChart),
+                    GoToChartPageCommand = new RelayCommand<string>(_GoToMeasureChart),
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
                     OnUnloadedCommand = new RelayCommand(_OnUnloaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
@@ -244,10 +244,10 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
-        /// 
+        ///     Goes to a page shows measure chart.
         /// </summary>
-        /// <param name="measureName"></param>
-        private async void _SeeMeasureChart(string measureName)
+        /// <param name="measureName">The name of measure.</param>
+        private void _GoToMeasureChart(string measureName)
         {
             _navigationService.NavigateTo("MeasureChart");
             MessengerInstance.Send(new MeasureMessageModel{Measures = Model.Measures, Name = measureName});

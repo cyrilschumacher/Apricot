@@ -40,6 +40,17 @@ namespace Apricot
         }
 
         /// <summary>
+        ///     Gets a view model for shows a measure chart.
+        /// </summary>
+        public MeasureChartViewModel MeasureChart
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MeasureChartViewModel>(Guid.NewGuid().ToString());
+            }
+        }
+
+        /// <summary>
         ///     Gets a view model for shows plant information.
         /// </summary>
         /// <value>The view model.</value>
@@ -104,8 +115,10 @@ namespace Apricot
         private static INavigationService _InitializeNavigationService()
         {
             var navigationService = new NavigationService();
+            navigationService.Configure("MeasureChart", typeof(MeasureChartPage));
             navigationService.Configure("Plant", typeof(PlantPage));
             navigationService.Configure("PlantChooser", typeof(PlantChooserPage));
+            navigationService.Configure("VarietyInformation", typeof(VarietyInformationPage));
 
             return navigationService;
         }
