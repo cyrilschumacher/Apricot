@@ -21,7 +21,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Service name for obtains the variety plant list.
         /// </summary>
-        private const string VarietyPlantListServiceName = "getTypesPlant";
+        private const string VarietyPlantListServiceName = "getTypePlant";
 
         /// <summary>
         ///     Service name for creates a new plant.

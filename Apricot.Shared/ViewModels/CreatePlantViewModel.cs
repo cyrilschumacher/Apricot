@@ -9,9 +9,11 @@ using System.ComponentModel;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -29,7 +31,12 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Maximum number of photos allowed.
         /// </summary>
-        private const int MaxPhoto = 5;
+        private const int MaximumPhoto = 5;
+
+        /// <summary>
+        ///     Maximum width of the image.
+        /// </summary>
+        private const int MaximumWidthImage = 600;
 
         #endregion Constants.
 
@@ -160,7 +167,7 @@ namespace Apricot.Shared.ViewModels
             if ((fileOpenPickerEventArgs != null) && (fileOpenPickerEventArgs.Files.Count > 0))
             {
                 // Obtains photo.
-                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaxPhoto))
+                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumWidthImage))
                 {
                     _AddPhotoAsync(file);
                 }
@@ -176,6 +183,16 @@ namespace Apricot.Shared.ViewModels
         private async void _AddPhotoAsync(IStorageFile file)
         {
             var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            // Reduce photo size.
+            var decoder = await BitmapDecoder.CreateAsync(stream);
+            var inMemory = new InMemoryRandomAccessStream();
+            var encoder = await BitmapEncoder.CreateForTranscodingAsync(inMemory, decoder);
+            encoder.BitmapTransform.ScaledWidth = MaximumWidthImage;
+
+            // Write out to the stream.
+            await encoder.FlushAsync();
+
             var photo = new BitmapImage();
             await photo.SetSourceAsync(stream);
 
@@ -189,7 +206,7 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Creates a new plant by user informations.
         /// </summary>
-        public async void _CreateNewPlantAsync()
+        private async void _CreateNewPlantAsync()
         {
             // Obtains, only, the photos in Base64 format.
             var photos = Model.Photos.Select(p => p.Base64Data);
@@ -211,7 +228,7 @@ namespace Apricot.Shared.ViewModels
         ///     Returns a value indicating whether the command to create a new plant is available.
         /// </summary>
         /// <returns>True if the command is available, otherwise, False.</returns>
-        public bool _CreateNewPlantCanExecute()
+        private bool _CreateNewPlantCanExecute()
         {
             return !string.IsNullOrEmpty(Model.Name) && (Model.SelectedVariety != null) &&
                    (Model.SelectedDevice != null);
@@ -256,8 +273,6 @@ namespace Apricot.Shared.ViewModels
             };
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
-            filePicker.FileTypeFilter.Add(".gif");
-            filePicker.FileTypeFilter.Add(".png");
             filePicker.PickMultipleFilesAndContinue();
         }
 
