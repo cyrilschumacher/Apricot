@@ -1,4 +1,5 @@
-﻿using Windows.Data.Json;
+﻿using System.IO;
+using Windows.Data.Json;
 
 namespace Apricot.Shared.Extensions
 {
@@ -16,6 +17,18 @@ namespace Apricot.Shared.Extensions
         {
             JsonValue result;
             return JsonValue.TryParse(value, out result);
+        }
+
+        public static Stream ToStream(this string value)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(value);
+            writer.Flush();
+
+            stream.Position = 0;
+
+            return stream;
         }
     }
 }

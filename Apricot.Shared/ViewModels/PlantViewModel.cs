@@ -1,4 +1,7 @@
-﻿using Apricot.Shared.Models;
+﻿using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Apricot.Shared.Models;
 using Apricot.Shared.Models.Service;
 using Apricot.Shared.Services;
 using GalaSoft.MvvmLight;
@@ -33,7 +36,8 @@ namespace Apricot.Shared.ViewModels
                 {
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
-                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
+                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute),
+                    OnUnloadedCommand = new RelayCommand(_OnUnloaded)
                 };
             }
         }
@@ -69,12 +73,31 @@ namespace Apricot.Shared.ViewModels
         #region Events.
 
         /// <summary>
+        ///     Occurs when the user presses the hardware Back button.
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">The parameters.</param>
+        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
+        {
+            // Handles the back button for avoid a application suspension.
+            e.Handled = true;
+
+            // Navigates to the previous page if the root frame is obtained.
+            var rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null)
+            {
+                rootFrame.GoBack();
+            }
+        }
+
+        /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
         {
             // Register messengers.
             MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
+            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
         }
 
         /// <summary>
@@ -86,6 +109,14 @@ namespace Apricot.Shared.ViewModels
             _plant = plant;
         }
 
+        /// <summary>
+        ///     Raises the Unloaded event.
+        /// </summary>
+        private void _OnUnloaded()
+        {
+            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
+        }
+
         #endregion Events.
 
         /// <summary>
@@ -94,6 +125,9 @@ namespace Apricot.Shared.ViewModels
         private void _Pin()
         {
             _plantFavoriteService.Add(_plant.Id);
+
+            Model.PinCommand.RaiseCanExecuteChanged();
+            Model.UnpinCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>
@@ -102,8 +136,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _PinCanExecute()
         {
-            return true;
-            //return _plantFavoriteService.Exists(_plant.Id);
+            return !_plantFavoriteService.Exists(_plant.Id);
         }
 
         /// <summary>
@@ -112,6 +145,9 @@ namespace Apricot.Shared.ViewModels
         private void _Unpin()
         {
             _plantFavoriteService.Remove(_plant.Id);
+
+            Model.PinCommand.RaiseCanExecuteChanged();
+            Model.UnpinCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>
@@ -120,8 +156,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _UnpinCanExecute()
         {
-            return true;
-            //return !_plantFavoriteService.Exists(_plant.Id);
+            return _plantFavoriteService.Exists(_plant.Id);
         }
 
         #endregion Methods.

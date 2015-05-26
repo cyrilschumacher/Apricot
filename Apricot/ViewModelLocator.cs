@@ -55,7 +55,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PlantChooserViewModel>();
+                return ServiceLocator.Current.GetInstance<PlantChooserViewModel>(Guid.NewGuid().ToString());
             }
         }
 

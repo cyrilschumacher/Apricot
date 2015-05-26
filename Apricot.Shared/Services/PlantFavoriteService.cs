@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
 using Windows.Storage;
+using Apricot.Shared.Extensions;
 
 namespace Apricot.Shared.Services
 {
@@ -43,17 +46,35 @@ namespace Apricot.Shared.Services
         #region Private methods.
 
         /// <summary>
+        ///     Creates plant favorites.
+        /// </summary>
+        private void _CreateFavorites()
+        {
+            if (!_settingsDataContainer.Values.ContainsKey(PlantFavoritesSettingsName))
+            {
+                _settingsDataContainer.Values[PlantFavoritesSettingsName] = string.Empty;
+            }
+        }
+
+        /// <summary>
         ///     Gets plant favorites.
         /// </summary>
         /// <returns>The plant favorites.</returns>
         private IList<string> _GetFavorites()
         {
-            if (_settingsDataContainer.Values.ContainsKey(PlantFavoritesSettingsName))
-            {
-                return _settingsDataContainer.Values[PlantFavoritesSettingsName] as List<string>;
-            }
+            _CreateFavorites();
 
-            return new List<string>();
+            var favorites = _settingsDataContainer.Values[PlantFavoritesSettingsName] as string;
+            return favorites.Split(',').ToList();
+        }
+
+        /// <summary>
+        ///     Saves plant favorites.
+        /// </summary>
+        /// <param name="favorites">The plant favorites.</param>
+        private void _SaveFavorites(IEnumerable<string> favorites)
+        {
+            _settingsDataContainer.Values[PlantFavoritesSettingsName] = string.Join(",", favorites);
         }
 
         #endregion Private methods.
@@ -67,7 +88,7 @@ namespace Apricot.Shared.Services
             var favorites = _GetFavorites();
             favorites.Add(id);
 
-            _settingsDataContainer.Values[PlantFavoritesSettingsName] = favorites;
+            _SaveFavorites(favorites);
         }
 
         /// <summary>
@@ -99,7 +120,7 @@ namespace Apricot.Shared.Services
             var favorites = _GetFavorites();
             favorites.Remove(id);
 
-            _settingsDataContainer.Values[PlantFavoritesSettingsName] = favorites;
+            _SaveFavorites(favorites);
         }
 
         #endregion Methods.

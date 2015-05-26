@@ -28,7 +28,7 @@ namespace Apricot.Shared.Models.Service
         /// </summary>
         /// <value>The variety identifier.</value>
         [JsonProperty("idTypePlant")]
-        public int Variety { get; set; }
+        public int? Variety { get; set; }
 
         #endregion Properties.
     }

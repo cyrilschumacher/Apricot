@@ -1,10 +1,4 @@
-﻿using Apricot.Shared.Extensions;
-using Apricot.Shared.Models;
-using Apricot.Shared.Services.Apricot;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
@@ -17,6 +11,12 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Apricot.Shared.Extensions;
+using Apricot.Shared.Models;
+using Apricot.Shared.Services.Apricot;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -31,12 +31,12 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Maximum number of photos allowed.
         /// </summary>
-        private const int MaximumPhoto = 5;
+        private const int MaximumPhoto = 3;
 
         /// <summary>
         ///     Maximum width of the image.
         /// </summary>
-        private const int MaximumWidthImage = 600;
+        private const int MaximumWidthImage = 200;
 
         #endregion Constants.
 
@@ -167,7 +167,8 @@ namespace Apricot.Shared.ViewModels
             if ((fileOpenPickerEventArgs != null) && (fileOpenPickerEventArgs.Files.Count > 0))
             {
                 // Obtains photo.
-                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumWidthImage))
+                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumPhoto)
+                    )
                 {
                     _AddPhotoAsync(file);
                 }
@@ -189,18 +190,19 @@ namespace Apricot.Shared.ViewModels
             var inMemory = new InMemoryRandomAccessStream();
             var encoder = await BitmapEncoder.CreateForTranscodingAsync(inMemory, decoder);
             encoder.BitmapTransform.ScaledWidth = MaximumWidthImage;
+            encoder.BitmapTransform.ScaledHeight = MaximumWidthImage;
 
             // Write out to the stream.
             await encoder.FlushAsync();
 
             var photo = new BitmapImage();
-            await photo.SetSourceAsync(stream);
+            await photo.SetSourceAsync(inMemory);
 
             // Reset stream position for avoid a wrong Base64 data.
-            stream.Seek(0);
-            var base64Data = await stream.ToBase64();
+            inMemory.Seek(0);
+            var base64Data = await inMemory.ToBase64();
 
-            Model.Photos.Add(new PlantPhotoModel { Image = photo, Base64Data = base64Data });
+            Model.Photos.Add(new PlantPhotoModel {Image = photo, Base64Data = base64Data});
         }
 
         /// <summary>
@@ -214,7 +216,8 @@ namespace Apricot.Shared.ViewModels
             try
             {
                 // Create a new plant by user informations.
-                await _plantService.CreateNewPlant(Model.Name, Model.SelectedVariety.Id, photos);
+                await
+                    _plantService.CreateNewPlant(Model.Name, Model.SelectedDevice.Id, Model.SelectedVariety.Id, photos);
                 // Return to the previous page.
                 _GoToPreviousPage();
             }

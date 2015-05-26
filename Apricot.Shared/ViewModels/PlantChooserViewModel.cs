@@ -95,7 +95,7 @@ namespace Apricot.Shared.ViewModels
             var favorites = (from x in Model.Plant join y in idsFavorite on x.Id equals y select x).ToList();
 
             Model.Favorites.Clear();
-            Model.Favorites.AddUnique(favorites);
+            Model.Favorites.AddRange(favorites);
         }
 
         /// <summary>

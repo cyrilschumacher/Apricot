@@ -55,6 +55,8 @@ namespace Apricot.Shared.Services.Apricot
 
         #region Methods.
 
+        #region Private methods.
+
         /// <summary>
         ///     Gets a the server address.
         /// </summary>
@@ -102,6 +104,8 @@ namespace Apricot.Shared.Services.Apricot
             var response = await httpResponse.Content.ReadAsStringAsync();
             return string.IsNullOrEmpty(response) ? default(TModel) : _JsonResponseToObject<TModel>(response);
         }
+
+        #endregion Private methods.
 
         /// <summary>
         ///     Sends a GET request to the specified Uri as an asynchronous operation. 

@@ -59,12 +59,13 @@ namespace Apricot.Shared.Services.Apricot
         ///     Creates a new plant.
         /// </summary>
         /// <param name="plantName">The plant name.</param>
+        /// <param name="deviceId">The device identifier.</param>
         /// <param name="varietyId">The variety identifier.</param>
         /// <param name="photos">The photos.</param>
         /// <returns>The task.</returns>
-        public async Task CreateNewPlant(string plantName, string varietyId, IEnumerable<string> photos)
+        public async Task CreateNewPlant(string plantName, string deviceId, string varietyId, IEnumerable<string> photos)
         {
-            var model = new CreatePlantServiceModel {Name = plantName, Photos = photos, VarietyId = varietyId};
+            var model = new CreatePlantServiceModel {Name = plantName, DeviceId = deviceId, Photos = photos, VarietyId = varietyId};
             var content = JsonConvert.SerializeObject(model);
 
             await PostAsync(CreateNewPlantServiceName, content);

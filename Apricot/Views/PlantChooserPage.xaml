@@ -20,13 +20,14 @@
 
     <Page.Resources>
         <DataTemplate x:Key="PlantDataTemplate">
-            <ListBoxItem>
+            <ListBoxItem Background="Red">
                 <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
             </ListBoxItem>
         </DataTemplate>
-        <Style x:Key="PlantStyle" TargetType="ListBoxItem">
+        <!--<Style x:Key="PlantStyle" TargetType="ListBoxItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        </Style>-->
     </Page.Resources>
 
     <Page.BottomAppBar>
@@ -45,21 +46,27 @@
     <Pivot x:Uid="MyGarden" Title="Maecenas ut">
         <PivotItem x:Uid="Plant" Header="Vestibulum">
             <ListBox x:Name="PlantListBox"
-                     Background="{x:Null}"
                      ItemsSource="{Binding Model.Plant}"
-                     ItemContainerStyle="{StaticResource PlantStyle}"
                      ItemTemplate="{StaticResource PlantDataTemplate}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">
-                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}" 
-                                                  CommandParameter="{Binding ElementName=PlantListBox, Path=SelectedItem}"/>
+                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
+                                                  CommandParameter="{Binding SelectedItem, ElementName=PlantListBox}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
             </ListBox>
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
-            <ListBox Background="{x:Null}" ItemsSource="{Binding Model.Favorites}"
-                     ItemContainerStyle="{StaticResource PlantStyle}" ItemTemplate="{StaticResource PlantDataTemplate}" />
+            <ListBox x:Name="FavoritesPlantListBox"
+                     ItemsSource="{Binding Model.Favorites}"
+                     ItemTemplate="{StaticResource PlantDataTemplate}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
+                                                  CommandParameter="{Binding SelectedItem, ElementName=FavoritesPlantListBox}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </ListBox>
         </PivotItem>
     </Pivot>
 </Page>
