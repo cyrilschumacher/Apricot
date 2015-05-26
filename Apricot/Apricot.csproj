@@ -176,7 +176,6 @@
     <Content Include="Assets\Logo\BadgeLogo.scale-240.png" />
     <Content Include="Assets\Logo\Logo.scale-100.png" />
     <Content Include="Assets\Logo\Logo.scale-140.png" />
-    <Content Include="Assets\Logo\Logo.scale-240.jpg" />
     <Content Include="Assets\Logo\Logo.scale-240.png" />
     <Content Include="Assets\Logo\SmallLogo.scale-100.png" />
     <Content Include="Assets\Logo\SmallLogo.scale-140.png" />
@@ -190,10 +189,6 @@
     <Content Include="Assets\Logo\StoreLogo.scale-240.png" />
     <Content Include="Assets\Logo\WideLogo.scale-100.png" />
     <Content Include="Assets\Logo\WideLogo.scale-140.png" />
-    <Content Include="Assets\Logo\WideLogo.scale-240.jpg" />
-    <Content Include="Assets\Logo\SmallLogo.scale-240.jpg" />
-    <Content Include="Assets\Logo\Square71x71Logo.scale-240.jpg" />
-    <Content Include="Assets\Logo\StoreLogo.scale-240.jpg" />
     <Content Include="Assets\Logo\WideLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\UnknownPlant.jpg" />

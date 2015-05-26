@@ -9,7 +9,8 @@
     xmlns:sampleData="using:Apricot.Shared.SampleData"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantChooserSampleData}"
-    DataContext="{Binding PlantChooser, Source={StaticResource Locator}}">
+    DataContext="{Binding PlantChooser, Source={StaticResource Locator}}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">

@@ -1,3 +1,4 @@
+using System;
 using Apricot.Shared.ViewModels;
 using Apricot.Views;
 using GalaSoft.MvvmLight.Ioc;
@@ -21,7 +22,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CreatePlantViewModel>();
+                return ServiceLocator.Current.GetInstance<CreatePlantViewModel>(Guid.NewGuid().ToString());
             }
         }
 

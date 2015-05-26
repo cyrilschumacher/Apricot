@@ -8,9 +8,9 @@
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding CreatePlant, Source={StaticResource Locator}}"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:CreatePlantSampleData}"
-    DataContext="{Binding CreatePlant, Source={StaticResource Locator}}">
+    d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:CreatePlantSampleData}">
 
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
