@@ -1,5 +1,10 @@
-﻿using Apricot.Shared.Services.Apricot;
+﻿using Apricot.Shared.Models.ViewModels;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -13,9 +18,19 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Variety plant service.
         /// </summary>
-        private VarietyPlantService _varietyPlantService;
+        private readonly VarietyPlantService _varietyPlantService;
 
         #endregion Members.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets or sets a model.
+        /// </summary>
+        /// <value>The model.</value>
+        public VarietyInformationModel Model { get; set; }
+
+        #endregion Properties.
 
         #region Constructors.
 
@@ -31,9 +46,71 @@ namespace Apricot.Shared.ViewModels
             {
                 // Initialize members.
                 _varietyPlantService = new VarietyPlantService();
+
+                // Initialize properties.
+                Model = new VarietyInformationModel
+                {
+                    OnUnloadedCommand = new RelayCommand(_OnUnloaded)
+                };
+
+                // Register messengers.
+                MessengerInstance.Register<int>(this, _OnPlantIdentifierMessage);
             }
         }
 
         #endregion Constructors.
+
+        #region Methods.
+
+        #region Events.
+
+        /// <summary>
+        ///     Occurs when the user presses the hardware Back button.
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">The parameters.</param>
+        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
+        {
+            // Handles the back button for avoid a application suspension.
+            e.Handled = true;
+
+            // Navigates to the previous page if the root frame is obtained.
+            var rootFrame = Window.Current.Content as Frame;
+            if (rootFrame != null)
+            {
+                rootFrame.GoBack();
+            }
+        }
+
+        /// <summary>
+        ///     Raises the Unloaded event.
+        /// </summary>
+        private void _OnUnloaded()
+        {
+            // Initializes events.
+            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+        }
+
+        /// <summary>
+        ///     Receives the plant identifier.
+        /// </summary>
+        /// <param name="plantIdentifier">The plant identifier.</param>
+        private void _OnPlantIdentifierMessage(int plantIdentifier)
+        {
+            _LoadVarietyInformationAsync(plantIdentifier);
+        }
+
+        #endregion Events.
+
+        /// <summary>
+        ///     Loads the variety information.
+        /// </summary>
+        /// <param name="plantIdentifier">The plant identifier.</param>
+        private async void _LoadVarietyInformationAsync(int plantIdentifier)
+        {
+            Model.Information = await _varietyPlantService.GetVarietyInformation(plantIdentifier);
+        }
+
+        #endregion Methods.
     }
 }

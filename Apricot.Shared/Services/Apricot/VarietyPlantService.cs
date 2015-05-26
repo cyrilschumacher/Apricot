@@ -38,10 +38,10 @@ namespace Apricot.Shared.Services.Apricot
         ///     Get information variety.
         /// </summary>
         /// <returns>The information variety of plant.</returns>
-        public async Task<List<VarietyPlantInformationServiceModel>> GetVarietyInformation(int plantId)
+        public async Task<VarietyPlantInformationServiceModel> GetVarietyInformation(int plantId)
         {
             var serviceUri = string.Format(VarietyPlantServiceName, plantId);
-            return await GetAsync<List<VarietyPlantInformationServiceModel>>(serviceUri);
+            return await GetAsync<VarietyPlantInformationServiceModel>(serviceUri);
         }
 
         #endregion Methods.

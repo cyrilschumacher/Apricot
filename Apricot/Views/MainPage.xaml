@@ -98,8 +98,7 @@
     <Grid>
         <ProgressRing Margin="0,200,0,0"
                       Foreground="{StaticResource ApricotFontPrimaryBrush}"
-                      IsActive="{Binding Model.IsLoading}"
-                      Background="{x:Null}" />
+                      IsActive="{Binding Model.IsLoading}" />
         <StackPanel Margin="12" VerticalAlignment="Bottom"
                     Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock x:Uid="NoCommunicationEstablished"

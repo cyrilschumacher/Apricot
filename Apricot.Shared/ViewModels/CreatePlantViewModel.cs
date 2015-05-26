@@ -6,6 +6,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
+using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
+using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -36,7 +38,7 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Maximum width of the image.
         /// </summary>
-        private const int MaximumWidthImage = 200;
+        private const int MaximumWidthImage = 500;
 
         #endregion Constants.
 
@@ -173,8 +175,7 @@ namespace Apricot.Shared.ViewModels
             if ((fileOpenPickerEventArgs != null) && (fileOpenPickerEventArgs.Files.Count > 0))
             {
                 // Obtains photo.
-                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumPhoto)
-                    )
+                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumPhoto))
                 {
                     _AddPhotoAsync(file);
                 }
@@ -187,16 +188,22 @@ namespace Apricot.Shared.ViewModels
         ///     Adds a photo in the album.
         /// </summary>
         /// <param name="file">The file that represents the photo.</param>
-        private async void _AddPhotoAsync(IStorageFile file)
+        private async void _AddPhotoAsync(StorageFile file)
         {
+            // Reads file.
             var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            // Gets the properties.
+            var properties = await file.Properties.GetImagePropertiesAsync();
+            var height = properties.Height;
+            var width = properties.Width;
 
             // Reduce photo size.
             var decoder = await BitmapDecoder.CreateAsync(stream);
             var inMemory = new InMemoryRandomAccessStream();
             var encoder = await BitmapEncoder.CreateForTranscodingAsync(inMemory, decoder);
             encoder.BitmapTransform.ScaledWidth = MaximumWidthImage;
-            encoder.BitmapTransform.ScaledHeight = MaximumWidthImage;
+            encoder.BitmapTransform.ScaledHeight = (height * MaximumWidthImage) / width;
 
             // Write out to the stream.
             await encoder.FlushAsync();

@@ -1,11 +1,11 @@
-﻿using Apricot.Shared.Models;
-using Apricot.Shared.Models.Services;
+﻿using Apricot.Shared.Models.Services;
 using System.Collections.ObjectModel;
+using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
-    ///     Fake view model for the "Plant chooser" view.
+    ///     Fake view model for select an existing plant.
     /// </summary>
     public class PlantChooserSampleData
     {

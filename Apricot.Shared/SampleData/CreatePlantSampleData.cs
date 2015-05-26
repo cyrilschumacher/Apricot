@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.Services;
+using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.SampleData
 {

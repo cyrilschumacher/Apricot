@@ -10,6 +10,8 @@ using System;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Apricot.Shared.Models.Messages;
+using GalaSoft.MvvmLight.Views;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -30,6 +32,16 @@ namespace Apricot.Shared.ViewModels
         #region Members.
 
         /// <summary>
+        ///     Service for manage measure.
+        /// </summary>
+        private readonly MeasureService _measureService;
+
+        /// <summary>
+        ///     Navigation service.
+        /// </summary>
+        private readonly INavigationService _navigationService;
+
+        /// <summary>
         ///     Service for manage plant favorite.
         /// </summary>
         private readonly PlantFavoriteService _plantFavoriteService;
@@ -38,11 +50,6 @@ namespace Apricot.Shared.ViewModels
         ///     Service for manage plant.
         /// </summary>
         private readonly PlantService _plantService;
-
-        /// <summary>
-        ///     Service for manage measure.
-        /// </summary>
-        private readonly MeasureService _measureService;
 
         /// <summary>
         ///     Real time measure.
@@ -66,7 +73,8 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public PlantViewModel()
+        /// <param name="navigationService">A navigation service.</param>
+        public PlantViewModel(INavigationService navigationService)
         {
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
@@ -75,6 +83,7 @@ namespace Apricot.Shared.ViewModels
             {
                 // Initialize members.
                 _measureService = new MeasureService();
+                _navigationService = navigationService;
                 _plantService = new PlantService();
                 _plantFavoriteService = new PlantFavoriteService();
                 _realTimeMeasureTimer = new DispatcherTimer
@@ -89,11 +98,12 @@ namespace Apricot.Shared.ViewModels
                 Model = new PlantModel
                 {
                     Details = new PlantDetailsModel(),
+                    GoToChartPageCommand = new RelayCommand<string>(_SeeMeasureChart),
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
                     OnUnloadedCommand = new RelayCommand(_OnUnloaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
-                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute),
-                    StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute)
+                    StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute),
+                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
                 };
             }
         }
@@ -142,7 +152,8 @@ namespace Apricot.Shared.ViewModels
             Model.IsActive = plant.IsActive;
             Model.Name = plant.Name;
 
-            // Loads the details of plant, the latest measure and the measures_LoadDetailsAsync();
+            // Loads the details of plant, the latest measure and the measures.
+            _LoadDetailsAsync();
             _LoadLatestMeasureAsync();
             _LoadMeasuresAsync();
 
@@ -200,9 +211,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadLatestMeasureAsync()
         {
-            var measure = await _measureService.GetLast(Model.Identifier);
-
-            Model.LatestMeasure = measure;
+            Model.LatestMeasure = await _measureService.GetLast(Model.Identifier);
         }
 
         /// <summary>
@@ -232,6 +241,16 @@ namespace Apricot.Shared.ViewModels
         private bool _PinCanExecute()
         {
             return !_plantFavoriteService.Exists(Model.Identifier);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="measureName"></param>
+        private async void _SeeMeasureChart(string measureName)
+        {
+            _navigationService.NavigateTo("MeasureChart");
+            MessengerInstance.Send(new MeasureMessageModel{Measures = Model.Measures, Name = measureName});
         }
 
         /// <summary>

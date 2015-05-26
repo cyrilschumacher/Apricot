@@ -41,28 +41,34 @@
 
     <Pivot x:Uid="MyGarden" Title="Maecenas ut">
         <PivotItem x:Uid="Plant" Header="Vestibulum">
-            <ListBox x:Name="PlantListBox"
-                     ItemsSource="{Binding Model.Plant}"
-                     ItemTemplate="{StaticResource PlantDataTemplate}">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="SelectionChanged">
-                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
-                                                  CommandParameter="{Binding SelectedItem, ElementName=PlantListBox}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-            </ListBox>
+            <Grid>
+                <ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
+                <ListBox x:Name="PlantListBox"
+                         ItemsSource="{Binding Model.Plant}"
+                         ItemTemplate="{StaticResource PlantDataTemplate}">
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
+                            <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
+                                                      CommandParameter="{Binding SelectedItem, ElementName=PlantListBox}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
+            </Grid>
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
-            <ListBox x:Name="FavoritesPlantListBox"
+            <Grid>
+                <ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
+                <ListBox x:Name="FavoritesPlantListBox"
                      ItemsSource="{Binding Model.Favorites}"
                      ItemTemplate="{StaticResource PlantDataTemplate}">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="SelectionChanged">
-                        <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
-                                                  CommandParameter="{Binding SelectedItem, ElementName=FavoritesPlantListBox}" />
-                    </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-            </ListBox>
+                    <interactivity:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="SelectionChanged">
+                            <core:InvokeCommandAction Command="{Binding Model.SelectPlantCommand}"
+                                                      CommandParameter="{Binding SelectedItem, ElementName=FavoritesPlantListBox}" />
+                        </core:EventTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </ListBox>
+            </Grid>
         </PivotItem>
     </Pivot>
 </Page>

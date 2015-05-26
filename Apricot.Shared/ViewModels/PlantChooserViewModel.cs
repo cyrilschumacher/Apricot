@@ -1,18 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Apricot.Shared.Extensions;
-using Apricot.Shared.Models;
 using Apricot.Shared.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using Apricot.Shared.Models.Services;
+using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.ViewModels
 {
     /// <summary>
-    ///     View model for the "Plant chooser" view.
+    ///     View model for select an existing plant.
     /// </summary>
     public class PlantChooserViewModel : ViewModelBase
     {
@@ -75,6 +76,35 @@ namespace Apricot.Shared.ViewModels
 
         #region Methods.
 
+        #region Events.
+
+        /// <summary>
+        ///     Raises the Loaded event.
+        /// </summary>
+        private async void _OnLoadedAsync()
+        {
+            // Indicates that loading occurs.
+            Model.Loading = true;
+
+            try
+            {
+                // Obtains a list of existing plants and determines the favorite plants.
+                await _LoadPlantAsync();
+                // The favorites list is to be made after loading the list of existing plants.
+                _LoadFavoritePlant();
+            }
+            catch (Exception)
+            {
+                //todo: Manage error.
+            }
+            finally
+            {
+                Model.Loading = false;
+            }
+        }
+
+        #endregion Events.
+
         /// <summary>
         ///     Loads existing plant.
         /// </summary>
@@ -82,6 +112,7 @@ namespace Apricot.Shared.ViewModels
         {
             var plant = await _plantService.GetPlantsAsync();
 
+            // Clear and adds existing plant.
             Model.Plant.Clear();
             Model.Plant.AddRange(plant);
         }
@@ -91,20 +122,13 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _LoadFavoritePlant()
         {
+            // Selects only the plants that have been saved as favorites.
             var idsFavorite = _plantFavoriteService.Get();
             var favorites = (from x in Model.Plant join y in idsFavorite on x.Identifier equals y select x).ToList();
 
+            // Clear and adds existing favorite plant.
             Model.Favorites.Clear();
             Model.Favorites.AddRange(favorites);
-        }
-
-        /// <summary>
-        ///     Raises the Loaded event.
-        /// </summary>
-        private async void _OnLoadedAsync()
-        {
-            await _LoadPlantAsync();
-            _LoadFavoritePlant();
         }
 
         /// <summary>

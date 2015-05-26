@@ -1,10 +1,10 @@
 ﻿using System;
-using Apricot.Shared.Models.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Apricot.Shared.Models.Services;
 using GalaSoft.MvvmLight.Command;
 
-namespace Apricot.Shared.Models
+namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
     ///     Model for the "Create plant" view.

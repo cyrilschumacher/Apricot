@@ -1,9 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Apricot.Shared.Models.Services;
+﻿using Apricot.Shared.Models.Services;
 using GalaSoft.MvvmLight.Command;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
-namespace Apricot.Shared.Models
+namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
     ///     Model for the "Plant chooser" view.
@@ -18,6 +18,11 @@ namespace Apricot.Shared.Models
         private ObservableCollection<PlantServiceModel> _favorites;
 
         /// <summary>
+        ///     Value indicating whether a load is in progress.
+        /// </summary>
+        private bool _isLoading;
+
+        /// <summary>
         ///     Plant.
         /// </summary>
         private ObservableCollection<PlantServiceModel> _plant;
@@ -29,9 +34,9 @@ namespace Apricot.Shared.Models
         #region Commands.
 
         /// <summary>
-        ///     Gets or sets a command for OnLoaded event.
+        ///     Gets or sets a command for <code>OnLoaded</code> event.
         /// </summary>
-        /// <value>The command for OnLoaded event.</value>
+        /// <value>The command for <code>OnLoaded</code> event.</value>
         public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
@@ -45,10 +50,35 @@ namespace Apricot.Shared.Models
         /// <summary>
         ///     Gets or sets favorites plant.
         /// </summary>
+        /// <value>Favorites plant.</value>
         public ObservableCollection<PlantServiceModel> Favorites
         {
-            get { return _favorites; }
-            set { SetValueProperty(ref _favorites, value); }
+            get
+            {
+                return _favorites;
+            }
+            set
+            {
+                SetValueProperty(ref _favorites, value);
+            }
+        }
+
+        /// <summary>
+        ///     Value indicating whether a load is in progress.
+        /// </summary>
+        /// <value>
+        ///     <code>True</code> if a loading occurs, otherwise, <code>False</code>.
+        /// </value>
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                SetValueProperty(ref _isLoading, value);
+            }
         }
 
         /// <summary>

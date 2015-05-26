@@ -1,16 +1,16 @@
-﻿using Apricot.Shared.Models;
-using Apricot.Shared.Models.Services;
+﻿using Apricot.Shared.Models.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Threading.Tasks;
+using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.ViewModels
 {
     /// <summary>
-    ///     View model for the "main" view.
+    ///     View model for verify server availability.
     /// </summary>
     public class MainViewModel : ViewModelBase
     {

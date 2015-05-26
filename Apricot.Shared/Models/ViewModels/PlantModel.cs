@@ -47,6 +47,12 @@ namespace Apricot.Shared.Models.ViewModels
         #region Commands.
 
         /// <summary>
+        ///     Gets or sets a command for see measure chart.
+        /// </summary>
+        /// <value>The command for see measure chart.</value>
+        public RelayCommand<string> GoToChartPageCommand { get; set; }
+
+        /// <summary>
         ///     Gets or sets a command for OnLoaded event.
         /// </summary>
         /// <value>The command for OnLoaded event.</value>
@@ -59,6 +65,12 @@ namespace Apricot.Shared.Models.ViewModels
         public ICommand OnUnloadedCommand { get; set; }
 
         /// <summary>
+        ///     Gets or sets a command for stop the measures of the plant.
+        /// </summary>
+        /// <value>The command forstop the measures of the plant.</value>
+        public RelayCommand StopCommand { get; set; }
+
+        /// <summary>
         ///     Gets or sets a command for pin plant.
         /// </summary>
         /// <value>The command for pin plant.</value>
@@ -69,12 +81,6 @@ namespace Apricot.Shared.Models.ViewModels
         /// </summary>
         /// <value>The command for unpin plant.</value>
         public RelayCommand UnpinCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for stop the measures of the plant.
-        /// </summary>
-        /// <value>The command forstop the measures of the plant.</value>
-        public RelayCommand StopCommand { get; set; }
 
         #endregion Commands.
 
