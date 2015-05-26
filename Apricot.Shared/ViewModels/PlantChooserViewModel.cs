@@ -84,7 +84,7 @@ namespace Apricot.Shared.ViewModels
         private async void _OnLoadedAsync()
         {
             // Indicates that loading occurs.
-            Model.Loading = true;
+            Model.IsLoading = true;
 
             try
             {
@@ -99,7 +99,7 @@ namespace Apricot.Shared.ViewModels
             }
             finally
             {
-                Model.Loading = false;
+                Model.IsLoading = false;
             }
         }
 
