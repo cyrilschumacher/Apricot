@@ -1,6 +1,8 @@
-﻿using Windows.Phone.UI.Input;
+﻿using System.Linq;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.Services;
 using Apricot.Shared.Services;
@@ -65,6 +67,7 @@ namespace Apricot.Shared.ViewModels
                     UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute),
                     OnUnloadedCommand = new RelayCommand(_OnUnloaded)
                 };
+                Model.Details = new PlantDetailsModel();
             }
         }
 
@@ -97,7 +100,20 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadDetailsAsync()
         {
-            Model.Details = await _plantService.GetDetailsPlantAsync(Model.Plant.Identifier);
+            var details = await _plantService.GetDetailsPlantAsync(Model.Plant.Identifier);
+            foreach (var photo in details.Photos)
+            {
+                _AddPhoto(photo);
+            }
+        }
+
+        /// <summary>
+        ///     
+        /// </summary>
+        private async void _AddPhoto(string photo)
+        {
+            var bitmap = await BitmapImageExtensions.FromBase64(photo);
+            Model.Details.Photos.Add(bitmap);
         }
 
         /// <summary>

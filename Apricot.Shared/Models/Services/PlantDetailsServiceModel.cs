@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 namespace Apricot.Shared.Models.Services
 {
     /// <summary>
-    /// 
+    ///     Model for obtains the details of plant.
     /// </summary>
-    public class PlantDetailsServiceModel
+    public class PlantDetailsServiceModel : NotifyPropertyChanged
     {
         #region Properties.
 
@@ -14,7 +14,7 @@ namespace Apricot.Shared.Models.Services
         ///     Gets or sets the plant identifier.
         /// </summary>
         /// <value>The plant identifier.</value>
-        [JsonProperty("idTypePlant")]
+        [JsonProperty("idPlant")]
         public int Identifier { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Apricot.Shared.Models.Services
         /// </summary>
         /// <value>The photos.</value>
         [JsonProperty("photoPlant")]
-        public string Photo { get; set; }
+        public List<string> Photos { get; set; }
 
         /// <summary>
         ///     Gets or sets the variety identifier.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -84,6 +85,7 @@ namespace Apricot.Shared.Services.Apricot
                 throw new ArgumentException("The data isn't a JSON data valid.", "jsonData");
             }
 
+            Debug.WriteLine("JSON received: {0}", jsonData);
             return JsonConvert.DeserializeObject<TModel>(jsonData);
         }
 

@@ -52,7 +52,8 @@ namespace Apricot.Shared.Services.Apricot
         /// <returns>The details of a plant.</returns>
         public async Task<PlantDetailsServiceModel> GetDetailsPlantAsync(int plantIdentifier)
         {
-            return await GetAsync<PlantDetailsServiceModel>(DetailsPlantServiceName);
+            var serviceUri = string.Format(DetailsPlantServiceName, plantIdentifier);
+            return await GetAsync<PlantDetailsServiceModel>(serviceUri);
         }
 
         /// <summary>
@@ -74,11 +75,11 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Stops plant.
         /// </summary>
-        /// <param name="plantId">The plant identifier.</param>
+        /// <param name="plantIdentifier">The plant identifier.</param>
         /// <returns>The task.</returns>
-        public async Task StopPlantAsync(string plantId)
+        public async Task StopPlantAsync(string plantIdentifier)
         {
-            var serviceUri = string.Format(StopPlantServiceName, plantId);
+            var serviceUri = string.Format(StopPlantServiceName, plantIdentifier);
             await GetAsync(serviceUri);
         }
 

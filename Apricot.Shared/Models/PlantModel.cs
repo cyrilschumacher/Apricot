@@ -19,7 +19,7 @@ namespace Apricot.Shared.Models
         /// <summary>
         ///     Details of the plant.
         /// </summary>
-        private PlantDetailsServiceModel _details;
+        private PlantDetailsModel _details;
 
         #endregion Members.
 
@@ -73,7 +73,7 @@ namespace Apricot.Shared.Models
         ///     Gets or sets a plant details.
         /// </summary>
         /// <value>The plant details.</value>
-        public PlantDetailsServiceModel Details
+        public PlantDetailsModel Details
         {
             get
             {
@@ -83,6 +83,11 @@ namespace Apricot.Shared.Models
             {
                 SetValueProperty(ref _details, value);
             }
+        }
+
+        public object T
+        {
+            
         }
 
         #endregion Properties.

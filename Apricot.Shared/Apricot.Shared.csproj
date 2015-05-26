@@ -89,6 +89,7 @@
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\CreatePlantModel.cs" />
     <Compile Include="Models\PlantChooserModel.cs" />
+    <Compile Include="Models\PlantDetailsModel.cs" />
     <Compile Include="Models\PlantModel.cs" />
     <Compile Include="Models\PlantPhotoModel.cs" />
     <Compile Include="Models\Services\CreatePlantServiceModel.cs" />
