@@ -20,6 +20,11 @@ namespace Apricot.Shared.Models
         private string _name;
 
         /// <summary>
+        ///     Selected device.
+        /// </summary>
+        private DeviceModel _selectedDevice;
+
+        /// <summary>
         ///     Selected variety.
         /// </summary>
         private VarietyPlantServiceModel _selectedVariety;
@@ -70,13 +75,23 @@ namespace Apricot.Shared.Models
         /// <summary>
         ///     Gets or sets devices.
         /// </summary>
-        public ObservableCollection<DeviceModel> Devices { get; set; } 
+        public ObservableCollection<DeviceModel> Devices { get; set; }
 
         /// <summary>
         ///     Gets or sets a device identifier.
         /// </summary>
         /// <value>The device identifier.</value>
-        public DeviceModel SelectedDevice { get; set; }
+        public DeviceModel SelectedDevice
+        {
+            get
+            {
+                return _selectedDevice;
+            }
+            set
+            {
+                SetValueProperty(ref _selectedDevice, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a plant name.

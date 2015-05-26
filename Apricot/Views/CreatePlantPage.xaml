@@ -52,10 +52,14 @@
         <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor"
                    Style="{ThemeResource HeaderTextBlockStyle}" />
 
-        <TextBlock x:Uid="PlantName" Text="Nulla feugiat" Style="{StaticResource ControlHeaderTextBlockStyle}" />
+        <TextBlock x:Uid="PlantName"
+                   Text="Nulla feugiat"
+                   Style="{StaticResource ControlHeaderTextBlockStyle}" />
         <TextBox Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBlock x:Uid="PlantVariety" Text="Aliquam mattis" Style="{StaticResource ControlHeaderTextBlockStyle}" />
+        <TextBlock x:Uid="PlantVariety"
+                   Text="Aliquam mattis" 
+                   Style="{StaticResource ControlHeaderTextBlockStyle}" />
         <ComboBox ItemsSource="{Binding Model.Varieties}"
                   SelectedItem="{Binding Model.SelectedVariety, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>
