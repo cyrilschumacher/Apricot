@@ -41,6 +41,12 @@
                           Label="Commodo"
                           Command="{Binding Model.UnpinCommand}"
                           Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=UnpinAppBarButton}" />
+            <AppBarButton x:Name="StopAppBarButton"
+                          x:Uid="Add"
+                          Icon="DisableUpdates"
+                          Label="Fusce"
+                          Command="{Binding Model.StopCommand}"
+                          Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=StopAppBarButton}" />
         </CommandBar>
     </Page.BottomAppBar>
 

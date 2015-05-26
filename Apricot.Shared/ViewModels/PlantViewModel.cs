@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -90,13 +89,9 @@ namespace Apricot.Shared.ViewModels
                     OnUnloadedCommand = new RelayCommand(_OnUnloaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
                     UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute),
+                    StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute)
                 };
             }
-        }
-
-        private void _RefreshMeasure(object sender, object o)
-        {
-            _LoadLatestMeasureAsync();
         }
 
         #endregion Constructors.
@@ -124,27 +119,6 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
-        ///     Loads the defails of the plant.
-        /// </summary>
-        private async void _LoadDetailsAsync()
-        {
-            var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
-            foreach (var photo in details.Photos)
-            {
-                _AddPhoto(photo);
-            }
-        }
-
-        /// <summary>
-        ///     
-        /// </summary>
-        private async void _AddPhoto(string photo)
-        {
-            var bitmap = await BitmapImageExtensions.FromBase64(photo);
-            Model.Details.Photos.Add(bitmap);
-        }
-
-        /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
@@ -163,20 +137,13 @@ namespace Apricot.Shared.ViewModels
         /// <param name="plant">The plant information.</param>
         private void _OnPlantChooserMessage(PlantServiceModel plant)
         {
-            Model = (PlantModel)plant;
+            Model.Identifier = plant.Identifier;
+            Model.IsActive = plant.IsActive;
+            Model.Name = plant.Name;
 
             _LoadDetailsAsync();
             _LoadLatestMeasureAsync();
             _realTimeMeasureTimer.Start();
-        }
-
-        /// <summary>
-        ///     Loads the latest measure.
-        /// </summary>
-        private async void _LoadLatestMeasureAsync()
-        {
-            var measure = await _measureService.GetLast(Model.Identifier);
-            Model.LatestMeasure = measure;
         }
 
         /// <summary>
@@ -191,7 +158,47 @@ namespace Apricot.Shared.ViewModels
             MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
+        /// <summary>
+        ///     Refreshs measures.
+        /// </summary>
+        /// <param name="sender">The sender object.</param>
+        /// <param name="o">The parameters.</param>
+        private void _RefreshMeasure(object sender, object o)
+        {
+            _LoadLatestMeasureAsync();
+        }
+
         #endregion Events.
+
+        /// <summary>
+        ///     
+        /// </summary>
+        private async void _AddPhoto(string photo)
+        {
+            var bitmap = await BitmapImageExtensions.FromBase64(photo);
+            Model.Details.Photos.Add(bitmap);
+        }
+
+        /// <summary>
+        ///     Loads the defails of the plant.
+        /// </summary>
+        private async void _LoadDetailsAsync()
+        {
+            var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
+            foreach (var photo in details.Photos)
+            {
+                _AddPhoto(photo);
+            }
+        }
+
+        /// <summary>
+        ///     Loads the latest measure.
+        /// </summary>
+        private async void _LoadLatestMeasureAsync()
+        {
+            var measure = await _measureService.GetLast(Model.Identifier);
+            Model.LatestMeasure = measure;
+        }
 
         /// <summary>
         ///     Pins the plant as a favorite plant.
@@ -211,6 +218,26 @@ namespace Apricot.Shared.ViewModels
         private bool _PinCanExecute()
         {
             return !_plantFavoriteService.Exists(Model.Identifier);
+        }
+
+        /// <summary>
+        ///     Stop the measures of the plant.
+        /// </summary>
+        private async void _StopMeasuresAsync()
+        {
+            await _plantService.StopPlantAsync(Model.Identifier);
+
+            Model.IsActive = false;
+            Model.StopCommand.RaiseCanExecuteChanged();
+        }
+
+        /// <summary>
+        ///     Returns a value indicating whether the command to stop measures is available.
+        /// </summary>
+        /// <returns>True if the command is available, otherwise, False.</returns>
+        private bool _StopMeasureCanExecute()
+        {
+            return Model.IsActive;
         }
 
         /// <summary>

@@ -17,9 +17,19 @@ namespace Apricot.Shared.Models.ViewModels
         private PlantDetailsModel _details;
 
         /// <summary>
+        ///     Value that indicates if the plant is active or not.
+        /// </summary>
+        private bool _isActive;
+
+        /// <summary>
         ///     Latest measure.
         /// </summary>
         private MeasureServiceModel _latestMeasure;
+
+        /// <summary>
+        ///     Plant name.
+        /// </summary>
+        private string _name;
 
         #endregion Members.
 
@@ -51,6 +61,12 @@ namespace Apricot.Shared.Models.ViewModels
         /// <value>The command for unpin plant.</value>
         public RelayCommand UnpinCommand { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a command for stop the measures of the plant.
+        /// </summary>
+        /// <value>The command forstop the measures of the plant.</value>
+        public RelayCommand StopCommand { get; set; }
+
         #endregion Commands.
 
         /// <summary>
@@ -76,7 +92,23 @@ namespace Apricot.Shared.Models.ViewModels
         public int Identifier { get; set; }
 
         /// <summary>
-        ///     Gets or sets the latest measure.
+        ///     Gets or sets a value that indicates if the plant is active or not.
+        /// </summary>
+        /// <value>The value that indicates if the plant is active or not.</value>
+        public bool IsActive
+        {
+            get
+            {
+                return _isActive;
+            }
+            set
+            {
+                SetValueProperty(ref _isActive, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets a latest measure.
         /// </summary>
         public MeasureServiceModel LatestMeasure
         {
@@ -91,29 +123,33 @@ namespace Apricot.Shared.Models.ViewModels
         }
 
         /// <summary>
-        ///     Gets or set the name.
+        ///     Gets or set a plant name.
         /// </summary>
-        public string Name { get; set; }
+        /// <value>The plant name.</value>
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                SetValueProperty(ref _name, value);
+            }
+        }
 
         #endregion Properties.
 
-        #region Methods.
+        #region Constructors.
 
         /// <summary>
-        /// 
+        ///     Constructor.
         /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        public static explicit operator PlantModel(PlantServiceModel model)
+        public PlantModel()
         {
-            return new PlantModel
-            {
-                Details = new PlantDetailsModel(), 
-                Identifier = model.Identifier,
-                Name = model.Name
-            };
+            Details = new PlantDetailsModel();
         }
 
-        #endregion Methods.
+        #endregion Constructors.
     }
 }

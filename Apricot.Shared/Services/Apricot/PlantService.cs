@@ -77,7 +77,7 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <param name="plantIdentifier">The plant identifier.</param>
         /// <returns>The task.</returns>
-        public async Task StopPlantAsync(string plantIdentifier)
+        public async Task StopPlantAsync(int plantIdentifier)
         {
             var serviceUri = string.Format(StopPlantServiceName, plantIdentifier);
             await GetAsync(serviceUri);
