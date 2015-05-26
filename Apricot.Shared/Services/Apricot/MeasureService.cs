@@ -13,7 +13,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Service name for obtains all temperature, luminosity and humidity of the plant.
         /// </summary>
-        private const string AllMeasureServiceName = "getValue/last/{0}/{1}";
+        private const string AllMeasureServiceName = "getValue/all/{0}/{1}";
 
         /// <summary>
         ///     Service name for obtains temperature, luminosity and humidity of the plant.

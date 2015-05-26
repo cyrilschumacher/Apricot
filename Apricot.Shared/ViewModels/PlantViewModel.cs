@@ -1,8 +1,4 @@
-﻿using System;
-using Windows.Phone.UI.Input;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Apricot.Shared.Extensions;
+﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
@@ -10,6 +6,10 @@ using Apricot.Shared.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
+using Windows.Phone.UI.Input;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -23,7 +23,7 @@ namespace Apricot.Shared.ViewModels
 
         /// <summary>
         /// </summary>
-        private const long TimeRefresh = 5;
+        private const long LatestMeasureDuration = 5;
 
         #endregion Constants.
 
@@ -79,7 +79,10 @@ namespace Apricot.Shared.ViewModels
                 _measureService = new MeasureService();
                 _plantService = new PlantService();
                 _plantFavoriteService = new PlantFavoriteService();
-                _realTimeMeasureTimer = new DispatcherTimer { Interval = new TimeSpan(TimeRefresh * TimeSpan.TicksPerSecond) };
+                _realTimeMeasureTimer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(LatestMeasureDuration * TimeSpan.TicksPerSecond)
+                };
 
                 // Initialize properties.
                 Model = new PlantModel
@@ -141,8 +144,11 @@ namespace Apricot.Shared.ViewModels
             Model.IsActive = plant.IsActive;
             Model.Name = plant.Name;
 
-            _LoadDetailsAsync();
+            // Loads the details of plant, the latest measure and the measures_LoadDetailsAsync();
             _LoadLatestMeasureAsync();
+            _LoadMeasuresAsync();
+
+            // Reloads the latest measure by a duration.
             _realTimeMeasureTimer.Start();
         }
 
@@ -171,7 +177,7 @@ namespace Apricot.Shared.ViewModels
         #endregion Events.
 
         /// <summary>
-        ///     
+        ///
         /// </summary>
         private async void _AddPhoto(string photo)
         {
@@ -197,7 +203,17 @@ namespace Apricot.Shared.ViewModels
         private async void _LoadLatestMeasureAsync()
         {
             var measure = await _measureService.GetLast(Model.Identifier);
+
             Model.LatestMeasure = measure;
+        }
+
+        /// <summary>
+        ///     Loads the measures.
+        /// </summary>
+        private async void _LoadMeasuresAsync()
+        {
+            //todo: Change "numberHour" parameter.
+            Model.Measures = await _measureService.GetAll(Model.Identifier, 1);
         }
 
         /// <summary>

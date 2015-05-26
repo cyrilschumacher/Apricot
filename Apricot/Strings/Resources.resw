@@ -129,6 +129,18 @@
   <data name="Favorites.Header" xml:space="preserve">
     <value>Favorites</value>
   </data>
+  <data name="Graphs.Header" xml:space="preserve">
+    <value>Graphs</value>
+  </data>
+  <data name="HumidityGraph.Title" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
+  <data name="InRealTime.Header" xml:space="preserve">
+    <value>In real time</value>
+  </data>
+  <data name="LuminosityGraph.Title" xml:space="preserve">
+    <value>Luminosity</value>
+  </data>
   <data name="MyGarden.Title" xml:space="preserve">
     <value>My Garden</value>
   </data>
@@ -149,6 +161,18 @@
   </data>
   <data name="PlantVariety.Text" xml:space="preserve">
     <value>Variety</value>
+  </data>
+  <data name="SeeVarietyInformation.Label" xml:space="preserve">
+    <value>See variety information</value>
+  </data>
+  <data name="StopMeasures.Label" xml:space="preserve">
+    <value>Stop measures</value>
+  </data>
+  <data name="Summary.Header" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TemperatureGraph.Title" xml:space="preserve">
+    <value>Temperature</value>
   </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Try again</value>

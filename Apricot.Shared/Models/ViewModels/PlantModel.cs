@@ -1,12 +1,16 @@
-﻿using System.Windows.Input;
+﻿using System;
 using Apricot.Shared.Models.Services;
 using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
     ///     Model for "plant information" page.
     /// </summary>
+    [CLSCompliant(false)]
     public class PlantModel : NotifyPropertyChanged
     {
         #region Members.
@@ -25,6 +29,11 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Latest measure.
         /// </summary>
         private MeasureServiceModel _latestMeasure;
+
+        /// <summary>
+        ///     Measures.
+        /// </summary>
+        private List<MeasureServiceModel> _measures;
 
         /// <summary>
         ///     Plant name.
@@ -110,6 +119,7 @@ namespace Apricot.Shared.Models.ViewModels
         /// <summary>
         ///     Gets or sets a latest measure.
         /// </summary>
+        /// <value>The latest measure.</value>
         public MeasureServiceModel LatestMeasure
         {
             get
@@ -119,6 +129,24 @@ namespace Apricot.Shared.Models.ViewModels
             set
             {
                 SetValueProperty(ref _latestMeasure, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets measures.
+        /// </summary>
+        /// <value>Measures.</value>
+        public List<MeasureServiceModel> Measures
+        {
+            get
+            {
+                return _measures;
+            }
+            set
+            {
+                //todo: To delete.
+                var measures = value.Where(p => p != null).Take(50).ToList();
+                SetValueProperty(ref _measures, measures);
             }
         }
 
@@ -148,6 +176,7 @@ namespace Apricot.Shared.Models.ViewModels
         public PlantModel()
         {
             Details = new PlantDetailsModel();
+            Measures = new List<MeasureServiceModel>();
         }
 
         #endregion Constructors.

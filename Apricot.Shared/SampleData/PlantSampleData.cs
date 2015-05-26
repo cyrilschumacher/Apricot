@@ -1,12 +1,16 @@
 ﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
+using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
     ///     Fake view model for the "Plant information" view.
     /// </summary>
+    [CLSCompliant(false)]
     public class PlantSampleData
     {
         #region Constants.
@@ -43,6 +47,13 @@ namespace Apricot.Shared.SampleData
                 Details = new PlantDetailsModel
                 {
                     Variety = 0
+                },
+                Measures = new List<MeasureServiceModel>
+                {
+                    new MeasureServiceModel{ Date = "1432659441", Temperature = 21.8},
+                    new MeasureServiceModel{ Date = "1432659450", Temperature = 28.1},
+                    new MeasureServiceModel{ Date = "1432659450", Temperature = 22.5},
+                    new MeasureServiceModel{ Date = "1432659424", Temperature = 24.9}
                 }
             };
 

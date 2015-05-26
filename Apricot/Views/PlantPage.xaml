@@ -9,6 +9,7 @@
     xmlns:sampleData="using:Apricot.Shared.SampleData"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     DataContext="{Binding Plant, Source={StaticResource Locator}}"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantSampleData}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -16,6 +17,7 @@
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <convertersA:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter" />
+        <convertersA:TextUpperConverter x:Key="TextUpperConverter" />
     </Page.Resources>
 
     <interactivity:Interaction.Behaviors>
@@ -29,42 +31,77 @@
 
     <Page.BottomAppBar>
         <CommandBar Background="{StaticResource ApricotPrimaryBrush}" Foreground="White">
-            <AppBarButton x:Name="PinAppBarButton"
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="PinAppBarButton"
                           x:Uid="Add"
                           Icon="Pin"
                           Label="Euismod"
                           Command="{Binding Model.PinCommand}"
                           Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=PinAppBarButton}" />
-            <AppBarButton x:Name="UnpinAppBarButton"
+                <AppBarButton x:Name="UnpinAppBarButton"
                           x:Uid="Add"
                           Icon="UnPin"
                           Label="Commodo"
                           Command="{Binding Model.UnpinCommand}"
                           Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=UnpinAppBarButton}" />
-            <AppBarButton x:Name="StopAppBarButton"
-                          x:Uid="Add"
-                          Icon="DisableUpdates"
-                          Label="Fusce"
-                          Command="{Binding Model.StopCommand}"
-                          Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=StopAppBarButton}" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="StopAppBarButton"
+                              x:Uid="StopMeasures"
+                              Label="Fusce"
+                              Command="{Binding Model.StopCommand}"
+                              Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=StopAppBarButton}" />
+                <AppBarButton x:Uid="SeeVarietyInformation"
+                              Label="Dignissim">
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="Apricot.Views.VarietyInformationPage" Parameter="{Binding Model.Identifier}" />
+                    </core:EventTriggerBehavior>
+                </AppBarButton>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Pivot Title="Sollicitudin">
-        <PivotItem Header="Volutpat">
+    <Pivot Title="{Binding Model.Name, Converter={StaticResource TextUpperConverter}}">
+        <PivotItem x:Uid="Summary"
+                   Header="Volutpat">
             <StackPanel>
-                <Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200"/>
-                <TextBlock Text="{Binding Model.Name}"/>
+                <Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200" />
+                <TextBlock Text="{Binding Model.Name}" />
             </StackPanel>
         </PivotItem>
-        <PivotItem Header="Phasellus">
+        <PivotItem x:Uid="InRealTime"
+                   Header="Phasellus">
             <StackPanel>
-                <TextBlock Text="{Binding Model.LatestMeasure.Date, Converter={StaticResource TimeStampToDateTimeConverter}}"/>
-                <TextBlock Text="{Binding Model.LatestMeasure.Humidity}"/>
-                <TextBlock Text="{Binding Model.LatestMeasure.Luminosity}"/>
-                <TextBlock Text="{Binding Model.LatestMeasure.Temperature}"/>
+                <TextBlock Text="{Binding Model.LatestMeasure.Date, Converter={StaticResource TimeStampToDateTimeConverter}}" />
+                <TextBlock Text="{Binding Model.LatestMeasure.Humidity}" />
+                <TextBlock Text="{Binding Model.LatestMeasure.Luminosity}" />
+                <TextBlock Text="{Binding Model.LatestMeasure.Temperature}" />
             </StackPanel>
         </PivotItem>
-        <PivotItem Header="Dapibus"/>
+        <PivotItem x:Uid="Graphs"
+                   Header="Dapibus">
+            <ScrollViewer>
+                <StackPanel>
+                    <chart:Chart Height="300">
+                        <chart:LineSeries x:Uid="TemperatureGraph"
+                                          DependentValuePath="Temperature"
+                                          IndependentValuePath="Date"
+                                          ItemsSource="{Binding Model.Measures}" />
+                    </chart:Chart>
+                    <chart:Chart Height="300">
+                        <chart:LineSeries x:Uid="HumidityGraph"
+                                          DependentValuePath="Humidity"
+                                          IndependentValuePath="Date"
+                                          ItemsSource="{Binding Model.Measures}" />
+                    </chart:Chart>
+                    <chart:Chart Height="300">
+                        <chart:LineSeries x:Uid="LuminosityGraph"
+                                          DependentValuePath="Luminosity"
+                                          IndependentValuePath="Date"
+                                          ItemsSource="{Binding Model.Measures}" />
+                    </chart:Chart>
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
     </Pivot>
 </Page>
