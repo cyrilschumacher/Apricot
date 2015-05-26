@@ -53,6 +53,11 @@ namespace Apricot.Shared.ViewModels
         private readonly INavigationService _navigationService;
 
         /// <summary>
+        ///     Variety plant service.
+        /// </summary>
+        private readonly VarietyPlantService _varietyPlantService;
+
+        /// <summary>
         ///     Plant service.
         /// </summary>
         private readonly PlantService _plantService;
@@ -84,6 +89,7 @@ namespace Apricot.Shared.ViewModels
                 _coreApplicationView = CoreApplication.GetCurrentView();
                 _navigationService = navigationService;
                 _plantService = new PlantService();
+                _varietyPlantService = new VarietyPlantService();
 
                 // Initialize properties.
                 Model = new CreatePlantModel
@@ -217,7 +223,7 @@ namespace Apricot.Shared.ViewModels
             {
                 // Create a new plant by user informations.
                 await
-                    _plantService.CreateNewPlant(Model.Name, Model.SelectedDevice.Id, Model.SelectedVariety.Id, photos);
+                    _plantService.CreateNewPlantAsync(Model.Name, Model.SelectedDevice.Identifier, Model.SelectedVariety.Id, photos);
                 // Return to the previous page.
                 _GoToPreviousPage();
             }
@@ -250,7 +256,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadPlantVarietiesAsync()
         {
-            var varieties = await _plantService.GetPlantVarieties();
+            var varieties = await _varietyPlantService.GetVarieties();
             Model.Varieties.AddRange(varieties);
         }
 

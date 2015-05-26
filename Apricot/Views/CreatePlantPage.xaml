@@ -69,7 +69,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <TextBlock x:Uid="PlantVariety" Text="Donec commodo" Style="{StaticResource ControlHeaderTextBlockStyle}" />
+        <TextBlock x:Uid="Device" Text="Donec commodo" Style="{StaticResource ControlHeaderTextBlockStyle}" />
         <ComboBox ItemsSource="{Binding Model.Devices}"
                   SelectedItem="{Binding Model.SelectedDevice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.ItemTemplate>

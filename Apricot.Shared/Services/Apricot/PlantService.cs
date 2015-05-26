@@ -1,27 +1,26 @@
-﻿using Apricot.Shared.Models.Service;
+﻿using Apricot.Shared.Models.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Apricot.Shared.Services.Apricot;
 using Newtonsoft.Json;
 
 namespace Apricot.Shared.Services.Apricot
 {
     /// <summary>
-    ///     Apricote Plant service.
+    ///     Service for the manager of plants.
     /// </summary>
     public class PlantService : AbstractApricotService
     {
         #region Constants.
 
         /// <summary>
-        ///     Service name for obtains the details of a plant.
+        ///     Service name for plant list.
         /// </summary>
-        private const string DetailsPlantServiceName = "getPlant";
+        private const string PlantListServiceName = "getPlant";
 
         /// <summary>
-        ///     Service name for obtains the variety plant list.
+        ///     Service name for obtains the details of a plant.
         /// </summary>
-        private const string VarietyPlantListServiceName = "getTypePlant";
+        private const string DetailsPlantServiceName = "getPlant/{0}";
 
         /// <summary>
         ///     Service name for creates a new plant.
@@ -38,21 +37,22 @@ namespace Apricot.Shared.Services.Apricot
         #region Methods.
 
         /// <summary>
-        ///     Get details of a plant.
+        ///     Gets plant list.
         /// </summary>
-        /// <returns>The details of a plant.</returns>
-        public async Task<List<PlantServiceModel>> GetPlant()
+        /// <returns>The list of plant.</returns>
+        public async Task<List<PlantServiceModel>> GetPlantsAsync()
         {
-            return await GetAsync<List<PlantServiceModel>>(DetailsPlantServiceName);
+            return await GetAsync<List<PlantServiceModel>>(PlantListServiceName);
         }
 
         /// <summary>
-        ///     Get a list of plant varieties.
+        ///     Gets details of a plant.
         /// </summary>
-        /// <returns>The list of plant varieties.</returns>
-        public async Task<List<VarietyPlantServiceModel>> GetPlantVarieties()
+        /// <param name="plantIdentifier">The plant identifier.</param>
+        /// <returns>The details of a plant.</returns>
+        public async Task<PlantDetailsServiceModel> GetDetailsPlantAsync(int plantIdentifier)
         {
-            return await GetAsync<List<VarietyPlantServiceModel>>(VarietyPlantListServiceName);
+            return await GetAsync<PlantDetailsServiceModel>(DetailsPlantServiceName);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <param name="varietyId">The variety identifier.</param>
         /// <param name="photos">The photos.</param>
         /// <returns>The task.</returns>
-        public async Task CreateNewPlant(string plantName, string deviceId, string varietyId, IEnumerable<string> photos)
+        public async Task CreateNewPlantAsync(string plantName, string deviceId, int varietyId, IEnumerable<string> photos)
         {
             var model = new CreatePlantServiceModel {Name = plantName, DeviceId = deviceId, Photos = photos, VarietyId = varietyId};
             var content = JsonConvert.SerializeObject(model);
@@ -76,7 +76,7 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <param name="plantId">The plant identifier.</param>
         /// <returns>The task.</returns>
-        public async Task StopPlant(string plantId)
+        public async Task StopPlantAsync(string plantId)
         {
             var serviceUri = string.Format(StopPlantServiceName, plantId);
             await GetAsync(serviceUri);

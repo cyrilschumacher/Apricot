@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Apricot.Shared.Models.Service;
-using Apricot.Shared.Services.Apricot;
+using Apricot.Shared.Models.Services;
 
 namespace Apricot.Shared.Services.Apricot
 {
@@ -24,7 +23,7 @@ namespace Apricot.Shared.Services.Apricot
         ///     Get health of server.
         /// </summary>
         /// <returns>The health server.</returns>
-        public async Task<ServerHealthModel> GetHealth()
+        public async Task<ServerHealthModel> GetHealthAsync()
         {
             return await GetAsync<ServerHealthModel>(ServerHealthServiceName);
         }

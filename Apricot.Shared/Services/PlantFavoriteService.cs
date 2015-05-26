@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
 using Windows.Storage;
-using Apricot.Shared.Extensions;
 
 namespace Apricot.Shared.Services
 {
@@ -60,19 +59,28 @@ namespace Apricot.Shared.Services
         ///     Gets plant favorites.
         /// </summary>
         /// <returns>The plant favorites.</returns>
-        private IList<string> _GetFavorites()
+        private IList<int> _GetFavorites()
         {
             _CreateFavorites();
 
             var favorites = _settingsDataContainer.Values[PlantFavoritesSettingsName] as string;
-            return favorites.Split(',').ToList();
+            if (favorites == null)
+            {
+                throw new Exception("The favorite list couldn't be recovered.");
+            }
+
+            return
+                favorites.Split(',')
+                    .Where(identifier => !string.IsNullOrWhiteSpace(identifier))
+                    .Select(int.Parse)
+                    .ToList();
         }
 
         /// <summary>
         ///     Saves plant favorites.
         /// </summary>
         /// <param name="favorites">The plant favorites.</param>
-        private void _SaveFavorites(IEnumerable<string> favorites)
+        private void _SaveFavorites(IEnumerable<int> favorites)
         {
             _settingsDataContainer.Values[PlantFavoritesSettingsName] = string.Join(",", favorites);
         }
@@ -83,7 +91,7 @@ namespace Apricot.Shared.Services
         ///     Adds a plant in the favorites.
         /// </summary>
         /// <param name="id">The plant identifier.</param>
-        public void Add(string id)
+        public void Add(int id)
         {
             var favorites = _GetFavorites();
             favorites.Add(id);
@@ -92,11 +100,11 @@ namespace Apricot.Shared.Services
         }
 
         /// <summary>
-        ///     Determines whether a plant was set as a favorite. 
+        ///     Determines whether a plant was set as a favorite.
         /// </summary>
         /// <param name="id">The plant identifier.</param>
         /// <returns>True if the plant is favorite, otherwise, False.</returns>
-        public bool Exists(string id)
+        public bool Exists(int id)
         {
             var favorites = _GetFavorites();
             return favorites.Contains(id);
@@ -106,7 +114,7 @@ namespace Apricot.Shared.Services
         ///     Gets plant favorites.
         /// </summary>
         /// <returns>The plant favorites.</returns>
-        public IList<string> Get()
+        public IList<int> Get()
         {
             return _GetFavorites();
         }
@@ -115,7 +123,7 @@ namespace Apricot.Shared.Services
         ///     Removes a plant in the favorites.
         /// </summary>
         /// <param name="id">The plant identifier.</param>
-        public void Remove(string id)
+        public void Remove(int id)
         {
             var favorites = _GetFavorites();
             favorites.Remove(id);

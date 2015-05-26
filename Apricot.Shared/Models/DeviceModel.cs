@@ -11,7 +11,7 @@
         ///     Gets or sets a identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public string Id { get; set; }
+        public string Identifier { get; set; }
 
         /// <summary>
         ///     Gets or sets a name.

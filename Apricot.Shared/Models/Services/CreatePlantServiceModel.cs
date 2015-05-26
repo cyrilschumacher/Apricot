@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Apricot.Shared.Models.Service
+namespace Apricot.Shared.Models.Services
 {
     /// <summary>
     ///     Model for create a new plant.
@@ -26,7 +26,7 @@ namespace Apricot.Shared.Models.Service
         /// </summary>
         /// <value>The variety identifier.</value>
         [JsonProperty("idTypePlant")]
-        public string VarietyId { get; set; }
+        public int VarietyId { get; set; }
 
         /// <summary>
         ///     Gets or sets a photos.

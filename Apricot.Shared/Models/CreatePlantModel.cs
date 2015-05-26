@@ -1,5 +1,5 @@
 ﻿using System;
-using Apricot.Shared.Models.Service;
+using Apricot.Shared.Models.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
@@ -164,8 +164,8 @@ namespace Apricot.Shared.Models
         {
             Devices = new ObservableCollection<DeviceModel>
             {
-                new DeviceModel {Id = "ARD1", Name = "Arduino 1"},
-                new DeviceModel {Id = "ARD2", Name = "Arduino 2"},
+                new DeviceModel {Identifier = "ARD1", Name = "Arduino 1"},
+                new DeviceModel {Identifier = "ARD2", Name = "Arduino 2"},
             };
             Photos = new ObservableCollection<PlantPhotoModel>();
             SelectedPhotoIndex = -1;

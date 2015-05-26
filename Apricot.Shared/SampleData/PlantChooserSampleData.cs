@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Apricot.Shared.Models;
-using Apricot.Shared.Models.Service;
+﻿using Apricot.Shared.Models;
+using Apricot.Shared.Models.Services;
+using System.Collections.ObjectModel;
 
 namespace Apricot.Shared.SampleData
 {
@@ -29,13 +29,13 @@ namespace Apricot.Shared.SampleData
             {
                 Plant = new ObservableCollection<PlantServiceModel>
                 {
-                    new PlantServiceModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3},
-                    new PlantServiceModel{Id = "5560eba236e1ff544bb6eaf6", Name = "nostrud id", Variety = 11},
-                    new PlantServiceModel{Id = "5560eba25de8b401a33533aa", Name = "excepteur sunt", Variety = 4}
+                    new PlantServiceModel{Identifier = 0, Name = "ut duis" },
+                    new PlantServiceModel{Identifier = 1, Name = "nostrud id" },
+                    new PlantServiceModel{Identifier = 2, Name = "excepteur sunt" }
                 },
                 Favorites = new ObservableCollection<PlantServiceModel>
                 {
-                    new PlantServiceModel{Id = "5560eba2e1a1798fb9edd09f", Name = "ut duis", Variety = 3}
+                    new PlantServiceModel{Identifier = 0, Name = "ut duis" }
                 }
             };
         }

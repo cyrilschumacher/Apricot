@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Apricot.Shared.Models.Service
+namespace Apricot.Shared.Models.Services
 {
     /// <summary>
     ///     Model for the details of a plant.
@@ -14,7 +14,7 @@ namespace Apricot.Shared.Models.Service
         /// </summary>
         /// <value>The plant identifier.</value>
         [JsonProperty("idPlant")]
-        public string Id { get; set; }
+        public int Identifier { get; set; }
 
         /// <summary>
         ///     Gets or sets the plant name.
@@ -22,13 +22,6 @@ namespace Apricot.Shared.Models.Service
         /// <value>The plant name.</value>
         [JsonProperty("namePlant")]
         public string Name { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the variety identifier.
-        /// </summary>
-        /// <value>The variety identifier.</value>
-        [JsonProperty("idTypePlant")]
-        public int? Variety { get; set; }
 
         #endregion Properties.
     }

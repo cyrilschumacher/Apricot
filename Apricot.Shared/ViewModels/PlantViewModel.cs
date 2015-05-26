@@ -2,8 +2,9 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Apricot.Shared.Models;
-using Apricot.Shared.Models.Service;
+using Apricot.Shared.Models.Services;
 using Apricot.Shared.Services;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -14,6 +15,30 @@ namespace Apricot.Shared.ViewModels
     /// </summary>
     public class PlantViewModel : ViewModelBase
     {
+        #region Members.
+
+        /// <summary>
+        ///     Service for manage plant favorite.
+        /// </summary>
+        private readonly PlantFavoriteService _plantFavoriteService;
+
+        /// <summary>
+        ///     
+        /// </summary>
+        private readonly PlantService _plantService;
+
+        #endregion Members.
+
+        #region Properties.
+
+        /// <summary>
+        ///     Gets or sets a model.
+        /// </summary>
+        /// <value>The model.</value>
+        public PlantModel Model { get; private set; }
+
+        #endregion Properties.
+
         #region Constructors.
 
         /// <summary>
@@ -29,6 +54,7 @@ namespace Apricot.Shared.ViewModels
             if (!IsInDesignMode)
             {
                 // Initialize members.
+                _plantService = new PlantService();
                 _plantFavoriteService = new PlantFavoriteService();
 
                 // Initialize properties.
@@ -43,30 +69,6 @@ namespace Apricot.Shared.ViewModels
         }
 
         #endregion Constructors.
-
-        #region Properties.
-
-        /// <summary>
-        ///     Gets or sets a model.
-        /// </summary>
-        /// <value>The model.</value>
-        public PlantModel Model { get; private set; }
-
-        #endregion Properties.
-
-        #region Members.
-
-        /// <summary>
-        ///     Service for manage plant favorite.
-        /// </summary>
-        private readonly PlantFavoriteService _plantFavoriteService;
-
-        /// <summary>
-        ///     Plant.
-        /// </summary>
-        private PlantServiceModel _plant;
-
-        #endregion Members.
 
         #region Methods.
 
@@ -91,6 +93,14 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
+        ///     Loads the defails of the plant.
+        /// </summary>
+        private async void _LoadDetailsAsync()
+        {
+            Model.Details = await _plantService.GetDetailsPlantAsync(Model.Plant.Identifier);
+        }
+
+        /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
@@ -106,7 +116,8 @@ namespace Apricot.Shared.ViewModels
         /// <param name="plant">The plant information.</param>
         private void _OnPlantChooserMessage(PlantServiceModel plant)
         {
-            _plant = plant;
+            Model.Plant = plant;
+            _LoadDetailsAsync();
         }
 
         /// <summary>
@@ -115,6 +126,7 @@ namespace Apricot.Shared.ViewModels
         private void _OnUnloaded()
         {
             HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
+            MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
         #endregion Events.
@@ -124,7 +136,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Pin()
         {
-            _plantFavoriteService.Add(_plant.Id);
+            _plantFavoriteService.Add(Model.Plant.Identifier);
 
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
@@ -136,7 +148,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _PinCanExecute()
         {
-            return !_plantFavoriteService.Exists(_plant.Id);
+            return !_plantFavoriteService.Exists(Model.Plant.Identifier);
         }
 
         /// <summary>
@@ -144,7 +156,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _Unpin()
         {
-            _plantFavoriteService.Remove(_plant.Id);
+            _plantFavoriteService.Remove(Model.Plant.Identifier);
 
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
@@ -156,7 +168,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _UnpinCanExecute()
         {
-            return _plantFavoriteService.Exists(_plant.Id);
+            return _plantFavoriteService.Exists(Model.Plant.Identifier);
         }
 
         #endregion Methods.

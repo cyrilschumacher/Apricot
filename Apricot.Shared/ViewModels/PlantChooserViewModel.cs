@@ -7,7 +7,7 @@ using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using Apricot.Shared.Models.Service;
+using Apricot.Shared.Models.Services;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -80,7 +80,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async Task _LoadPlantAsync()
         {
-            var plant = await _plantService.GetPlant();
+            var plant = await _plantService.GetPlantsAsync();
 
             Model.Plant.Clear();
             Model.Plant.AddRange(plant);
@@ -92,7 +92,7 @@ namespace Apricot.Shared.ViewModels
         private void _LoadFavoritePlant()
         {
             var idsFavorite = _plantFavoriteService.Get();
-            var favorites = (from x in Model.Plant join y in idsFavorite on x.Id equals y select x).ToList();
+            var favorites = (from x in Model.Plant join y in idsFavorite on x.Identifier equals y select x).ToList();
 
             Model.Favorites.Clear();
             Model.Favorites.AddRange(favorites);

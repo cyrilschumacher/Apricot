@@ -123,6 +123,9 @@
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Device.Text" xml:space="preserve">
+    <value>Device</value>
+  </data>
   <data name="Favorites.Header" xml:space="preserve">
     <value>Favorites</value>
   </data>

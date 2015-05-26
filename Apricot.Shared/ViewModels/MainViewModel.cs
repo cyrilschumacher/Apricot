@@ -1,5 +1,5 @@
 ﻿using Apricot.Shared.Models;
-using Apricot.Shared.Models.Service;
+using Apricot.Shared.Models.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -97,7 +97,7 @@ namespace Apricot.Shared.ViewModels
             {
                 // Obtains the health of server
                 // and checks if the server is up.
-                var health = await _serverService.GetHealth();
+                var health = await _serverService.GetHealthAsync();
 
                 // If the server is up, it navigate to a next view,
                 // otherwise, it show a error message.

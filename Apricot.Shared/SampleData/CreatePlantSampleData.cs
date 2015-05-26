@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
-using Apricot.Shared.Models.Service;
+using Apricot.Shared.Models.Services;
 
 namespace Apricot.Shared.SampleData
 {
@@ -45,9 +45,9 @@ namespace Apricot.Shared.SampleData
                 Photos = new ObservableCollection<PlantPhotoModel>(),
                 Varieties = new ObservableCollection<VarietyPlantServiceModel>
                 {
-                    new VarietyPlantServiceModel {Id = "55619fdce976397f6dfc35fe", Name = "velit et"},
-                    new VarietyPlantServiceModel {Id = "55619fdcf0951b90ddac7783", Name = "in est culpa amet"},
-                    new VarietyPlantServiceModel {Id = "55619fdc33ca8948661bb6e0", Name = "veniam nulla"}
+                    new VarietyPlantServiceModel {Id = 0, Name = "velit et"},
+                    new VarietyPlantServiceModel {Id = 1, Name = "in est culpa amet"},
+                    new VarietyPlantServiceModel {Id = 2, Name = "veniam nulla"}
                 }
             };
 
