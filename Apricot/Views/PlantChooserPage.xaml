@@ -24,10 +24,6 @@
                 <TextBlock Text="{Binding Name}" Style="{StaticResource TitleTextBlockStyle}" />
             </ListBoxItem>
         </DataTemplate>
-        <!--<Style x:Key="PlantStyle" TargetType="ListBoxItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        </Style>-->
     </Page.Resources>
 
     <Page.BottomAppBar>

@@ -9,7 +9,6 @@
     xmlns:sampleData="using:Apricot.Shared.SampleData"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     DataContext="{Binding Plant, Source={StaticResource Locator}}"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantSampleData}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -77,31 +76,6 @@
                 <TextBlock Text="{Binding Model.LatestMeasure.Luminosity}" />
                 <TextBlock Text="{Binding Model.LatestMeasure.Temperature}" />
             </StackPanel>
-        </PivotItem>
-        <PivotItem x:Uid="Graphs"
-                   Header="Dapibus">
-            <ScrollViewer>
-                <StackPanel>
-                    <chart:Chart Height="300">
-                        <chart:LineSeries x:Uid="TemperatureGraph"
-                                          DependentValuePath="Temperature"
-                                          IndependentValuePath="Date"
-                                          ItemsSource="{Binding Model.Measures}" />
-                    </chart:Chart>
-                    <chart:Chart Height="300">
-                        <chart:LineSeries x:Uid="HumidityGraph"
-                                          DependentValuePath="Humidity"
-                                          IndependentValuePath="Date"
-                                          ItemsSource="{Binding Model.Measures}" />
-                    </chart:Chart>
-                    <chart:Chart Height="300">
-                        <chart:LineSeries x:Uid="LuminosityGraph"
-                                          DependentValuePath="Luminosity"
-                                          IndependentValuePath="Date"
-                                          ItemsSource="{Binding Model.Measures}" />
-                    </chart:Chart>
-                </StackPanel>
-            </ScrollViewer>
         </PivotItem>
     </Pivot>
 </Page>

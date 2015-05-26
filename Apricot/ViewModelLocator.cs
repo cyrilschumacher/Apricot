@@ -1,9 +1,9 @@
-using System;
 using Apricot.Shared.ViewModels;
 using Apricot.Views;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using System;
 
 namespace Apricot
 {
@@ -16,8 +16,9 @@ namespace Apricot
         #region Properties.
 
         /// <summary>
-        ///     Gets the new plant view model.
+        ///     Gets a view model for creates a new plant.
         /// </summary>
+        /// <value>The view model.</value>
         public CreatePlantViewModel CreatePlant
         {
             get
@@ -27,35 +28,50 @@ namespace Apricot
         }
 
         /// <summary>
-        ///     Gets the plant view model.
-        /// </summary>
-        public PlantViewModel Plant
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<PlantViewModel>();
-            }
-        }
-
-        /// <summary>
         ///     Gets the main view model.
         /// </summary>
+        /// <value>The view model.</value>
         public MainViewModel Main
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
+                return ServiceLocator.Current.GetInstance<MainViewModel>(Guid.NewGuid().ToString());
             }
         }
 
         /// <summary>
-        ///     Gets the plant chooser view model.
+        ///     Gets a view model for shows plant information.
         /// </summary>
+        /// <value>The view model.</value>
+        public PlantViewModel Plant
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<PlantViewModel>(Guid.NewGuid().ToString());
+            }
+        }
+
+        /// <summary>
+        ///     Gets the view model for select a plant.
+        /// </summary>
+        /// <value>The view model.</value>
         public PlantChooserViewModel PlantChooser
         {
             get
             {
                 return ServiceLocator.Current.GetInstance<PlantChooserViewModel>(Guid.NewGuid().ToString());
+            }
+        }
+
+        /// <summary>
+        ///     Gets the view model for shows the variety information.
+        /// </summary>
+        /// <value>The view model.</value>
+        public VarietyInformationViewModel VarietyInformation
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<VarietyInformationViewModel>(Guid.NewGuid().ToString());
             }
         }
 
@@ -69,11 +85,12 @@ namespace Apricot
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
             SimpleIoc.Default.Register(_InitializeNavigationService);
-            SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CreatePlantViewModel>();
-            SimpleIoc.Default.Register<PlantChooserViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<PlantViewModel>();
+            SimpleIoc.Default.Register<PlantChooserViewModel>();
         }
 
         #endregion Constructors.

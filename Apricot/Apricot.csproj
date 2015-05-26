@@ -101,11 +101,17 @@
     <Compile Include="Views\CreatePlantPage.xaml.cs">
       <DependentUpon>CreatePlantPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MeasureChartPage.xaml.cs">
+      <DependentUpon>MeasureChartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlantChooserPage.xaml.cs">
       <DependentUpon>PlantChooserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PlantPage.xaml.cs">
       <DependentUpon>PlantPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VarietyInformationPage.xaml.cs">
+      <DependentUpon>VarietyInformationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -131,11 +137,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MeasureChartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlantChooserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlantPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VarietyInformationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

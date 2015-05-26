@@ -1,0 +1,22 @@
+﻿<Page
+    x:Class="Apricot.Views.MeasureChartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Margin="19">
+        <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor"
+                   Style="{ThemeResource HeaderTextBlockStyle}" />
+        
+        <chart:Chart Height="650">
+            <chart:LineSeries x:Uid="TemperatureGraph"
+                                          DependentValuePath="Temperature"
+                                          IndependentValuePath="Date"
+                                          ItemsSource="{Binding Model.Measures}" />
+        </chart:Chart>
+    </Grid>
+</Page>

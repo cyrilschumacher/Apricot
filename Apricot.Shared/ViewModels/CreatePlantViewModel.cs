@@ -21,7 +21,7 @@ using GalaSoft.MvvmLight.Views;
 namespace Apricot.Shared.ViewModels
 {
     /// <summary>
-    ///     View model for the "create plant" view.
+    ///     View model for the creation of a plant.
     /// </summary>
     [CLSCompliant(false)]
     public class CreatePlantViewModel : ViewModelBase

@@ -136,7 +136,7 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Gets or sets measures.
         /// </summary>
         /// <value>Measures.</value>
-        public List<MeasureServiceModel> Measures
+        public IList<MeasureServiceModel> Measures
         {
             get
             {

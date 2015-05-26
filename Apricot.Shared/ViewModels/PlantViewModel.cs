@@ -68,8 +68,6 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         public PlantViewModel()
         {
-            MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
-
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
             // the visualizing of the XAML code in the design mode.
@@ -83,6 +81,9 @@ namespace Apricot.Shared.ViewModels
                 {
                     Interval = new TimeSpan(LatestMeasureDuration * TimeSpan.TicksPerSecond)
                 };
+
+                // Register messengers.
+                MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
 
                 // Initialize properties.
                 Model = new PlantModel
@@ -129,9 +130,6 @@ namespace Apricot.Shared.ViewModels
             // Initializes events.
             _realTimeMeasureTimer.Tick += _RefreshMeasure;
             HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
-
-            // Register messengers.
-            MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
         /// <summary>

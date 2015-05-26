@@ -7,7 +7,7 @@ using Apricot.Shared.Models.Services;
 namespace Apricot.Shared.SampleData
 {
     /// <summary>
-    ///     Fake view model for the "New plant" view.
+    ///     Fake view model for the creation of a plant.
     /// </summary>
     [CLSCompliant(false)]
     public class CreatePlantSampleData
