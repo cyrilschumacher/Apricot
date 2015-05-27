@@ -181,6 +181,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\Big_Bottom_Typeface_Normal.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <PRIResource Include="Strings\Resources.resw" />
   </ItemGroup>
@@ -210,8 +213,8 @@
     <Content Include="Assets\Logo\WideLogo.scale-100.png" />
     <Content Include="Assets\Logo\WideLogo.scale-140.png" />
     <Content Include="Assets\Logo\WideLogo.scale-240.png" />
+    <Content Include="Assets\Logo.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
-    <Content Include="Assets\UnknownPlant.jpg" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

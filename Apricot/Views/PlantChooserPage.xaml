@@ -201,36 +201,58 @@
 		</CommandBar>
 	</Page.BottomAppBar>
 
-	<Pivot x:Uid="MyGarden" Title="Maecenas ut">
-		<PivotItem x:Uid="Plant" Header="Vestibulum">
-			<Grid>
-				<ListView x:Name="PlantListBox"
-					ItemsSource="{Binding Model.Plant}">
-					<interactivity:Interaction.Behaviors>
-						<core:EventTriggerBehavior EventName="SelectionChanged">
-							<core:InvokeCommandAction Command="{Binding SelectPlantCommand}"
-								CommandParameter="{Binding SelectedItem, ElementName=PlantListBox}" />
-						</core:EventTriggerBehavior>
-					</interactivity:Interaction.Behaviors>
-				</ListView>
-				<ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}"
-							  IsActive="{Binding Model.IsLoading}" />
-			</Grid>
-		</PivotItem>
-		<PivotItem x:Uid="Favorites" Header="Ante">
-			<Grid>
-				<StackPanel Margin="12" VerticalAlignment="Center" Visibility="{Binding Model.HasFavorites, Converter={StaticResource InverterBooleanVisibilityConverter}}">
-					<TextBlock x:Uid="NoPlantFavorites" 
-						TextAlignment="Center"
-						Foreground="#AAAAAA"
-						FontSize="24"
-						TextWrapping="Wrap"
-						Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
-					<TextBlock FontSize="56" Foreground="#AAAAAA" TextAlignment="Center" Text=":(" />
-				</StackPanel>
-				<ListView ItemsSource="{Binding Model.Favorites}" ItemTemplate="{StaticResource PlantDataTemplate}" />
-				<ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
-			</Grid>
-		</PivotItem>
-	</Pivot>
+	<Grid>
+		<Hub Header="My Garden">
+			<Hub.HeaderTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<Image Height="125" Margin="0,0,12,0" Source="/Assets/Logo.png" VerticalAlignment="Bottom" />
+						<TextBlock FontFamily="{StaticResource BigBottomCartoonFontFamily}" FontSize="52" Foreground="{StaticResource ApricotPrimaryBrush}" Margin="0,-12,0,0" Text="{Binding}"/>
+					</StackPanel>
+				</DataTemplate>
+			</Hub.HeaderTemplate>
+			<HubSection x:Uid="Plant" Header="Vestibulum">
+				<HubSection.HeaderTemplate>
+					<DataTemplate>
+						<TextBlock Foreground="{StaticResource ApricotFontPrimaryBrush}" FontSize="32" Text="{Binding}"/>
+					</DataTemplate>
+				</HubSection.HeaderTemplate>
+				<DataTemplate>
+					<Grid >
+						<ListView x:Name="PlantListBox"
+								  ItemsSource="{Binding Model.Plant}">
+							<interactivity:Interaction.Behaviors>
+								<core:EventTriggerBehavior EventName="SelectionChanged">
+									<core:InvokeCommandAction Command="{Binding SelectPlantCommand}" CommandParameter="{Binding SelectedItem, ElementName=PlantListBox}" />
+								</core:EventTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
+						</ListView>
+						<ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
+					</Grid>
+				</DataTemplate>
+			</HubSection>
+			<HubSection x:Uid="Favorites" Header="Ante">
+				<HubSection.HeaderTemplate>
+					<DataTemplate>
+						<TextBlock Foreground="{StaticResource ApricotFontPrimaryBrush}" FontSize="32" Text="{Binding}"/>
+					</DataTemplate>
+				</HubSection.HeaderTemplate>
+				<DataTemplate>
+					<Grid>
+						<StackPanel Margin="12" VerticalAlignment="Center" Visibility="{Binding Model.HasFavorites, Converter={StaticResource InverterBooleanVisibilityConverter}}">
+							<TextBlock x:Uid="NoPlantFavorites" 
+							TextAlignment="Center"
+							Foreground="#AAAAAA"
+							FontSize="24"
+							TextWrapping="Wrap"
+							Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
+							<TextBlock FontSize="56" Foreground="#AAAAAA" TextAlignment="Center" Text=":(" />
+						</StackPanel>
+						<ListView ItemsSource="{Binding Model.Favorites}" ItemTemplate="{StaticResource PlantDataTemplate}" />
+						<ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
+					</Grid>
+				</DataTemplate>
+			</HubSection>
+		</Hub>
+	</Grid>
 </Page>

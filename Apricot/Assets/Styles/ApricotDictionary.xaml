@@ -9,5 +9,6 @@
     <SolidColorBrush x:Key="ApricotPrimaryBrush" Color="{StaticResource ApricotPrimaryColor}"/>
     <SolidColorBrush x:Key="ApricotSecondaryBrush" Color="{StaticResource ApricotSecondaryColor}"/>
     <SolidColorBrush x:Key="ApricotFontPrimaryBrush" Color="{StaticResource ApricotFontPrimaryColor}"/>
-    
+
+    <FontFamily x:Key="BigBottomCartoonFontFamily">/Assets/Fonts/Big_Bottom_Typeface_Normal.ttf#Big_Bottom_Cartoon</FontFamily>
 </ResourceDictionary>
