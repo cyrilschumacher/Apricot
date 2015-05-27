@@ -15,7 +15,6 @@
         <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
         <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
         <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
-        <Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
         <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
         <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
         <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
@@ -27,7 +26,6 @@
             <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}" />
             <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}" />
             <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}" />
-            <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}" />
             <Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}" />
             <Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}" />
             <Setter Property="HorizontalAlignment" Value="Left" />
@@ -60,7 +58,7 @@
                                     <VisualState x:Name="Disabled" />
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                                 <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Border>
                         </Grid>
@@ -89,7 +87,6 @@
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
             <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
             <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}" />
-            <Setter Property="Margin" Value="{ThemeResource TextControlMarginThemeThickness}" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -337,35 +334,29 @@
                     <TextBlock x:Uid="Photo"
                                Style="{StaticResource ControlHeaderTextBlockStyle}"
                                Text="Suspendisse" />
-                    <Grid Height="200" Width="200" HorizontalAlignment="Left">
+                    <Grid Height="125" Width="125" HorizontalAlignment="Left" Margin="0,8">
                         <Button BorderBrush="LightGray"
                                 BorderThickness="5"
-                                Height="200"
-                                Width="200"
-                                Command="{Binding Model.AddPhotoCommand}" Style="{StaticResource AddPhotoButtonStyle}">
+                                Height="125"
+                                Width="125"
+                                Command="{Binding Model.AddPhotoCommand}" 
+                                Style="{StaticResource AddPhotoButtonStyle}">
                             <Button.Content>
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock FontFamily="Segoe UI Symbol"
-                                               FontSize="36"
+                                               FontSize="28"
                                                Foreground="LightGray"
                                                TextAlignment="Center"
                                                Text="&#xE0C5;" />
-                                    <TextBlock x:Uid="AddPlantPhoto"
-                                               FontSize="15"
-                                               Foreground="LightGray"
-                                               Margin="0,12,0,0"
-                                               Text="Curabitur interdum urna nulla"
-                                               TextAlignment="Center"
-                                               TextWrapping="Wrap" />
                                 </StackPanel>
                             </Button.Content>
                         </Button>
                         <Image x:Name="PlantPhoto"
                                Source="{Binding Model.Photo.Image}"
                                HorizontalAlignment="Left"
-                               Height="200"
+                               Height="125"
                                Stretch="Fill"
-                               Width="200" />
+                               Width="125" />
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

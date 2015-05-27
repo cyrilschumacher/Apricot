@@ -20,8 +20,8 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Server address.
         /// </summary>
-        //private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
-        private const string ServerAddress = "http://192.168.154.134:3000/";
+        private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
+        //private const string ServerAddress = "http://192.168.154.134:3000/";
 
         #endregion Constants.
 

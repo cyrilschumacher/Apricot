@@ -26,7 +26,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor"
+        <TextBlock  Text="Etiam vulputate purus tortor"
                    Style="{ThemeResource HeaderTextBlockStyle}" />
 
         <StackPanel Grid.Row="1">

@@ -1,4 +1,11 @@
-﻿using System;
+﻿using Apricot.Shared.Extensions;
+using Apricot.Shared.Models;
+using Apricot.Shared.Models.ViewModels;
+using Apricot.Shared.Services.Apricot;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,19 +14,11 @@ using Windows.ApplicationModel.Core;
 using Windows.Graphics.Imaging;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
-using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
-using Apricot.Shared.Extensions;
-using Apricot.Shared.Models;
-using Apricot.Shared.Models.ViewModels;
-using Apricot.Shared.Services.Apricot;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Views;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -184,32 +183,39 @@ namespace Apricot.Shared.ViewModels
         /// <param name="file">The file that represents the photo.</param>
         private async void _AddPhotoAsync(StorageFile file)
         {
-            // Reads file.
-            var stream = await file.OpenAsync(FileAccessMode.Read);
+            try
+            {
+                // Reads file.
+                var stream = await file.OpenAsync(FileAccessMode.Read);
 
-            // Gets the properties.
-            var properties = await file.Properties.GetImagePropertiesAsync();
-            var height = properties.Height;
-            var width = properties.Width;
+                // Gets the properties.
+                var properties = await file.Properties.GetImagePropertiesAsync();
+                var height = properties.Height;
+                var width = properties.Width;
 
-            // Reduce photo size.
-            var decoder = await BitmapDecoder.CreateAsync(stream);
-            var inMemory = new InMemoryRandomAccessStream();
-            var encoder = await BitmapEncoder.CreateForTranscodingAsync(inMemory, decoder);
-            encoder.BitmapTransform.ScaledWidth = MaximumWidthImage;
-            encoder.BitmapTransform.ScaledHeight = (height * MaximumWidthImage) / width;
+                // Reduce photo size.
+                var decoder = await BitmapDecoder.CreateAsync(stream);
+                var inMemory = new InMemoryRandomAccessStream();
+                var encoder = await BitmapEncoder.CreateForTranscodingAsync(inMemory, decoder);
+                encoder.BitmapTransform.ScaledWidth = MaximumWidthImage;
+                encoder.BitmapTransform.ScaledHeight = (height*MaximumWidthImage)/width;
 
-            // Write out to the stream.
-            await encoder.FlushAsync();
+                // Write out to the stream.
+                await encoder.FlushAsync();
 
-            var photo = new BitmapImage();
-            await photo.SetSourceAsync(inMemory);
+                var photo = new BitmapImage();
+                await photo.SetSourceAsync(inMemory);
 
-            // Reset stream position for avoid a wrong Base64 data.
-            inMemory.Seek(0);
-            var base64Data = await inMemory.ToBase64();
+                // Reset stream position for avoid a wrong Base64 data.
+                inMemory.Seek(0);
+                var base64Data = await inMemory.ToBase64();
 
-            Model.Photo = new PlantPhotoModel {Image = photo, Base64Data = base64Data};
+                Model.Photo = new PlantPhotoModel {Image = photo, Base64Data = base64Data};
+            }
+            catch (Exception)
+            {
+                //todo: Manage errors.
+            }
         }
 
         /// <summary>
@@ -218,7 +224,7 @@ namespace Apricot.Shared.ViewModels
         private async void _CreateNewPlantAsync()
         {
             // Obtains, only, the photos in Base64 format.
-            var photoList = new List<PlantPhotoModel> {Model.Photo};
+            var photoList = new List<PlantPhotoModel> { Model.Photo };
             var photos = photoList.Select(photo => photo.Base64Data);
 
             try
@@ -241,7 +247,7 @@ namespace Apricot.Shared.ViewModels
         /// <returns>True if the command is available, otherwise, False.</returns>
         private bool _CreateNewPlantCanExecute()
         {
-            return !string.IsNullOrEmpty(Model.Name) && (Model.SelectedVariety != null) &&
+            return !string.IsNullOrWhiteSpace(Model.Name) && (Model.SelectedVariety != null) &&
                    (Model.SelectedDevice != null);
         }
 

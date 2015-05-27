@@ -54,6 +54,13 @@ namespace Apricot.Shared.SampleData
                     new MeasureServiceModel{ Date = "1432659450", Temperature = 28.1},
                     new MeasureServiceModel{ Date = "1432659450", Temperature = 22.5},
                     new MeasureServiceModel{ Date = "1432659424", Temperature = 24.9}
+                },
+                LatestMeasure = new MeasureServiceModel
+                {
+                    Temperature = 26.45,
+                    Date = "123456789",
+                    Humidity = 26.945,
+                    Luminosity = 436.54
                 }
             };
 
