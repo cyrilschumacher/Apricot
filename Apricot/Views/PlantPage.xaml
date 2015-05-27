@@ -139,12 +139,20 @@
 	</Page.BottomAppBar>
 
 	<Pivot Title="{Binding Model.Name, Converter={StaticResource TextUpperConverter}}">
-		<!--<PivotItem x:Uid="Summary"  Header="Volutpat">
+		<Pivot.TitleTemplate>
+			<DataTemplate>
+				<StackPanel Orientation="Horizontal">
+					<Image Source="/Assets/Logo.png" Height="50"/>
+					<TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" Text="{Binding}" VerticalAlignment="Bottom" />
+				</StackPanel>
+			</DataTemplate>
+		</Pivot.TitleTemplate>
+		<PivotItem x:Uid="Summary"  Header="Volutpat">
 			<StackPanel>
 				<Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200" />
 				<TextBlock Text="{Binding Model.Name}" />
 			</StackPanel>
-		</PivotItem>-->
+		</PivotItem>
 		<PivotItem x:Uid="InRealTime" Header="Phasellus">
 			<StackPanel>
 				<!-- Temperature. -->

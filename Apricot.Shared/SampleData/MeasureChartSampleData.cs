@@ -26,6 +26,7 @@ namespace Apricot.Shared.SampleData
         {
             Model = new MeasureChartModel
             {
+                Name = "Nullam semper",
                 Measures = new []
                 {
                     new MeasureServiceModel{ Date = "1432659441", Temperature = 21.8},

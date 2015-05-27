@@ -334,6 +334,14 @@
     </Page.BottomAppBar>
 
     <Pivot x:Uid="MyGarden" Title="Maecenas ut">
+        <Pivot.TitleTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Logo.png" Height="50"/>
+                    <TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" Text="{Binding}" VerticalAlignment="Bottom" />
+                </StackPanel>
+            </DataTemplate>
+        </Pivot.TitleTemplate>
         <PivotItem x:Uid="CreateNewPlant" Header="Etiam vulputate purus tortor">
             <ScrollViewer>
                 <StackPanel>

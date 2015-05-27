@@ -198,4 +198,10 @@
   <data name="RefreshPlant.Label" xml:space="preserve">
     <value>Refresh</value>
   </data>
+  <data name="Chart.Title" xml:space="preserve">
+    <value>CHART</value>
+  </data>
+  <data name="HumberHours.Text" xml:space="preserve">
+    <value>Number of hours</value>
+  </data>
 </root>
