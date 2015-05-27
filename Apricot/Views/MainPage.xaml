@@ -12,7 +12,11 @@
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MainSampleData}">
 
     <Page.Resources>
+        <!-- Converters. -->
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <!-- Styles. -->
+        <!-- Style for the "Try Again" button. -->
         <Style x:Key="TryAgainButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,12" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -83,6 +87,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- Style for the loading. -->
+        <Style x:Key="IsLoadingStyle" TargetType="ProgressRing">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="Foreground" Value="{StaticResource ApricotFontPrimaryBrush}" />
+            <Setter Property="Margin" Value="0,200,0,0" />
+        </Style>
     </Page.Resources>
 
     <Page.Background>
@@ -96,9 +106,7 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid>
-        <ProgressRing Margin="0,200,0,0"
-                      Foreground="{StaticResource ApricotFontPrimaryBrush}"
-                      IsActive="{Binding Model.IsLoading}" />
+        <ProgressRing Style="{StaticResource IsLoadingStyle}" IsActive="{Binding Model.IsLoading}" />
         <StackPanel Margin="12" VerticalAlignment="Bottom"
                     Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock x:Uid="NoCommunicationEstablished"

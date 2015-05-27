@@ -170,7 +170,7 @@ namespace Apricot.Shared.ViewModels
             _realTimeMeasureTimer.Tick -= _RefreshMeasure;
             HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
 
-            MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
+           // MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
         }
 
         /// <summary>

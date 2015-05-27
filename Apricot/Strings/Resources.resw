@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Active.Text" xml:space="preserve">
+    <value>ACTIVE</value>
+  </data>
   <data name="CreateNewPlant.Text" xml:space="preserve">
     <value>Create new plant</value>
   </data>
@@ -135,6 +138,9 @@
   <data name="HumidityGraph.Title" xml:space="preserve">
     <value>Humidity</value>
   </data>
+  <data name="Inactive.Text" xml:space="preserve">
+    <value>INACTIVE</value>
+  </data>
   <data name="InRealTime.Header" xml:space="preserve">
     <value>In real time</value>
   </data>
@@ -142,7 +148,7 @@
     <value>Luminosity</value>
   </data>
   <data name="MyGarden.Title" xml:space="preserve">
-    <value>My Garden</value>
+    <value>MY GARDEN</value>
   </data>
   <data name="New.Label" xml:space="preserve">
     <value>New</value>
