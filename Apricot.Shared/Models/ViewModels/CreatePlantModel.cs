@@ -32,7 +32,7 @@ namespace Apricot.Shared.Models.ViewModels
         /// <summary>
         ///     Selected variety.
         /// </summary>
-        private VarietyPlantServiceModel _selectedVariety;
+        private VarietiesServiceModel _selectedVariety;
 
         #endregion Members.
 
@@ -129,13 +129,13 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Gets or sets a plant varieties.
         /// </summary>
         /// <value>The plant varieties.</value>
-        public ObservableCollection<VarietyPlantServiceModel> Varieties { get; set; }
+        public ObservableCollection<VarietiesServiceModel> Varieties { get; set; }
 
         /// <summary>
         ///     Gets or sets a selected variety.
         /// </summary>
         /// <value>The selected variety.</value>
-        public VarietyPlantServiceModel SelectedVariety
+        public VarietiesServiceModel SelectedVariety
         {
             get
             {
@@ -162,7 +162,7 @@ namespace Apricot.Shared.Models.ViewModels
                 new DeviceModel {Identifier = "ARD2", Name = "Arduino 2"},
             };
             Photo = new PlantPhotoModel();
-            Varieties = new ObservableCollection<VarietyPlantServiceModel>();
+            Varieties = new ObservableCollection<VarietiesServiceModel>();
         }
 
         #endregion Constructor.

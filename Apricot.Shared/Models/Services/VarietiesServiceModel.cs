@@ -5,7 +5,7 @@ namespace Apricot.Shared.Models.Services
     /// <summary>
     ///     Model for variety plant.
     /// </summary>
-    public class VarietyPlantServiceModel
+    public class VarietiesServiceModel
     {
         #region Properties.
 

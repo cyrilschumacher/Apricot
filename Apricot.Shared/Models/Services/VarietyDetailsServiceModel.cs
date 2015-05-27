@@ -5,7 +5,7 @@ namespace Apricot.Shared.Models.Services
     /// <summary>
     ///     Model for information from the variety of the plant.
     /// </summary>
-    public class VarietyPlantInformationServiceModel
+    public class VarietyDetailsServiceModel
     {
         /// <summary>
         ///     Gets or sets a plant identifier.

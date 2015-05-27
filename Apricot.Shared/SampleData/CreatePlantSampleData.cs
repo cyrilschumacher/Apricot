@@ -43,11 +43,11 @@ namespace Apricot.Shared.SampleData
             Model = new CreatePlantModel
             {
                 Name = "Etiam vulputate purus",
-                Varieties = new ObservableCollection<VarietyPlantServiceModel>
+                Varieties = new ObservableCollection<VarietiesServiceModel>
                 {
-                    new VarietyPlantServiceModel {Id = 0, Name = "velit et"},
-                    new VarietyPlantServiceModel {Id = 1, Name = "in est culpa amet"},
-                    new VarietyPlantServiceModel {Id = 2, Name = "veniam nulla"}
+                    new VarietiesServiceModel {Id = 0, Name = "velit et"},
+                    new VarietiesServiceModel {Id = 1, Name = "in est culpa amet"},
+                    new VarietiesServiceModel {Id = 2, Name = "veniam nulla"}
                 }
             };
 

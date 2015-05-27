@@ -14,35 +14,35 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Service name for obtains the variety plant list.
         /// </summary>
-        private const string VarietyPlantListServiceName = "getTypePlant";
+        private const string VarietiesServiceName = "getTypePlant";
 
         /// <summary>
         ///     Service name for obtains the information of variety.
         /// </summary>
-        private const string VarietyPlantServiceName = "getTypePlant/{0}";
+        private const string VarietyDetailsServiceName = "getTypePlant/{0}";
 
         #endregion Constants.
 
         #region Methods.
 
         /// <summary>
-        ///     Get a list of plant varieties.
+        ///     Get varieties.
         /// </summary>
-        /// <returns>The list of plant varieties.</returns>
-        public async Task<List<VarietyPlantServiceModel>> GetVarieties()
+        /// <returns>The varieties.</returns>
+        public async Task<List<VarietiesServiceModel>> GetVarieties()
         {
-            return await GetAsync<List<VarietyPlantServiceModel>>(VarietyPlantListServiceName);
+            return await GetAsync<List<VarietiesServiceModel>>(VarietiesServiceName);
         }
 
         /// <summary>
-        ///     Get information variety.
+        ///     Get variety details.
         /// </summary>
         /// <param name="varietyIdentifier">The variety identifier.</param>
         /// <returns>The information variety of plant.</returns>
-        public async Task<VarietyPlantInformationServiceModel> GetVarietyInformation(int varietyIdentifier)
+        public async Task<VarietyDetailsServiceModel> GetVarietyDetails(int varietyIdentifier)
         {
-            var serviceUri = string.Format(VarietyPlantServiceName, varietyIdentifier);
-            return await GetAsync<VarietyPlantInformationServiceModel>(serviceUri);
+            var serviceUri = string.Format(VarietyDetailsServiceName, varietyIdentifier);
+            return await GetAsync<VarietyDetailsServiceModel>(serviceUri);
         }
 
         #endregion Methods.

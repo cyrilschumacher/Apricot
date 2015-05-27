@@ -12,7 +12,7 @@ namespace Apricot.Shared.Models.ViewModels
         /// <summary>
         ///     Variety information.
         /// </summary>
-        private VarietyPlantInformationServiceModel _information;
+        private VarietyDetailsServiceModel _information;
 
         #endregion Members.
 
@@ -28,7 +28,7 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Gets or sets a variety information.
         /// </summary>
         /// <value>The variety information.</value>
-        public VarietyPlantInformationServiceModel Information
+        public VarietyDetailsServiceModel Information
         {
             get
             {

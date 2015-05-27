@@ -108,7 +108,7 @@ namespace Apricot.Shared.ViewModels
         /// <param name="varietyIdentifier">The variety identifier.</param>
         private async void _LoadVarietyInformationAsync(int varietyIdentifier)
         {
-            Model.Information = await _varietyPlantService.GetVarietyInformation(varietyIdentifier);
+            Model.Information = await _varietyPlantService.GetVarietyDetails(varietyIdentifier);
         }
 
         #endregion Methods.

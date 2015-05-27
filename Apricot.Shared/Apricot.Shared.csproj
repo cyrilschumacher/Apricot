@@ -100,9 +100,9 @@
     <Compile Include="Models\Services\PlantDetailsServiceModel.cs" />
     <Compile Include="Models\Services\PlantServiceModel.cs" />
     <Compile Include="Models\Services\MeasureServiceModel.cs" />
-    <Compile Include="Models\Services\VarietyPlantInformationServiceModel.cs" />
+    <Compile Include="Models\Services\VarietyDetailsServiceModel.cs" />
     <Compile Include="Models\Services\ServerHealthServiceModel.cs" />
-    <Compile Include="Models\Services\VarietyPlantServiceModel.cs" />
+    <Compile Include="Models\Services\VarietiesServiceModel.cs" />
     <Compile Include="Models\ViewModels\VarietyInformationModel.cs" />
     <Compile Include="NotifyPropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -27,7 +27,7 @@ namespace Apricot.Shared.SampleData
         {
             Model = new VarietyInformationModel
             {
-                Information = new VarietyPlantInformationServiceModel
+                Information = new VarietyDetailsServiceModel
                 {
                     Identifier = 0,
                     MaximumHumidity = 10,
