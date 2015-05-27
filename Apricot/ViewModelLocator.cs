@@ -58,7 +58,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PlantViewModel>(Guid.NewGuid().ToString());
+                return ServiceLocator.Current.GetInstance<PlantViewModel>();
             }
         }
 
@@ -103,6 +103,7 @@ namespace Apricot
             SimpleIoc.Default.Register<MeasureChartViewModel>();
             SimpleIoc.Default.Register<PlantViewModel>();
             SimpleIoc.Default.Register<PlantChooserViewModel>();
+            SimpleIoc.Default.Register<VarietyInformationViewModel>();
         }
 
         #endregion Constructors.

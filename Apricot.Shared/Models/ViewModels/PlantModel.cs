@@ -47,21 +47,27 @@ namespace Apricot.Shared.Models.ViewModels
         #region Commands.
 
         /// <summary>
-        ///     Gets or sets a command for see measure chart.
+        ///     Gets or sets a command for go to a measure chart page.
         /// </summary>
         /// <value>The command for see measure chart.</value>
         public RelayCommand<string> GoToChartPageCommand { get; set; }
 
         /// <summary>
-        ///     Gets or sets a command for OnLoaded event.
+        ///     Gets or sets a command for go to a variety information page.
         /// </summary>
-        /// <value>The command for OnLoaded event.</value>
+        /// <value>The command for go to a variety information page.</value>
+        public ICommand GoToVarietyInformationPageCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for <code>OnLoaded</code> event.
+        /// </summary>
+        /// <value>The command for <code>OnLoaded</code> event.</value>
         public ICommand OnLoadedCommand { get; set; }
 
         /// <summary>
-        ///     Gets or set a command for OnUnloaded event.
+        ///     Gets or set a command for <code>OnUnloaded</code> event.
         /// </summary>
-        /// <value>The command for OnUnloaded event.</value>
+        /// <value>The command for <code>OnUnloaded</code> event.</value>
         public ICommand OnUnloadedCommand { get; set; }
 
         /// <summary>

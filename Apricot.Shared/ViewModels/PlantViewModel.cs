@@ -99,6 +99,7 @@ namespace Apricot.Shared.ViewModels
                 {
                     Details = new PlantDetailsModel(),
                     GoToChartPageCommand = new RelayCommand<string>(_GoToMeasureChart),
+                    GoToVarietyInformationPageCommand = new RelayCommand(_GoToVarietyInformationPage),
                     OnLoadedCommand = new RelayCommand(_OnLoaded),
                     OnUnloadedCommand = new RelayCommand(_OnUnloaded),
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
@@ -199,6 +200,7 @@ namespace Apricot.Shared.ViewModels
         private async void _LoadDetailsAsync()
         {
             var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
+            Model.Details.Variety = details.Variety;
             foreach (var photo in details.Photos)
             {
                 _AddPhoto(photo);
@@ -234,13 +236,22 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
-        ///     Goes to a page shows measure chart.
+        ///     Goes to a page shows measure chart page.
         /// </summary>
         /// <param name="measureName">The name of measure.</param>
         private void _GoToMeasureChart(string measureName)
         {
             _navigationService.NavigateTo("MeasureChart");
             MessengerInstance.Send(new MeasureMessageModel { Name = measureName, PlantIdentifier = Model.Identifier });
+        }
+
+        /// <summary>
+        ///     Goes to a page shows variety information page.
+        /// </summary>
+        private void _GoToVarietyInformationPage()
+        {
+            _navigationService.NavigateTo("VarietyInformation");
+            MessengerInstance.Send(Model.Details.Variety);
         }
 
         /// <summary>

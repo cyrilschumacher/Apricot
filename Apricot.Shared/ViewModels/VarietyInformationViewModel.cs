@@ -94,10 +94,10 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Receives the plant identifier.
         /// </summary>
-        /// <param name="plantIdentifier">The plant identifier.</param>
-        private void _OnPlantIdentifierMessage(int plantIdentifier)
+        /// <param name="varietyIdentifier">The variety identifier.</param>
+        private void _OnPlantIdentifierMessage(int varietyIdentifier)
         {
-            _LoadVarietyInformationAsync(plantIdentifier);
+            _LoadVarietyInformationAsync(varietyIdentifier);
         }
 
         #endregion Events.
@@ -105,10 +105,10 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Loads the variety information.
         /// </summary>
-        /// <param name="plantIdentifier">The plant identifier.</param>
-        private async void _LoadVarietyInformationAsync(int plantIdentifier)
+        /// <param name="varietyIdentifier">The variety identifier.</param>
+        private async void _LoadVarietyInformationAsync(int varietyIdentifier)
         {
-            Model.Information = await _varietyPlantService.GetVarietyInformation(plantIdentifier);
+            Model.Information = await _varietyPlantService.GetVarietyInformation(varietyIdentifier);
         }
 
         #endregion Methods.

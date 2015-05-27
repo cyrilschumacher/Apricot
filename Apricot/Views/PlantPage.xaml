@@ -51,11 +51,8 @@
                               Command="{Binding Model.StopCommand}"
                               Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=StopAppBarButton}" />
                 <AppBarButton x:Uid="SeeVarietyInformation"
-                              Label="Dignissim">
-                    <core:EventTriggerBehavior EventName="Click">
-                        <core:NavigateToPageAction TargetPage="Apricot.Views.VarietyInformationPage" Parameter="{Binding Model.Identifier}" />
-                    </core:EventTriggerBehavior>
-                </AppBarButton>
+                              Label="Dignissim"
+                              Command="{Binding Model.GoToVarietyInformationPageCommand}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
