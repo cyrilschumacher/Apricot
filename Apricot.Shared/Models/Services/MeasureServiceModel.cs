@@ -18,7 +18,7 @@ namespace Apricot.Shared.Models.Services
         /// </summary>
         /// <value>The humidity.</value>
         [JsonProperty("humidity")]
-        public int Humidity { get; set; }
+        public double Humidity { get; set; }
 
         /// <summary>
         ///     Gets or sets a luminosity.

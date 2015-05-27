@@ -9,6 +9,7 @@
     xmlns:sampleData="using:Apricot.Shared.SampleData"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    NavigationCacheMode="Enabled"
     DataContext="{Binding Plant, Source={StaticResource Locator}}"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantSampleData}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

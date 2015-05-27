@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Apricot.Shared.Models.Messages;
+﻿using Apricot.Shared.Models.Messages;
+using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
+using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Apricot.Shared.Extensions;
-using Apricot.Shared.Models.Services;
-using Apricot.Shared.Services.Apricot;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -24,9 +22,9 @@ namespace Apricot.Shared.ViewModels
         #region Constants.
 
         /// <summary>
-        ///     Duration before refreshing hours.
+        ///     Duration before refreshing hours (to milliseconds).
         /// </summary>
-        private const int RefreshingHoursDuration = 2;
+        private const int RefreshingHoursDuration = 150;
 
         #endregion Constants.
 
@@ -73,7 +71,7 @@ namespace Apricot.Shared.ViewModels
             {
                 // Initialize members.
                 _measureService = new MeasureService();
-                _refreshTimer = new DispatcherTimer {Interval = new TimeSpan(TimeSpan.TicksPerSecond*RefreshingHoursDuration)};
+                _refreshTimer = new DispatcherTimer { Interval = new TimeSpan(TimeSpan.TicksPerMillisecond * RefreshingHoursDuration) };
 
                 // Initialize properties.
                 Model = new MeasureChartModel
@@ -122,7 +120,7 @@ namespace Apricot.Shared.ViewModels
         {
             // Initializes events.
             HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
-            _refreshTimer.Tick += _RefreshTimerOnTick;
+            _refreshTimer.Tick += _OnRefreshTimerTick;
 
             // Unregister messengers.
             MessengerInstance.Unregister<MeasureMessageModel>(this, _OnMeasureServiceMessage);
@@ -135,24 +133,29 @@ namespace Apricot.Shared.ViewModels
         {
             // Initializes events.
             HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
-            _refreshTimer.Tick -= _RefreshTimerOnTick;
+            _refreshTimer.Tick -= _OnRefreshTimerTick;
         }
 
         /// <summary>
         ///     Receives the measures (with its name).
         /// </summary>
         /// <param name="message">The message.</param>
-        private async void _OnMeasureServiceMessage(MeasureMessageModel message)
+        private void _OnMeasureServiceMessage(MeasureMessageModel message)
         {
+            // Obtains the plant identifiant and name.
             Model.Name = message.Name;
-
             _plantIdentifier = message.PlantIdentifier;
 
-            await Task.Delay(2000);
+            // Load all measures.
             _LoadMeasuresAsync();
         }
 
-        private void _RefreshTimerOnTick(object sender, object o)
+        /// <summary>
+        ///     Occurs when the timer interval has elapsed.
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="o">The parameters.</param>
+        private void _OnRefreshTimerTick(object sender, object o)
         {
             _refreshTimer.Stop();
             _LoadMeasuresAsync();
@@ -177,8 +180,10 @@ namespace Apricot.Shared.ViewModels
         {
             var measures = await _measureService.GetAll(_plantIdentifier, Model.Hours);
 
+            // Create a counter and
+            // and selects the requested property.
             var i = 0;
-            Model.Measures = measures.Select(measure => new {X = i++, Y = measure.Measure.GetPropertyValue(Model.Name)});
+            Model.Measures = measures.Select(measure => new { X = i++, Y = measure.Measure.GetPropertyValue(Model.Name) });
         }
 
         #endregion Methods.

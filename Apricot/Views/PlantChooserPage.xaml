@@ -208,11 +208,31 @@
         </PivotItem>
         <PivotItem x:Uid="Favorites" Header="Ante">
             <Grid>
+                <StackPanel x:Name="NoPlantFavorites" 
+                            VerticalAlignment="Center" 
+                            Margin="12">
+                    <interactivity:Interaction.Behaviors>
+                        <core:DataTriggerBehavior Binding="{Binding Model.Favorites.Count}" Value="0">
+                            <core:ChangePropertyAction TargetObject="{Binding ElementName=NoPlantFavorites}" 
+                                                       PropertyName="Visibility"
+                                                       Value="Collapsed" />
+                        </core:DataTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                    <TextBlock x:Uid="NoPlantFavorites" 
+                               TextAlignment="Center"
+                               Foreground="#AAAAAA"
+                               FontSize="24"
+                               TextWrapping="Wrap"
+                               Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
+                    <TextBlock Text=":("
+                               Foreground="#AAAAAA"
+                               TextAlignment="Center"
+                               FontSize="56"/>
+                </StackPanel>
                 <ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}"
                               IsActive="{Binding Model.IsLoading}" />
-                <ListView x:Name="FavoritesPlantListBox"
-                     ItemsSource="{Binding Model.Favorites}"
-                     ItemTemplate="{StaticResource PlantDataTemplate}">
+                <ListView ItemsSource="{Binding Model.Favorites}"
+                          ItemTemplate="{StaticResource PlantDataTemplate}">
                 </ListView>
             </Grid>
         </PivotItem>

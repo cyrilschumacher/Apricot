@@ -179,18 +179,5 @@ namespace Apricot.Shared.Models.ViewModels
         }
 
         #endregion Properties.
-
-        #region Constructors.
-
-        /// <summary>
-        ///     Constructor.
-        /// </summary>
-        public PlantModel()
-        {
-            Details = new PlantDetailsModel();
-            Measures = new List<MeasureServiceModel>();
-        }
-
-        #endregion Constructors.
     }
 }

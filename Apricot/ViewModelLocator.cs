@@ -23,7 +23,8 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<CreatePlantViewModel>(Guid.NewGuid().ToString());
+                var guid = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<CreatePlantViewModel>(guid);
             }
         }
 
@@ -35,7 +36,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MainViewModel>(Guid.NewGuid().ToString());
+                return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
 
@@ -46,7 +47,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MeasureChartViewModel>(Guid.NewGuid().ToString());
+                return ServiceLocator.Current.GetInstance<MeasureChartViewModel>();
             }
         }
 
@@ -70,7 +71,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<PlantChooserViewModel>(Guid.NewGuid().ToString());
+                return ServiceLocator.Current.GetInstance<PlantChooserViewModel>();
             }
         }
 
@@ -82,7 +83,7 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<VarietyInformationViewModel>(Guid.NewGuid().ToString());
+                return ServiceLocator.Current.GetInstance<VarietyInformationViewModel>();
             }
         }
 

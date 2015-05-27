@@ -81,6 +81,18 @@ namespace Apricot.Shared.ViewModels
             // the visualizing of the XAML code in the design mode.
             if (!IsInDesignMode)
             {
+                // Initialize properties.
+                Model = new PlantModel
+                {
+                    GoToChartPageCommand = new RelayCommand<string>(_GoToMeasureChart),
+                    GoToVarietyInformationPageCommand = new RelayCommand(_GoToVarietyInformationPage),
+                    OnLoadedCommand = new RelayCommand(_OnLoaded),
+                    OnUnloadedCommand = new RelayCommand(_OnUnloaded),
+                    PinCommand = new RelayCommand(_Pin, _PinCanExecute),
+                    StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute),
+                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
+                };
+
                 // Initialize members.
                 _measureService = new MeasureService();
                 _navigationService = navigationService;
@@ -93,19 +105,6 @@ namespace Apricot.Shared.ViewModels
 
                 // Register messengers.
                 MessengerInstance.Register<PlantServiceModel>(this, _OnPlantChooserMessage);
-
-                // Initialize properties.
-                Model = new PlantModel
-                {
-                    Details = new PlantDetailsModel(),
-                    GoToChartPageCommand = new RelayCommand<string>(_GoToMeasureChart),
-                    GoToVarietyInformationPageCommand = new RelayCommand(_GoToVarietyInformationPage),
-                    OnLoadedCommand = new RelayCommand(_OnLoaded),
-                    OnUnloadedCommand = new RelayCommand(_OnUnloaded),
-                    PinCommand = new RelayCommand(_Pin, _PinCanExecute),
-                    StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute),
-                    UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
-                };
             }
         }
 
@@ -138,9 +137,20 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _OnLoaded()
         {
+            if (Model.Details != null)
+            {
+                // If details on the plant exists,
+                // it clears and obtains new details of the web service.
+                _ResetDetails();
+                _LoadDetailsAsync();
+            }
+
             // Initializes events.
             _realTimeMeasureTimer.Tick += _RefreshMeasure;
             HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+
+            // Reloads the latest measure by a duration.
+            _realTimeMeasureTimer.Start();
         }
 
         /// <summary>
@@ -149,6 +159,7 @@ namespace Apricot.Shared.ViewModels
         /// <param name="plant">The plant information.</param>
         private void _OnPlantChooserMessage(PlantServiceModel plant)
         {
+            // Sets the plant information.
             Model.Identifier = plant.Identifier;
             Model.IsActive = plant.IsActive;
             Model.Name = plant.Name;
@@ -156,9 +167,6 @@ namespace Apricot.Shared.ViewModels
             // Loads the details of plant, the latest measure and the measures.
             _LoadDetailsAsync();
             _LoadLatestMeasureAsync();
-
-            // Reloads the latest measure by a duration.
-            _realTimeMeasureTimer.Start();
         }
 
         /// <summary>
@@ -170,7 +178,8 @@ namespace Apricot.Shared.ViewModels
             _realTimeMeasureTimer.Tick -= _RefreshMeasure;
             HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
 
-           // MessengerInstance.Unregister<PlantServiceModel>(this, _OnPlantChooserMessage);
+            // Stops the timer.
+            _realTimeMeasureTimer.Stop();
         }
 
         /// <summary>
@@ -180,7 +189,10 @@ namespace Apricot.Shared.ViewModels
         /// <param name="o">The parameters.</param>
         private void _RefreshMeasure(object sender, object o)
         {
-            _LoadLatestMeasureAsync();
+            if (Model.Details != null)
+            {
+                _LoadLatestMeasureAsync();
+            }
         }
 
         #endregion Events.
@@ -200,7 +212,8 @@ namespace Apricot.Shared.ViewModels
         private async void _LoadDetailsAsync()
         {
             var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
-            Model.Details.Variety = details.Variety;
+            Model.Details = new PlantDetailsModel {Variety = details.Variety};
+
             foreach (var photo in details.Photos)
             {
                 _AddPhoto(photo);
@@ -222,6 +235,7 @@ namespace Apricot.Shared.ViewModels
         {
             _plantFavoriteService.Add(Model.Identifier);
 
+            // Refreshs commands.
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
         }
@@ -255,6 +269,14 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
+        ///     Resets plant details.
+        /// </summary>
+        private void _ResetDetails()
+        {
+            Model.Details = new PlantDetailsModel();
+        }
+
+        /// <summary>
         ///     Stop the measures of the plant.
         /// </summary>
         private async void _StopMeasuresAsync()
@@ -281,6 +303,7 @@ namespace Apricot.Shared.ViewModels
         {
             _plantFavoriteService.Remove(Model.Identifier);
 
+            // Refreshs commands.
             Model.PinCommand.RaiseCanExecuteChanged();
             Model.UnpinCommand.RaiseCanExecuteChanged();
         }

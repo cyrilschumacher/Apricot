@@ -33,7 +33,7 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Maximum number of photos allowed.
         /// </summary>
-        private const int MaximumPhoto = 3;
+        private const int MaximumPhoto = 1;
 
         /// <summary>
         ///     Maximum width of the image.
@@ -289,7 +289,7 @@ namespace Apricot.Shared.ViewModels
             };
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
-            filePicker.PickMultipleFilesAndContinue();
+            filePicker.PickSingleFileAndContinue();
         }
 
         #endregion Methods.
