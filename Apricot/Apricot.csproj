@@ -91,6 +91,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\InverterBooleanVisibilityConverter.cs" />
     <Compile Include="Converters\TextUpperConverter.cs" />
     <Compile Include="Converters\TimeStampToDateTimeConverter.cs" />
     <Compile Include="ViewModelLocator.cs" />

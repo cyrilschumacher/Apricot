@@ -126,6 +126,9 @@ namespace Apricot.Shared.ViewModels
             var idsFavorite = _plantFavoriteService.Get();
             var favorites = (from x in Model.Plant join y in idsFavorite on x.Identifier equals y select x).ToList();
 
+            // Determines whether there favorites.
+            Model.HasFavorites = favorites.Count > 0;
+
             // Clear and adds existing favorite plant.
             Model.Favorites.Clear();
             Model.Favorites.AddRange(favorites);

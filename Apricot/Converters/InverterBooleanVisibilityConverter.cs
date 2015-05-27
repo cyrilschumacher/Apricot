@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Globalization;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace Apricot.Converters
 {
     /// <summary>
-    ///     Converter from a <see cref="string"/> type to a <see cref="DateTime"/> type.
+    ///     Converter from inverted <see cref="bool"/> type to a <see cref="Visibility"/> type.
     /// </summary>
-    public class TimeStampToDateTimeConverter : IValueConverter
+    public class InverterBooleanVisibilityConverter : IValueConverter
     {
-        #region Constants.
-
-        /// <summary>
-        ///     Default format of <see cref="DateTime" />.
-        /// </summary>
-        private const string DefaultFormat = "U";
-
-        #endregion Constants.
-
-        #region Methods.
-
         /// <summary>
         ///     Modifies the source data before passing it to the target for display in the UI.
         /// </summary>
@@ -30,20 +19,7 @@ namespace Apricot.Converters
         /// <returns>The value to be passed to the target dependency property.</returns>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            long timeStamp;
-            if (!long.TryParse(value.ToString(), out timeStamp))
-            {
-                return value;
-            }
-
-            // Creates a date time by a UNIX time.
-            var baseDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            var newValue = baseDateTime.AddSeconds(timeStamp);
-
-            var parameterString = parameter as string;
-            var format = parameterString ?? DefaultFormat;
-
-            return newValue.ToString(format, new CultureInfo(language));
+            return value != null ? (object)((!(bool)value) ? Visibility.Visible : Visibility.Collapsed) : null;
         }
 
         /// <summary>
@@ -56,9 +32,7 @@ namespace Apricot.Converters
         /// <returns>The value to be passed to the source object.</returns>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            throw new NotImplementedException();
+            return (value is Visibility) && !((Visibility)value).Equals(Visibility.Visible);
         }
-
-        #endregion Methods.
     }
 }

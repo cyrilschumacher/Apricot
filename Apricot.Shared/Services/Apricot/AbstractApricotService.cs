@@ -97,6 +97,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <returns>The model.</returns>
         private static async Task<TModel> _ReadContentHttpResponse<TModel>(HttpResponseMessage httpResponse)
         {
+            Debug.WriteLine("HTTP status: {0}", httpResponse.StatusCode);
             if (httpResponse.StatusCode != HttpStatusCode.OK)
             {
                 throw new HttpRequestException("The HTTP request has failed.");
@@ -134,6 +135,8 @@ namespace Apricot.Shared.Services.Apricot
 
             // Obtains the absolute URL (with the URI address of service) and sends a HTTP request.
             var requestUri = _GetServerAddress(serviceUri);
+
+            Debug.WriteLine("Require URI: {0}", requestUri);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken.Value);
 
             return await _ReadContentHttpResponse<TModel>(response);
@@ -154,6 +157,8 @@ namespace Apricot.Shared.Services.Apricot
             // Obtains the absolute URL (with the URI address of service),
             // adds content and sends a HTTP request.
             var requestUri = _GetServerAddress(serviceUri);
+
+            Debug.WriteLine("Require URI: {0}", requestUri);
             var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
 
             await _httpClient.PostAsync(requestUri, httpContent, cancellationToken.Value);

@@ -18,6 +18,11 @@ namespace Apricot.Shared.Models.ViewModels
         private ObservableCollection<PlantServiceModel> _favorites;
 
         /// <summary>
+        ///     Value indicating whether any existing favorites.
+        /// </summary>
+        private bool _hasFavorites;
+
+        /// <summary>
         ///     Value indicating whether a load is in progress.
         /// </summary>
         private bool _isLoading;
@@ -46,6 +51,22 @@ namespace Apricot.Shared.Models.ViewModels
         public RelayCommand<PlantServiceModel> SelectPlantCommand { get; set; }
 
         #endregion Commands.
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether any existing favorites.
+        /// </summary>
+        /// <value>True if exist favorites, otherwise, False.</value>
+        public bool HasFavorites
+        {
+            get
+            {
+                return _hasFavorites;
+            }
+            set
+            {
+                SetValueProperty(ref _hasFavorites, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets favorites plant.

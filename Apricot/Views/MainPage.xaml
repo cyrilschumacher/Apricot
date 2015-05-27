@@ -106,18 +106,14 @@
     </interactivity:Interaction.Behaviors>
 
     <Grid>
-        <ProgressRing Style="{StaticResource IsLoadingStyle}" IsActive="{Binding Model.IsLoading}" />
-        <StackPanel Margin="12" VerticalAlignment="Bottom"
-                    Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <ProgressRing Style="{StaticResource IsLoadingStyle}" Margin="0,0,0,48" VerticalAlignment="Bottom" IsActive="{Binding Model.IsLoading}" />
+        <StackPanel Margin="12" VerticalAlignment="Bottom" Visibility="{Binding Model.RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
             <TextBlock x:Uid="NoCommunicationEstablished"
-                       TextAlignment="Center"
                        Style="{StaticResource BaseTextBlockStyle}"
                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis."
-                       Foreground="{StaticResource ApricotFontPrimaryBrush}" />
-            <Button x:Uid="TryAgain"
-                    Style="{StaticResource TryAgainButtonStyle}"
-                    Content="Aenean interdum"
-                    Command="{Binding Model.RetryCommand}" />
+                       Foreground="{StaticResource ApricotFontPrimaryBrush}"
+                       TextAlignment="Center" />
+            <Button x:Uid="TryAgain" Style="{StaticResource TryAgainButtonStyle}" Command="{Binding Model.RetryCommand}" Content="Aenean interdum" />
         </StackPanel>
     </Grid>
 </Page>
