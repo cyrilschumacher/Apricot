@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Graphics.Imaging;
@@ -63,6 +64,40 @@ namespace Apricot.Shared.ViewModels
 
         #region Properties.
 
+        #region Commands.
+
+        /// <summary>
+        ///     Gets or sets a command for create a new plant.
+        /// </summary>
+        /// <value>The command for create a new plant.</value>
+        public RelayCommand CreateCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for add a photo.
+        /// </summary>
+        /// <value>The command for add a photo.</value>
+        public ICommand AddPhotoCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for OnLoaded event.
+        /// </summary>
+        /// <value>The command for OnLoaded event.</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or set a command for OnUnloaded event.
+        /// </summary>
+        /// <value>The command for OnUnloaded event.</value>
+        public ICommand OnUnloadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for remove a photo.
+        /// </summary>
+        /// <value>The command for remove a photo.</value>
+        public ICommand RemovePhotoCommand { get; set; }
+
+        #endregion Commands.
+
         /// <summary>
         ///     Gets the model.
         /// </summary>
@@ -89,14 +124,12 @@ namespace Apricot.Shared.ViewModels
                 _varietyPlantService = new VarietyPlantService();
 
                 // Initialize properties.
-                Model = new CreatePlantModel
-                {
-                    CreateCommand = new RelayCommand(_CreateNewPlantAsync, _CreateNewPlantCanExecute),
-                    OnLoadedCommand = new RelayCommand(_OnLoaded),
-                    OnUnloadedCommand = new RelayCommand(_OnUnloaded),
-                    AddPhotoCommand = new RelayCommand(_ShowPhotosSelector),
-                    RemovePhotoCommand = new RelayCommand(_RemovePhoto)
-                };
+                Model = new CreatePlantModel();
+                CreateCommand = new RelayCommand(_CreateNewPlantAsync, _CreateNewPlantCanExecute);
+                OnLoadedCommand = new RelayCommand(_OnLoaded);
+                OnUnloadedCommand = new RelayCommand(_OnUnloaded);
+                AddPhotoCommand = new RelayCommand(_ShowPhotosSelector);
+                RemovePhotoCommand = new RelayCommand(_RemovePhoto);
             }
         }
 
@@ -114,7 +147,7 @@ namespace Apricot.Shared.ViewModels
         private void _OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // Test if the command of create a new plant is available.
-            Model.CreateCommand.RaiseCanExecuteChanged();
+            CreateCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>

@@ -38,40 +38,6 @@ namespace Apricot.Shared.Models.ViewModels
 
         #region Properties.
 
-        #region Commands.
-
-        /// <summary>
-        ///     Gets or sets a command for create a new plant.
-        /// </summary>
-        /// <value>The command for create a new plant.</value>
-        public RelayCommand CreateCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for add a photo.
-        /// </summary>
-        /// <value>The command for add a photo.</value>
-        public ICommand AddPhotoCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for OnLoaded event.
-        /// </summary>
-        /// <value>The command for OnLoaded event.</value>
-        public ICommand OnLoadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or set a command for OnUnloaded event.
-        /// </summary>
-        /// <value>The command for OnUnloaded event.</value>
-        public ICommand OnUnloadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for remove a photo.
-        /// </summary>
-        /// <value>The command for remove a photo.</value>
-        public ICommand RemovePhotoCommand { get; set; }
-
-        #endregion Commands.
-
         /// <summary>
         ///     Gets or sets devices.
         /// </summary>

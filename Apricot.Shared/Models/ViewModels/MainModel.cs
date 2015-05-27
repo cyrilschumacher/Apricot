@@ -40,18 +40,6 @@ namespace Apricot.Shared.Models.ViewModels
         }
 
         /// <summary>
-        ///     Get or sets a command for OnLoaded event.
-        /// </summary>
-        /// <value>The command for OnLoaded event</value>
-        public ICommand OnLoadedCommand { get; set; }
-
-        /// <summary>
-        ///     Get or sets a command for retry connection to server.
-        /// </summary>
-        /// <value>The command for retry connection to server</value>
-        public ICommand RetryCommand { get; set; }
-
-        /// <summary>
         ///     Gets or sets a visibility of the retry action.
         /// </summary>
         /// <value>The visibility of the retry action</value>

@@ -147,8 +147,8 @@
   <data name="LuminosityGraph.Title" xml:space="preserve">
     <value>Luminosity</value>
   </data>
-  <data name="New.Label" xml:space="preserve">
-    <value>New</value>
+  <data name="AddNewPlant.Label" xml:space="preserve">
+    <value>Add a new plant</value>
   </data>
   <data name="NoCommunicationEstablished.Text" xml:space="preserve">
     <value>No communication is established with the server.</value>
@@ -191,5 +191,11 @@
   </data>
   <data name="Temperature.Text" xml:space="preserve">
     <value>Temperature</value>
+  </data>
+  <data name="LastDateMeasure.Text" xml:space="preserve">
+    <value>Last date of measure</value>
+  </data>
+  <data name="RefreshPlant.Label" xml:space="preserve">
+    <value>Refresh</value>
   </data>
 </root>

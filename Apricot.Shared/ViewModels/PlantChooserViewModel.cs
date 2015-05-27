@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Services;
 using Apricot.Shared.Services.Apricot;
@@ -38,6 +39,27 @@ namespace Apricot.Shared.ViewModels
 
         #region Properties.
 
+        #region Commands.
+
+        /// <summary>
+        ///     Gets or sets a command for <code>OnLoaded</code> event.
+        /// </summary>
+        /// <value>The command for <code>OnLoaded</code> event.</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for select a plant.
+        /// </summary>
+        /// <value>The command for select a plant.</value>
+        public RelayCommand<PlantServiceModel> SelectPlantCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for refresh plant.
+        /// </summary>
+        public ICommand RefreshCommand { get; set; }
+
+        #endregion Commands.
+
         /// <summary>
         ///     Gets the model.
         /// </summary>
@@ -64,11 +86,10 @@ namespace Apricot.Shared.ViewModels
                 _plantFavoriteService = new PlantFavoriteService();
 
                 // Initialize properties.
-                Model = new PlantChooserModel
-                {
-                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
-                    SelectPlantCommand = new RelayCommand<PlantServiceModel>(_SelectPlant)
-                };
+                Model = new PlantChooserModel();
+                OnLoadedCommand = new RelayCommand(_OnLoadedAsync);
+                RefreshCommand = new RelayCommand(_Refresh);
+                SelectPlantCommand = new RelayCommand<PlantServiceModel>(_SelectPlant);
             }
         }
 
@@ -81,26 +102,9 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
-        private async void _OnLoadedAsync()
+        private void _OnLoadedAsync()
         {
-            // Indicates that loading occurs.
-            Model.IsLoading = true;
-
-            try
-            {
-                // Obtains a list of existing plants and determines the favorite plants.
-                await _LoadPlantAsync();
-                // The favorites list is to be made after loading the list of existing plants.
-                _LoadFavoritePlant();
-            }
-            catch (Exception)
-            {
-                //todo: Manage error.
-            }
-            finally
-            {
-                Model.IsLoading = false;
-            }
+            _Refresh();
         }
 
         #endregion Events.
@@ -132,6 +136,31 @@ namespace Apricot.Shared.ViewModels
             // Clear and adds existing favorite plant.
             Model.Favorites.Clear();
             Model.Favorites.AddRange(favorites);
+        }
+
+        /// <summary>
+        ///     Refreshs plant.
+        /// </summary>
+        private async void _Refresh()
+        {
+            // Indicates that loading occurs.
+            Model.IsLoading = true;
+
+            try
+            {
+                // Obtains a list of existing plants and determines the favorite plants.
+                await _LoadPlantAsync();
+                // The favorites list is to be made after loading the list of existing plants.
+                _LoadFavoritePlant();
+            }
+            catch (Exception)
+            {
+                //todo: Manage error.
+            }
+            finally
+            {
+                Model.IsLoading = false;
+            }
         }
 
         /// <summary>

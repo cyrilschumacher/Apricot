@@ -36,22 +36,6 @@ namespace Apricot.Shared.Models.ViewModels
 
         #region Properties.
 
-        #region Commands.
-
-        /// <summary>
-        ///     Gets or sets a command for <code>OnLoaded</code> event.
-        /// </summary>
-        /// <value>The command for <code>OnLoaded</code> event.</value>
-        public ICommand OnLoadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for select a plant.
-        /// </summary>
-        /// <value>The command for select a plant.</value>
-        public RelayCommand<PlantServiceModel> SelectPlantCommand { get; set; }
-
-        #endregion Commands.
-
         /// <summary>
         ///     Gets or sets a value indicating whether any existing favorites.
         /// </summary>

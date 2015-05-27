@@ -19,9 +19,11 @@
         <!-- Style for the "Try Again" button. -->
         <Style x:Key="TryAgainButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="0,12" />
+            <Setter Property="Padding" Value="24,0" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="{StaticResource ApricotFontPrimaryBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource ApricotFontPrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -101,7 +103,7 @@
 
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+            <core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
@@ -113,7 +115,7 @@
                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam convallis."
                        Foreground="{StaticResource ApricotFontPrimaryBrush}"
                        TextAlignment="Center" />
-            <Button x:Uid="TryAgain" Style="{StaticResource TryAgainButtonStyle}" Command="{Binding Model.RetryCommand}" Content="Aenean interdum" />
+            <Button x:Uid="TryAgain" Style="{StaticResource TryAgainButtonStyle}" Command="{Binding RetryCommand}" Content="Aenean interdum" />
         </StackPanel>
     </Grid>
 </Page>

@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.ViewModels
@@ -29,6 +30,22 @@ namespace Apricot.Shared.ViewModels
         #endregion Members.
 
         #region Properties.
+
+        #region Commands.
+
+        /// <summary>
+        ///     Get or sets a command for OnLoaded event.
+        /// </summary>
+        /// <value>The command for OnLoaded event</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Get or sets a command for retry connection to server.
+        /// </summary>
+        /// <value>The command for retry connection to server</value>
+        public ICommand RetryCommand { get; set; }
+
+        #endregion Commands.
 
         /// <summary>
         ///     Gets the model.
@@ -55,11 +72,9 @@ namespace Apricot.Shared.ViewModels
                 _serverService = new ServerService();
 
                 // Initialize properties.
-                Model = new MainModel
-                {
-                    OnLoadedCommand = new RelayCommand(_OnLoadedAsync),
-                    RetryCommand = new RelayCommand(_TestServerConnectionAsync)
-                };
+                Model = new MainModel();
+                OnLoadedCommand = new RelayCommand(_OnLoadedAsync);
+                RetryCommand = new RelayCommand(_TestServerConnectionAsync);
             }
         }
 
