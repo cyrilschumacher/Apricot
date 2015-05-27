@@ -1,17 +1,17 @@
 ﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
+using Apricot.Shared.Models.Messages;
 using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using System;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Apricot.Shared.Models.Messages;
-using GalaSoft.MvvmLight.Views;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -155,7 +155,6 @@ namespace Apricot.Shared.ViewModels
             // Loads the details of plant, the latest measure and the measures.
             _LoadDetailsAsync();
             _LoadLatestMeasureAsync();
-            _LoadMeasuresAsync();
 
             // Reloads the latest measure by a duration.
             _realTimeMeasureTimer.Start();
@@ -186,7 +185,7 @@ namespace Apricot.Shared.ViewModels
         #endregion Events.
 
         /// <summary>
-        ///
+        ///     Adds a photo.
         /// </summary>
         private async void _AddPhoto(string photo)
         {
@@ -212,15 +211,6 @@ namespace Apricot.Shared.ViewModels
         private async void _LoadLatestMeasureAsync()
         {
             Model.LatestMeasure = await _measureService.GetLast(Model.Identifier);
-        }
-
-        /// <summary>
-        ///     Loads the measures.
-        /// </summary>
-        private async void _LoadMeasuresAsync()
-        {
-            //todo: Change "numberHour" parameter.
-            Model.Measures = await _measureService.GetAll(Model.Identifier, 1);
         }
 
         /// <summary>
@@ -250,7 +240,7 @@ namespace Apricot.Shared.ViewModels
         private void _GoToMeasureChart(string measureName)
         {
             _navigationService.NavigateTo("MeasureChart");
-            MessengerInstance.Send(new MeasureMessageModel{Measures = Model.Measures, Name = measureName});
+            MessengerInstance.Send(new MeasureMessageModel { Name = measureName, PlantIdentifier = Model.Identifier });
         }
 
         /// <summary>

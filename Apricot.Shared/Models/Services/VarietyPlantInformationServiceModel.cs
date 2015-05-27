@@ -11,7 +11,7 @@ namespace Apricot.Shared.Models.Services
         ///     Gets or sets a plant identifier.
         /// </summary>
         [JsonProperty("idTypePlant")]
-        public string Id { get; set; }
+        public int Identifier { get; set; }
 
         /// <summary>
         ///     Gets or sets a plant name.

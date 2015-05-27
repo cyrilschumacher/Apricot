@@ -5,18 +5,44 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding MeasureChart, Source={StaticResource Locator}}"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MeasureChartSampleData}">
+
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+        </core:EventTriggerBehavior>
+        <core:EventTriggerBehavior EventName="Unloaded">
+            <core:InvokeCommandAction Command="{Binding Model.OnUnloadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Grid Margin="19">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <TextBlock x:Uid="CreateNewPlant" Text="Etiam vulputate purus tortor"
                    Style="{ThemeResource HeaderTextBlockStyle}" />
-        
-        <chart:Chart Height="650">
-            <chart:LineSeries x:Uid="TemperatureGraph"
-                                          DependentValuePath="Temperature"
-                                          IndependentValuePath="Date"
-                                          ItemsSource="{Binding Model.Measures}" />
-        </chart:Chart>
+
+        <StackPanel Grid.Row="1">
+            <Slider Minimum="1" Maximum="72" LargeChange="6" Value="{Binding Model.Hours, Mode=TwoWay}" TickFrequency="1000">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="ValueChanged">
+                        <core:InvokeCommandAction Command="{Binding Model.RefreshHoursCommand}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </Slider>
+            <chart:Chart Height="450">
+                <chart:LineSeries Title="{Binding Model.Name}"
+                                  IndependentValuePath="X"
+                                  DependentValuePath="Y"
+                                  ItemsSource="{Binding Model.Measures}" />
+            </chart:Chart>
+        </StackPanel>
     </Grid>
 </Page>

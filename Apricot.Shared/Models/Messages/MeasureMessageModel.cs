@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Apricot.Shared.Models.Services;
-
-namespace Apricot.Shared.Models.Messages
+﻿namespace Apricot.Shared.Models.Messages
 {
     /// <summary>
     ///     Model for send a message containing the measures and its name.
@@ -11,10 +8,9 @@ namespace Apricot.Shared.Models.Messages
         #region Properties.
 
         /// <summary>
-        ///     Gets or sets measures.
+        ///     Gets or sets a plant identifier.
         /// </summary>
-        /// <value>The measures.</value>
-        public IList<MeasureServiceModel> Measures { get; set; } 
+        public int PlantIdentifier { get; set; }
 
         /// <summary>
         ///     Gets or sets a name.

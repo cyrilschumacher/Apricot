@@ -73,8 +73,11 @@
             <StackPanel>
                 <TextBlock Text="{Binding Model.LatestMeasure.Date, Converter={StaticResource TimeStampToDateTimeConverter}}" />
                 <TextBlock Text="{Binding Model.LatestMeasure.Humidity}" />
+                <Button Content="Go Chart" Command="{Binding Model.GoToChartPageCommand}" CommandParameter="Humidity"/>
                 <TextBlock Text="{Binding Model.LatestMeasure.Luminosity}" />
+                <Button Content="Go Chart" Command="{Binding Model.GoToChartPageCommand}" CommandParameter="Luminosity"/>
                 <TextBlock Text="{Binding Model.LatestMeasure.Temperature}" />
+                <Button Content="Go Chart" Command="{Binding Model.GoToChartPageCommand}" CommandParameter="Temperature"/>
             </StackPanel>
         </PivotItem>
     </Pivot>

@@ -83,10 +83,12 @@
     <Compile Include="Extensions\BitmapImageExtensions.cs" />
     <Compile Include="Extensions\IRandomAccessStreamExtensions.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\Messages\MeasureMessageModel.cs" />
+    <Compile Include="Models\Services\AllMeasuresServiceModel.cs" />
     <Compile Include="Models\ViewModels\MainModel.cs" />
     <Compile Include="Models\ViewModels\CreatePlantModel.cs" />
     <Compile Include="Models\ViewModels\MeasureChartModel.cs" />

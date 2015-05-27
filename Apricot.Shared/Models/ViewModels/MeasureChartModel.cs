@@ -1,10 +1,11 @@
-﻿using Apricot.Shared.Models.Services;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
+    ///     Model for shows measure name and the measures.
     /// </summary>
     public class MeasureChartModel : NotifyPropertyChanged
     {
@@ -13,12 +14,17 @@ namespace Apricot.Shared.Models.ViewModels
         /// <summary>
         ///     Measures.
         /// </summary>
-        private IList<MeasureServiceModel> _measures;
+        private IEnumerable<Object> _measures;
 
         /// <summary>
         ///     Measure name.
         /// </summary>
         private string _name;
+
+        /// <summary>
+        ///     Hours.
+        /// </summary>
+        private int _hours;
 
         #endregion Members.
 
@@ -27,10 +33,22 @@ namespace Apricot.Shared.Models.ViewModels
         #region Commands.
 
         /// <summary>
-        ///     Gets or set a command for OnLoaded event.
+        ///     Gets or sets a command for <code>OnLoaded</code> event.
         /// </summary>
-        /// <value>The command for OnLoaded event.</value>
+        /// <value>The command for <code>OnLoaded</code> event.</value>
         public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for <code>OnUnloaded</code> event.
+        /// </summary>
+        /// <value>The command for <code>OnUnloaded</code> event.</value>
+        public ICommand OnUnloadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for refresh hours.
+        /// </summary>
+        /// <value>The command for refresh hours.</value>
+        public ICommand RefreshHoursCommand { get; set; }
 
         #endregion Commands.
 
@@ -38,7 +56,7 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Gets or sets a measures.
         /// </summary>
         /// <value>The measures.</value>
-        public IList<MeasureServiceModel> Measures
+        public IEnumerable<Object> Measures
         {
             get
             {
@@ -63,6 +81,22 @@ namespace Apricot.Shared.Models.ViewModels
             set
             {
                 SetValueProperty(ref _name, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets hours.
+        /// </summary>
+        /// <value>The hours.</value>
+        public int Hours
+        {
+            get
+            {
+                return _hours;
+            }
+            set
+            {
+                SetValueProperty(ref _hours, value);
             }
         }
 

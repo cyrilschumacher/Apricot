@@ -100,6 +100,7 @@ namespace Apricot
             SimpleIoc.Default.Register(_InitializeNavigationService);
             SimpleIoc.Default.Register<CreatePlantViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<MeasureChartViewModel>();
             SimpleIoc.Default.Register<PlantViewModel>();
             SimpleIoc.Default.Register<PlantChooserViewModel>();
         }

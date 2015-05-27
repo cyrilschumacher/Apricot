@@ -5,6 +5,7 @@ using Apricot.Shared.Models.Services;
 namespace Apricot.Shared.Services.Apricot
 {
     /// <summary>
+    ///     Service for manage measures.
     /// </summary>
     public class MeasureService : AbstractApricotService
     {
@@ -41,10 +42,10 @@ namespace Apricot.Shared.Services.Apricot
         /// <param name="plantIdentifier">The plant identifier.</param>
         /// <param name="numberHours">The number of hours.</param>
         /// <returns>The all measures.</returns>
-        public async Task<List<MeasureServiceModel>> GetAll(int plantIdentifier, int numberHours)
+        public async Task<List<AllMeasuresServiceModel>> GetAll(int plantIdentifier, int numberHours)
         {
             var serviceUri = string.Format(AllMeasureServiceName, plantIdentifier, numberHours);
-            return await GetAsync<List<MeasureServiceModel>>(serviceUri);
+            return await GetAsync<List<AllMeasuresServiceModel>>(serviceUri);
         }
 
         #endregion Methods.
