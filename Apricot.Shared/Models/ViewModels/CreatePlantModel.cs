@@ -20,6 +20,11 @@ namespace Apricot.Shared.Models.ViewModels
         private string _name;
 
         /// <summary>
+        ///     Photo.
+        /// </summary>
+        private PlantPhotoModel _photo;
+
+        /// <summary>
         ///     Selected device.
         /// </summary>
         private DeviceModel _selectedDevice;
@@ -28,11 +33,6 @@ namespace Apricot.Shared.Models.ViewModels
         ///     Selected variety.
         /// </summary>
         private VarietyPlantServiceModel _selectedVariety;
-
-        /// <summary>
-        ///     Selected photo index.
-        /// </summary>
-        private int _selectedPhotoIndex;
 
         #endregion Members.
 
@@ -110,10 +110,20 @@ namespace Apricot.Shared.Models.ViewModels
         }
 
         /// <summary>
-        ///     Gets or sets a photos.
+        ///     Gets or sets a photo.
         /// </summary>
-        /// <value>The photos.</value>
-        public ObservableCollection<PlantPhotoModel> Photos { get; set; }
+        /// <value>The photo.</value>
+        public PlantPhotoModel Photo
+        {
+            get
+            {
+                return _photo;
+            }
+            set
+            {
+                SetValueProperty(ref _photo, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a plant varieties.
@@ -137,22 +147,6 @@ namespace Apricot.Shared.Models.ViewModels
             }
         }
 
-        /// <summary>
-        ///     Gets or sets a selected photo index.
-        /// </summary>
-        /// <value>The selected photo index.</value>
-        public int SelectedPhotoIndex
-        {
-            get
-            {
-                return _selectedPhotoIndex;
-            }
-            set
-            {
-                SetValueProperty(ref _selectedPhotoIndex, value);
-            }
-        }
-
         #endregion Properties.
 
         #region Constructor.
@@ -167,8 +161,7 @@ namespace Apricot.Shared.Models.ViewModels
                 new DeviceModel {Identifier = "ARD1", Name = "Arduino 1"},
                 new DeviceModel {Identifier = "ARD2", Name = "Arduino 2"},
             };
-            Photos = new ObservableCollection<PlantPhotoModel>();
-            SelectedPhotoIndex = -1;
+            Photo = new PlantPhotoModel();
             Varieties = new ObservableCollection<VarietyPlantServiceModel>();
         }
 

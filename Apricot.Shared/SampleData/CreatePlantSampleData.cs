@@ -43,7 +43,6 @@ namespace Apricot.Shared.SampleData
             Model = new CreatePlantModel
             {
                 Name = "Etiam vulputate purus",
-                Photos = new ObservableCollection<PlantPhotoModel>(),
                 Varieties = new ObservableCollection<VarietyPlantServiceModel>
                 {
                     new VarietyPlantServiceModel {Id = 0, Name = "velit et"},
@@ -52,8 +51,8 @@ namespace Apricot.Shared.SampleData
                 }
             };
 
-            // Initialize photos.
-            _InitializeFakePhotos();
+            // Initialize photo.
+            _InitializeFakePhoto();
         }
 
         #endregion Constructor.
@@ -63,13 +62,10 @@ namespace Apricot.Shared.SampleData
         /// <summary>
         ///     Initialize fake photos.
         /// </summary>
-        private async void _InitializeFakePhotos()
+        private async void _InitializeFakePhoto()
         {
-            for (var i = 0; i < 9; i++)
-            {
-                var photo = await BitmapImageExtensions.FromBase64(FakePhotoBase64Data);
-                Model.Photos.Add(new PlantPhotoModel { Image = photo });
-            }
+            var photo = await BitmapImageExtensions.FromBase64(FakePhotoBase64Data);
+            Model.Photo = new PlantPhotoModel { Image = photo };
         }
 
         #endregion Methods.

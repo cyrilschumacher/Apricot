@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Windows.ApplicationModel.Activation;
@@ -31,14 +32,9 @@ namespace Apricot.Shared.ViewModels
         #region Constants.
 
         /// <summary>
-        ///     Maximum number of photos allowed.
-        /// </summary>
-        private const int MaximumPhoto = 1;
-
-        /// <summary>
         ///     Maximum width of the image.
         /// </summary>
-        private const int MaximumWidthImage = 500;
+        private const int MaximumWidthImage = 200;
 
         #endregion Constants.
 
@@ -174,11 +170,9 @@ namespace Apricot.Shared.ViewModels
             var fileOpenPickerEventArgs = e as FileOpenPickerContinuationEventArgs;
             if ((fileOpenPickerEventArgs != null) && (fileOpenPickerEventArgs.Files.Count > 0))
             {
-                // Obtains photo.
-                foreach (var file in fileOpenPickerEventArgs.Files.Where(file => Model.Photos.Count < MaximumPhoto))
-                {
-                    _AddPhotoAsync(file);
-                }
+                // Obtains photo and adds its.
+                var file = fileOpenPickerEventArgs.Files.First();
+                _AddPhotoAsync(file);
             }
         }
 
@@ -215,7 +209,7 @@ namespace Apricot.Shared.ViewModels
             inMemory.Seek(0);
             var base64Data = await inMemory.ToBase64();
 
-            Model.Photos.Add(new PlantPhotoModel {Image = photo, Base64Data = base64Data});
+            Model.Photo = new PlantPhotoModel {Image = photo, Base64Data = base64Data};
         }
 
         /// <summary>
@@ -224,7 +218,8 @@ namespace Apricot.Shared.ViewModels
         private async void _CreateNewPlantAsync()
         {
             // Obtains, only, the photos in Base64 format.
-            var photos = Model.Photos.Select(p => p.Base64Data);
+            var photoList = new List<PlantPhotoModel> {Model.Photo};
+            var photos = photoList.Select(photo => photo.Base64Data);
 
             try
             {
@@ -272,7 +267,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _RemovePhoto()
         {
-            Model.Photos.RemoveAt(Model.SelectedPhotoIndex);
+            Model.Photo = null;
         }
 
         /// <summary>

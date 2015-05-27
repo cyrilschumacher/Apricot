@@ -120,8 +120,8 @@
   <data name="Active.Text" xml:space="preserve">
     <value>ACTIVE</value>
   </data>
-  <data name="CreateNewPlant.Text" xml:space="preserve">
-    <value>Create new plant</value>
+  <data name="CreateNewPlant.Header" xml:space="preserve">
+    <value>New plant</value>
   </data>
   <data name="Delete.Label" xml:space="preserve">
     <value>Delete</value>
@@ -147,17 +147,14 @@
   <data name="LuminosityGraph.Title" xml:space="preserve">
     <value>Luminosity</value>
   </data>
-  <data name="MyGarden.Title" xml:space="preserve">
-    <value>MY GARDEN</value>
-  </data>
   <data name="New.Label" xml:space="preserve">
     <value>New</value>
   </data>
   <data name="NoCommunicationEstablished.Text" xml:space="preserve">
     <value>No communication is established with the server.</value>
   </data>
-  <data name="Photos.Text" xml:space="preserve">
-    <value>Photos</value>
+  <data name="Photo.Text" xml:space="preserve">
+    <value>Photo</value>
   </data>
   <data name="Plant.Header" xml:space="preserve">
     <value>Plant</value>
@@ -185,5 +182,11 @@
   </data>
   <data name="NoPlantFavorites.Text" xml:space="preserve">
     <value>No plants have been added to favorites.</value>
+  </data>
+  <data name="AddPlantPhoto.Text" xml:space="preserve">
+    <value>Add a photo of your plant.</value>
+  </data>
+  <data name="MyGarden.Title" xml:space="preserve">
+    <value>MY GARDEN</value>
   </data>
 </root>
