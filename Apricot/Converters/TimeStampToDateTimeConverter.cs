@@ -40,8 +40,12 @@ namespace Apricot.Converters
             var baseDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             var newValue = baseDateTime.AddSeconds(timeStamp);
 
+            // Defines a default format if no format is specified.
             var parameterString = parameter as string;
             var format = parameterString ?? DefaultFormat;
+
+            // If no language is defined, we take the language of the UI.
+            language = string.IsNullOrEmpty(language) ? CultureInfo.CurrentUICulture.Name : language;
 
             return newValue.ToString(format, new CultureInfo(language));
         }
