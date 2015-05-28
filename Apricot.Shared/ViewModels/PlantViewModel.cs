@@ -264,7 +264,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _GoToVarietyInformationPage()
         {
-            _navigationService.NavigateTo("VarietyInformation");
+            _navigationService.NavigateTo("VarietyDetails");
             MessengerInstance.Send(Model.Details.Variety);
         }
 

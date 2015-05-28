@@ -34,7 +34,7 @@ namespace Apricot.Shared.ViewModels
         #region Commands.
 
         /// <summary>
-        ///     Get or sets a command for OnLoaded event.
+        ///     Get or sets a command for <code>OnLoaded</code> event.
         /// </summary>
         /// <value>The command for OnLoaded event</value>
         public ICommand OnLoadedCommand { get; set; }

@@ -112,8 +112,8 @@
     <Compile Include="Views\PlantPage.xaml.cs">
       <DependentUpon>PlantPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\VarietyInformationPage.xaml.cs">
-      <DependentUpon>VarietyInformationPage.xaml</DependentUpon>
+    <Compile Include="Views\VarietyDetailsPage.xaml.cs">
+      <DependentUpon>VarietyDetailsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +151,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\VarietyInformationPage.xaml">
+    <Page Include="Views\VarietyDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,7 +14,7 @@ namespace Apricot.Shared.SampleData
         ///     Gets or sets a model.
         /// </summary>
         /// <value>The model.</value>
-        public VarietyInformationModel Model { get; set; }
+        public VarietyDetailsModel Model { get; set; }
 
         #endregion Properties.
 
@@ -25,9 +25,9 @@ namespace Apricot.Shared.SampleData
         /// </summary>
         public VarietyInformationSampleData()
         {
-            Model = new VarietyInformationModel
+            Model = new VarietyDetailsModel
             {
-                Information = new VarietyDetailsServiceModel
+                Details = new VarietyDetailsServiceModel
                 {
                     Identifier = 0,
                     MaximumHumidity = 10,

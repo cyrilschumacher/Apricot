@@ -1,4 +1,5 @@
-﻿using Apricot.Shared.Models.ViewModels;
+﻿using System.Windows.Input;
+using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -11,7 +12,7 @@ namespace Apricot.Shared.ViewModels
     /// <summary>
     ///     View model for shows information of variety of a plant.
     /// </summary>
-    public class VarietyInformationViewModel : ViewModelBase
+    public class VarietyDetailsViewModel : ViewModelBase
     {
         #region Members.
 
@@ -24,11 +25,27 @@ namespace Apricot.Shared.ViewModels
 
         #region Properties.
 
+        #region Commands.
+
+        /// <summary>
+        ///     Get or sets a command for <code>OnLoaded</code> event.
+        /// </summary>
+        /// <value>The command for OnLoaded event</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Get or sets a command for <code>OnUnloaded</code> event.
+        /// </summary>
+        /// <value>The command for OnUnloaded event</value>
+        public ICommand OnUnloadedCommand { get; set; }
+
+        #endregion Commands.
+
         /// <summary>
         ///     Gets or sets a model.
         /// </summary>
         /// <value>The model.</value>
-        public VarietyInformationModel Model { get; set; }
+        public VarietyDetailsModel Model { get; set; }
 
         #endregion Properties.
 
@@ -37,7 +54,7 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public VarietyInformationViewModel()
+        public VarietyDetailsViewModel()
         {
             // Don't execute the following code in design mode.
             // This condition avoids this error: "Object reference not set to an instance of an object" during
@@ -48,10 +65,9 @@ namespace Apricot.Shared.ViewModels
                 _varietyPlantService = new VarietyPlantService();
 
                 // Initialize properties.
-                Model = new VarietyInformationModel
-                {
-                    OnUnloadedCommand = new RelayCommand(_OnUnloaded)
-                };
+                Model = new VarietyDetailsModel();
+                OnLoadedCommand = new RelayCommand(_OnLoaded);
+                OnUnloadedCommand = new RelayCommand(_OnUnloaded);
 
                 // Register messengers.
                 MessengerInstance.Register<int>(this, _OnPlantIdentifierMessage);
@@ -83,12 +99,21 @@ namespace Apricot.Shared.ViewModels
         }
 
         /// <summary>
+        ///     Raises the Loaded event.
+        /// </summary>
+        private void _OnLoaded()
+        {
+            // Initializes events.
+            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+        }
+
+        /// <summary>
         ///     Raises the Unloaded event.
         /// </summary>
         private void _OnUnloaded()
         {
-            // Initializes events.
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+            // Removes events.
+            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
         }
 
         /// <summary>
@@ -108,7 +133,8 @@ namespace Apricot.Shared.ViewModels
         /// <param name="varietyIdentifier">The variety identifier.</param>
         private async void _LoadVarietyInformationAsync(int varietyIdentifier)
         {
-            Model.Information = await _varietyPlantService.GetVarietyDetails(varietyIdentifier);
+            Model.Details = await _varietyPlantService.GetVarietyDetails(varietyIdentifier);
+            var a = 0;
         }
 
         #endregion Methods.

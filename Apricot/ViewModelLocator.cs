@@ -79,11 +79,11 @@ namespace Apricot
         ///     Gets the view model for shows the variety information.
         /// </summary>
         /// <value>The view model.</value>
-        public VarietyInformationViewModel VarietyInformation
+        public VarietyDetailsViewModel VarietyDetails
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<VarietyInformationViewModel>();
+                return ServiceLocator.Current.GetInstance<VarietyDetailsViewModel>();
             }
         }
 
@@ -104,7 +104,7 @@ namespace Apricot
             SimpleIoc.Default.Register<MeasureChartViewModel>();
             SimpleIoc.Default.Register<PlantViewModel>();
             SimpleIoc.Default.Register<PlantChooserViewModel>();
-            SimpleIoc.Default.Register<VarietyInformationViewModel>();
+            SimpleIoc.Default.Register<VarietyDetailsViewModel>();
         }
 
         #endregion Constructors.
@@ -121,7 +121,7 @@ namespace Apricot
             navigationService.Configure("MeasureChart", typeof(MeasureChartPage));
             navigationService.Configure("Plant", typeof(PlantPage));
             navigationService.Configure("PlantChooser", typeof(PlantChooserPage));
-            navigationService.Configure("VarietyInformation", typeof(VarietyInformationPage));
+            navigationService.Configure("VarietyDetails", typeof(VarietyDetailsPage));
 
             return navigationService;
         }

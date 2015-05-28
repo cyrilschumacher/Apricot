@@ -7,8 +7,8 @@
     xmlns:chart="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:converters="using:Apricot.Converters"
     xmlns:sampleData="using:Apricot.Shared.SampleData"
+    xmlns:dataVisualization="using:WinRTXamlToolkit.Controls.DataVisualization"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding MeasureChart, Source={StaticResource Locator}}"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MeasureChartSampleData}">
@@ -23,8 +23,7 @@
     </interactivity:Interaction.Behaviors>
 
     <Page.Resources>
-        <!-- Converters. -->
-        <converters:StringFormatConverter x:Key="StringFormatConverter" />
+        <!-- Styles. -->
         <SolidColorBrush x:Key="SliderBorderThemeBrush" Color="Transparent" />
         <Thickness x:Key="SliderBorderThemeThickness">0</Thickness>
         <FontFamily x:Key="ContentControlThemeFontFamily">Segoe WP</FontFamily>
@@ -178,25 +177,51 @@
                     <chart:Chart.Series>
                         <chart:LineSeries IndependentValuePath="X"
                                           DependentValuePath="Y"
-                                          ItemsSource="{Binding Model.Measures}" />
+                                          ItemsSource="{Binding Model.Measures}" IsSelectionEnabled="True">
+                            <chart:LineSeries.DataPointStyle>
+                                <Style TargetType="chart:LineDataPoint">
+                                    <Setter Property="Background" Value="#DDDDDD"/>
+                                    <Setter Property="Width" Value="8" />
+                                    <Setter Property="Height" Value="8" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="chart:LineDataPoint">
+                                                <Rectangle Fill="{StaticResource ApricotPrimaryBrush}" />
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </chart:LineSeries.DataPointStyle>
+                        </chart:LineSeries>
                     </chart:Chart.Series>
-                    <chart:Chart.Palette>
-                        <chart:ResourceDictionaryCollection>
-                            <!-- Blue -->
-                            <ResourceDictionary>
-                                <SolidColorBrush x:Key="Background" Color="Red" />
-                                <Style x:Key="DataPointStyle" TargetType="Control">
-                                    <Setter Property="Background" Value="Blue" />
-                                </Style>
-                                <Style x:Key="DataShapeStyle" TargetType="Shape">
-                                    <Setter Property="Stroke" Value="{StaticResource Background}" />
-                                    <Setter Property="StrokeThickness" Value="2" />
-                                    <Setter Property="StrokeMiterLimit" Value="1" />
-                                    <Setter Property="Fill" Value="{StaticResource Background}" />
-                                </Style>
-                            </ResourceDictionary>
-                        </chart:ResourceDictionaryCollection>
-                    </chart:Chart.Palette>
+                    <chart:Chart.LegendStyle>
+                        <Style TargetType="dataVisualization:Legend">
+                            <Setter Property="VerticalAlignment" Value="Bottom" />
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Margin" Value="0,0,0,0" />
+                            <Setter Property="TitleStyle">
+                                <Setter.Value>
+                                    <Style TargetType="dataVisualization:Title">
+                                        <Setter Property="Margin" Value="0,0,0,0" />
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="ItemContainerStyle">
+                                <Setter.Value>
+                                    <Style TargetType="chart:LegendItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="chart:LegendItem">
+                                                    <ContentPresenter Visibility="Collapsed"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </chart:Chart.LegendStyle>
                 </chart:Chart>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>

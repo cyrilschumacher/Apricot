@@ -204,4 +204,7 @@
   <data name="HumberHours.Text" xml:space="preserve">
     <value>Number of hours</value>
   </data>
+  <data name="Variety.Title" xml:space="preserve">
+    <value>VARIETY</value>
+  </data>
 </root>
