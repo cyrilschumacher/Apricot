@@ -6,7 +6,7 @@ namespace Apricot.Shared.SampleData
     /// <summary>
     ///     Fake view model for shows variety information.
     /// </summary>
-    public class VarietyInformationSampleData
+    public class VarietyDetailsSampleData
     {
         #region Properties.
 
@@ -23,7 +23,7 @@ namespace Apricot.Shared.SampleData
         /// <summary>
         ///     Constructor.
         /// </summary>
-        public VarietyInformationSampleData()
+        public VarietyDetailsSampleData()
         {
             Model = new VarietyDetailsModel
             {

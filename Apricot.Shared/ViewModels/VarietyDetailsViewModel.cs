@@ -134,7 +134,6 @@ namespace Apricot.Shared.ViewModels
         private async void _LoadVarietyInformationAsync(int varietyIdentifier)
         {
             Model.Details = await _varietyPlantService.GetVarietyDetails(varietyIdentifier);
-            var a = 0;
         }
 
         #endregion Methods.

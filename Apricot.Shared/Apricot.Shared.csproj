@@ -111,7 +111,7 @@
     <Compile Include="SampleData\PlantChooserSampleData.cs" />
     <Compile Include="SampleData\PlantSampleData.cs" />
     <Compile Include="SampleData\MeasureChartSampleData.cs" />
-    <Compile Include="SampleData\VarietyInformationSampleData.cs" />
+    <Compile Include="SampleData\VarietyDetailsSampleData.cs" />
     <Compile Include="Services\Apricot\AbstractApricotService.cs" />
     <Compile Include="Services\Apricot\MeasureService.cs" />
     <Compile Include="Services\Apricot\PlantService.cs" />

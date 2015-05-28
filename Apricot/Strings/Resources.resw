@@ -207,4 +207,13 @@
   <data name="Variety.Title" xml:space="preserve">
     <value>VARIETY</value>
   </data>
+  <data name="Humidity.Text" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
+  <data name="Maximum.Text" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Minimum.Text" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
 </root>

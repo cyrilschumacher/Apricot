@@ -149,7 +149,7 @@
 		</Pivot.TitleTemplate>
 		<PivotItem x:Uid="Summary"  Header="Volutpat">
 			<StackPanel>
-				<Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200" />
+				<Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200" Stretch="Fill" />
 				<TextBlock Text="{Binding Model.Name}" />
 			</StackPanel>
 		</PivotItem>
@@ -201,10 +201,10 @@
 										   Text="Consequat" />
 							</StackPanel>
 							<TextBlock Grid.Column="2"
-									Foreground="LightGray"
-									FontFamily="Segoe UI Symbol"
-									FontSize="36"
-									VerticalAlignment="Center" TextAlignment="Right" Text="&#xE2A9;"/>
+									   Foreground="LightGray"
+									   FontFamily="Segoe UI Symbol"
+									   FontSize="36"
+									   VerticalAlignment="Center" TextAlignment="Right" Text="&#xE2A9;"/>
 						</Grid>
 					</Button.Content>
 				</Button>
@@ -285,11 +285,11 @@
 					</Button.Content>
 				</Button>
 
+				<!-- Date. -->
 				<StackPanel Margin="12,0">
 					<TextBlock x:Uid="LastDateMeasure" Text="Praesent sit amet"/>
 					<TextBlock FontWeight="Bold" Text="{Binding Model.LatestMeasure.Date, Converter={StaticResource TimeStampToDateTimeConverter}}" />
 				</StackPanel>
-
 			</StackPanel>
 		</PivotItem>
 	</Pivot>

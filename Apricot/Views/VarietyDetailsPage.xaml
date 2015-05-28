@@ -9,7 +9,7 @@
 	xmlns:sampleData="using:Apricot.Shared.SampleData"
 	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
 	DataContext="{Binding VarietyDetails, Source={StaticResource Locator}}"
-	mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:VarietyInformationSampleData}">
+	mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:VarietyDetailsSampleData}">
 
 	<interactivity:Interaction.Behaviors>
 		<core:EventTriggerBehavior EventName="Loaded">
@@ -30,11 +30,85 @@
 			</DataTemplate>
 		</Pivot.TitleTemplate>
 		<PivotItem Header="{Binding Model.Details.Name}">
+				<!-- Temperature. -->
 			<StackPanel>
-				<TextBlock Text="{Binding Model.Details.MinimumHumidity}" />
-				<TextBlock Text="{Binding Model.Details.MaximumHumidity}" />
-				<TextBlock Text="{Binding Model.Details.MinimumTemperature}" />
-				<TextBlock Text="{Binding Model.Details.MaximumTemperature}" />
+				<TextBlock Style="{StaticResource SubheaderTextBlockStyle}" 
+							   x:Uid="Temperature"
+							   Text="Maecenas ullamcorper"/>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<StackPanel>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" 
+									   FontSize="52" 
+									   Text="{Binding Model.Details.MinimumTemperature}" />
+							<TextBlock Grid.Column="1" 
+									   Foreground="{StaticResource ApricotPrimaryBrush}"
+									   FontSize="24"
+									   Text="°c" 
+									   VerticalAlignment="Top" />
+						</Grid>
+						<TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}"  
+								   x:Uid="Minimum"
+								   Margin="0,-12,0,0"
+								   Text="Maecenas at"/>
+					</StackPanel>
+					<StackPanel Grid.Column="1">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" 
+									   FontSize="52" 
+									   Text="{Binding Model.Details.MaximumTemperature}" />
+							<TextBlock Grid.Column="1" 
+									   Foreground="{StaticResource ApricotPrimaryBrush}"
+									   FontSize="24"
+									   Text="°c" 
+									   VerticalAlignment="Top" />
+						</Grid>
+						<TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}" 
+								   x:Uid="Maximum"
+								   Margin="0,-12,0,0"
+								   Text="Proin ultricies "/>
+					</StackPanel>
+				</Grid>
+				<TextBlock Style="{StaticResource SubheaderTextBlockStyle}" 
+						   x:Uid="Humidity"
+						   Margin="0,12,0,0"
+						   Text="Phasellus at interdum"/>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<StackPanel>
+						<TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" 
+								   FontSize="52" 
+								   Text="{Binding Model.Details.MinimumHumidity}" />
+						<TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}"
+								   x:Uid="Minimum"
+								   Margin="0,-12,0,0"
+								   Text="Maecenas at"/>
+					</StackPanel>
+					<StackPanel Grid.Column="1">
+						<TextBlock Foreground="{StaticResource ApricotPrimaryBrush}" 
+									   FontSize="52" 
+									   Text="{Binding Model.Details.MaximumHumidity}" />
+						<TextBlock Style="{StaticResource ControlHeaderTextBlockStyle}" 
+								   x:Uid="Maximum"
+								   Margin="0,-12,0,0"
+								   Text="Proin ultricies "/>
+					</StackPanel>
+				</Grid>
 			</StackPanel>
 		</PivotItem>
 	</Pivot>
