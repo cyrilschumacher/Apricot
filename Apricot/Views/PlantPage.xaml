@@ -20,6 +20,7 @@
 		<convertersApricot:StringFormatConverter x:Key="StringFormatConverter" />
 		<convertersApricot:TimeStampToDateTimeConverter x:Key="TimeStampToDateTimeConverter" />
 		<convertersApricot:TextUpperConverter x:Key="TextUpperConverter" />
+		<convertersApricot:TimespanConverter x:Key="TimespanConverter" />
 		
 		<!-- Styles. -->
 		<!-- For measure buttons. -->
@@ -107,6 +108,26 @@
 		<core:EventTriggerBehavior EventName="Unloaded">
 			<core:InvokeCommandAction Command="{Binding Model.OnUnloadedCommand}" />
 		</core:EventTriggerBehavior>
+		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
+			<core:ChangePropertyAction TargetObject="{Binding ElementName=GoodTemperatureTextBlock}" PropertyName="Visibility">
+				<core:ChangePropertyAction.Value>
+					<Visibility>Visible</Visibility>
+				</core:ChangePropertyAction.Value>
+			</core:ChangePropertyAction>
+		</core:DataTriggerBehavior>
+		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
+			<core:ChangePropertyAction TargetObject="{Binding ElementName=BadTemperatureTextBlock}" PropertyName="Visibility">
+				<core:ChangePropertyAction.Value>
+					<Visibility>Visible</Visibility>
+				</core:ChangePropertyAction.Value>
+			</core:ChangePropertyAction>
+		</core:DataTriggerBehavior>
+		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+			<core:ChangePropertyAction TargetObject="GoodHumidityTextBlock" PropertyName="Visibility" Value="Visible"/>
+		</core:DataTriggerBehavior>
+		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+			<core:ChangePropertyAction TargetObject="BadHumidityTextBlock" PropertyName="Visibility" Value="Visible"/>
+		</core:DataTriggerBehavior>
 	</interactivity:Interaction.Behaviors>
 
 	<Page.BottomAppBar>
@@ -147,12 +168,78 @@
 				</StackPanel>
 			</DataTemplate>
 		</Pivot.TitleTemplate>
+		<!-- In summary. -->
 		<PivotItem x:Uid="Summary"  Header="Volutpat">
-			<StackPanel>
-				<Image Source="{Binding Model.Details.Photos[0]}" Height="200" Width="200" Stretch="Fill" />
-				<TextBlock Text="{Binding Model.Name}" />
-			</StackPanel>
+			<ScrollViewer>
+				<StackPanel>
+					<Image Source="{Binding Model.Details.Photos[0]}" Margin="6" Height="175" Stretch="UniformToFill" Visibility="Collapsed">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.Details.Photos.Count}" ComparisonCondition="GreaterThan" Value="0">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+					</Image>
+					<!-- Temperature. -->
+					<TextBlock x:Uid="GoodTemperature" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
+					<TextBlock x:Name="GoodTemperatureTextBlock" x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+					</TextBlock>
+					<TextBlock x:Name="BadTemperatureTextBlock" x:Uid="NoGood" FontSize="48" Foreground="#F44336" Visibility="Collapsed">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+					</TextBlock>
+				
+					<!-- Humidity. -->
+					<TextBlock x:Uid="GoodHumidity" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
+					<TextBlock x:Name="GoodHumidityTextBlock" x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+					</TextBlock>
+					<TextBlock x:Name="BadHumidityTextBlock" x:Uid="NoGood" FontSize="48" Foreground="#F44336" Visibility="Collapsed">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+					</TextBlock>
+
+					<!-- Remaining time. -->
+					<TextBlock x:Uid="RemainingTime" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
+					<TextBlock FontSize="48" Text="{Binding Model.RemainingTime.LeftTime, Converter={StaticResource TimespanConverter}}" />
+				</StackPanel>
+			</ScrollViewer>
 		</PivotItem>
+		<!-- In real time. -->
 		<PivotItem x:Uid="InRealTime" Header="Phasellus">
 			<StackPanel>
 				<!-- Temperature. -->

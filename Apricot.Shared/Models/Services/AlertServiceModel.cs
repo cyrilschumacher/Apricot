@@ -1,23 +1,14 @@
-﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json;
 
 namespace Apricot.Shared.Models.Services
 {
-    /// <summary>
-    ///     Model for the time remaining before watering.
-    /// </summary>
+    //todo: Add documentation.
     public class AlertServiceModel
     {
-        #region Properties.
+        [JsonProperty("isHumidityGood")]
+        public bool Humidity { get; set; }
 
-        /// <summary>
-        ///     Gets or sets a time remaining.
-        /// </summary>
-        [JsonProperty("time")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
-        public DateTime LeftTime { get; set; }
-
-        #endregion Properties.
+        [JsonProperty("isTemperatureGood")]
+        public bool Temperature { get; set; }
     }
 }

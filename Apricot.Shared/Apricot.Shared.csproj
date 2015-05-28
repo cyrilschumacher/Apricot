@@ -88,6 +88,8 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\Messages\MeasureMessageModel.cs" />
+    <Compile Include="Models\Services\AlertServiceModel.cs" />
+    <Compile Include="Models\Services\RemainingTimeServiceModel.cs" />
     <Compile Include="Models\Services\AllMeasuresServiceModel.cs" />
     <Compile Include="Models\ViewModels\MainModel.cs" />
     <Compile Include="Models\ViewModels\CreatePlantModel.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="SampleData\PlantSampleData.cs" />
     <Compile Include="SampleData\MeasureChartSampleData.cs" />
     <Compile Include="SampleData\VarietyDetailsSampleData.cs" />
+    <Compile Include="Services\Apricot\AlertService.cs" />
     <Compile Include="Services\Apricot\AbstractApricotService.cs" />
     <Compile Include="Services\Apricot\MeasureService.cs" />
     <Compile Include="Services\Apricot\PlantService.cs" />

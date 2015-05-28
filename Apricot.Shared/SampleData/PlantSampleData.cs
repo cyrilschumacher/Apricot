@@ -3,7 +3,6 @@ using Apricot.Shared.Models;
 using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
 using System;
-using System.Collections.Generic;
 
 namespace Apricot.Shared.SampleData
 {
@@ -61,6 +60,15 @@ namespace Apricot.Shared.SampleData
                     Date = "123456789",
                     Humidity = 26.945,
                     Luminosity = 436.54
+                },
+                Alert =
+                {
+                    Humidity = true,
+                    Temperature = true
+                },
+                RemainingTime =
+                {
+                    LeftTime = 14204
                 }
             };
 

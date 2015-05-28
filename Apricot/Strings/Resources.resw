@@ -216,4 +216,19 @@
   <data name="Minimum.Text" xml:space="preserve">
     <value>Minimum</value>
   </data>
+  <data name="Good.Text" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="GoodHumidity.Text" xml:space="preserve">
+    <value>Good humidity</value>
+  </data>
+  <data name="GoodTemperature.Text" xml:space="preserve">
+    <value>Good temperature</value>
+  </data>
+  <data name="NoGood.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RemainingTime.Text" xml:space="preserve">
+    <value>Remaining time with next watering</value>
+  </data>
 </root>

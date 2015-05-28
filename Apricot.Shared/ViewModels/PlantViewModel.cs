@@ -32,6 +32,11 @@ namespace Apricot.Shared.ViewModels
         #region Members.
 
         /// <summary>
+        ///     Service for manage alert.
+        /// </summary>
+        private readonly AlertService _alertService;
+
+        /// <summary>
         ///     Service for manage measure.
         /// </summary>
         private readonly MeasureService _measureService;
@@ -81,6 +86,17 @@ namespace Apricot.Shared.ViewModels
             // the visualizing of the XAML code in the design mode.
             if (!IsInDesignMode)
             {
+                // Initialize members.
+                _alertService = new AlertService();
+                _measureService = new MeasureService();
+                _navigationService = navigationService;
+                _plantService = new PlantService();
+                _plantFavoriteService = new PlantFavoriteService();
+                _realTimeMeasureTimer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(LatestMeasureDuration * TimeSpan.TicksPerSecond)
+                };
+
                 // Initialize properties.
                 Model = new PlantModel
                 {
@@ -91,16 +107,6 @@ namespace Apricot.Shared.ViewModels
                     PinCommand = new RelayCommand(_Pin, _PinCanExecute),
                     StopCommand = new RelayCommand(_StopMeasuresAsync, _StopMeasureCanExecute),
                     UnpinCommand = new RelayCommand(_Unpin, _UnpinCanExecute)
-                };
-
-                // Initialize members.
-                _measureService = new MeasureService();
-                _navigationService = navigationService;
-                _plantService = new PlantService();
-                _plantFavoriteService = new PlantFavoriteService();
-                _realTimeMeasureTimer = new DispatcherTimer
-                {
-                    Interval = new TimeSpan(LatestMeasureDuration * TimeSpan.TicksPerSecond)
                 };
 
                 // Register messengers.
@@ -167,6 +173,7 @@ namespace Apricot.Shared.ViewModels
             // Loads the details of plant, the latest measure and the measures.
             _LoadDetailsAsync();
             _LoadLatestMeasureAsync();
+            _LoadAlertAsync();
         }
 
         /// <summary>
@@ -192,6 +199,7 @@ namespace Apricot.Shared.ViewModels
             if (Model.Details != null)
             {
                 _LoadLatestMeasureAsync();
+                _LoadAlertAsync();
             }
         }
 
@@ -221,6 +229,15 @@ namespace Apricot.Shared.ViewModels
                     _AddPhoto(photo);
                 }
             }
+        }
+
+        /// <summary>
+        ///     Loads the 
+        /// </summary>
+        private async void _LoadAlertAsync()
+        {
+            Model.RemainingTime = await _alertService.GetTimeRemainingAsync(Model.Identifier);
+            Model.Alert = await _alertService.GetAlertAsync(Model.Identifier);
         }
 
         /// <summary>

@@ -16,6 +16,14 @@ namespace Apricot.Shared.Models.ViewModels
         #region Members.
 
         /// <summary>
+        ///     Watering alert.
+        /// </summary>
+        private RemainingTimeServiceModel _remainingTime;
+
+        //todo: add documentation.
+        private AlertServiceModel _alert;
+
+        /// <summary>
         ///     Details of the plant.
         /// </summary>
         private PlantDetailsModel _details;
@@ -89,6 +97,35 @@ namespace Apricot.Shared.Models.ViewModels
         public RelayCommand UnpinCommand { get; set; }
 
         #endregion Commands.
+
+        /// <summary>
+        ///     Gets or sets a watering alert.
+        /// </summary>
+        /// <value>The watering alert.</value>
+        public RemainingTimeServiceModel RemainingTime
+        {
+            get
+            {
+                return _remainingTime;
+            }
+            set
+            {
+                SetValueProperty(ref _remainingTime, value);
+            }
+        }
+
+        //todo: Add documentation.
+        public AlertServiceModel Alert
+        {
+            get
+            {
+                return _alert;
+            }
+            set
+            {
+                SetValueProperty(ref _alert, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a plant details.
