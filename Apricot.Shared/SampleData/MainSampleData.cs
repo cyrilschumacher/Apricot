@@ -1,5 +1,4 @@
-﻿using Apricot.Shared.Models;
-using Apricot.Shared.Models.ViewModels;
+﻿using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.SampleData
 {

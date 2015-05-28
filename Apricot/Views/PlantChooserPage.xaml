@@ -36,34 +36,34 @@
 		</CommandBar>
 	</Page.BottomAppBar>
 
-    <Page.Resources>
-        <!-- Converters. -->
-        <converters:InverterBooleanVisibilityConverter x:Key="InverterBooleanVisibilityConverter"/>
+	<Page.Resources>
+		<!-- Converters. -->
+		<converters:InverterBooleanVisibilityConverter x:Key="InverterBooleanVisibilityConverter"/>
 
-        <!-- DateTemplates. -->
-        <DataTemplate x:Key="PlantDataTemplate">
-            <ListViewItem Background="#F5F5F5" HorizontalContentAlignment="Stretch" Margin="0,3">
-                <interactivity:Interaction.Behaviors>
-                    <core:DataTriggerBehavior  Binding="{Binding IsActive}" Value="False">
-                        <core:ChangePropertyAction TargetObject="{Binding ElementName=ActiveBorder}" PropertyName="Visibility" Value="Collapsed" />
-                    </core:DataTriggerBehavior>
-                    <core:DataTriggerBehavior Binding="{Binding IsActive}" Value="True">
-                        <core:ChangePropertyAction TargetObject="{Binding ElementName=InactiveBorder}" PropertyName="Visibility" Value="Collapsed" />
-                    </core:DataTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+		<!-- DateTemplates. -->
+		<DataTemplate x:Key="PlantDataTemplate">
+			<ListViewItem Background="#F5F5F5" HorizontalContentAlignment="Stretch" Margin="0,3">
+				<interactivity:Interaction.Behaviors>
+					<core:DataTriggerBehavior  Binding="{Binding IsActive}" Value="False">
+						<core:ChangePropertyAction TargetObject="{Binding ElementName=ActiveBorder}" PropertyName="Visibility" Value="Collapsed" />
+					</core:DataTriggerBehavior>
+					<core:DataTriggerBehavior Binding="{Binding IsActive}" Value="True">
+						<core:ChangePropertyAction TargetObject="{Binding ElementName=InactiveBorder}" PropertyName="Visibility" Value="Collapsed" />
+					</core:DataTriggerBehavior>
+				</interactivity:Interaction.Behaviors>
 
-                <Grid Margin="12,3" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="4.5*" />
-                        <ColumnDefinition Width="2.5*" />
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="0,0,10,0" VerticalAlignment="Center">
-                        <Border x:Name="ActiveBorder" 
+				<Grid Margin="12,3" HorizontalAlignment="Stretch">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="3*" />
+						<ColumnDefinition Width="4.5*" />
+						<ColumnDefinition Width="2.5*" />
+					</Grid.ColumnDefinitions>
+					<StackPanel Margin="0,0,10,0" VerticalAlignment="Center">
+						<Border x:Name="ActiveBorder" 
 								Background="#8BC34A"
 								BorderBrush="#8BC34A"
 								BorderThickness="1">
-                            <TextBlock x:Uid="Active"
+							<TextBlock x:Uid="Active"
 									   Style="{StaticResource TitleTextBlockStyle}"
 									   FontSize="15"
 									   Foreground="#FFFFFF"
@@ -71,12 +71,12 @@
 									   Margin="6,4"
 									   VerticalAlignment="Center"
 									   Text="Sollicitudin " />
-                        </Border>
-                        <Border x:Name="InactiveBorder"
+						</Border>
+						<Border x:Name="InactiveBorder"
 								BorderBrush="#9E9E9E"
 								BorderThickness="1"
 								VerticalAlignment="Center">
-                            <TextBlock x:Uid="Inactive"
+							<TextBlock x:Uid="Inactive"
 								Style="{StaticResource TitleTextBlockStyle}"
 								FontSize="15"
 								Foreground="#9E9E9E"
@@ -84,15 +84,15 @@
 								Margin="6,4"
 								VerticalAlignment="Center"
 								Text="Fermentum" />
-                        </Border>
-                    </StackPanel>
-                    <TextBlock Grid.Column="1"
+						</Border>
+					</StackPanel>
+					<TextBlock Grid.Column="1"
 						FontSize="18"
 						FontWeight="SemiBold"
 						Text="{Binding Name}"
 						Foreground="{StaticResource ApricotFontPrimaryBrush}"
 						VerticalAlignment="Center" TextWrapping="Wrap" />
-                    <Button Grid.Column="2"
+					<Button Grid.Column="2"
 						BorderThickness="0"
 						Command="{Binding DataContext.SelectPlantCommand, ElementName=PlantChooser}"
 						CommandParameter="{Binding}"
@@ -100,97 +100,96 @@
 						FontFamily="Segoe UI Symbol"
 						FontSize="36"
 						VerticalAlignment="Center">
-                        <TextBlock TextAlignment="Right" Text="&#xE2A9;"/>
-                    </Button>
-                </Grid>
-            </ListViewItem>
-        </DataTemplate>
+						<TextBlock TextAlignment="Right" Text="&#xE2A9;"/>
+					</Button>
+				</Grid>
+			</ListViewItem>
+		</DataTemplate>
 
-        <!-- Styles. -->
-        <!-- For the plant list. -->
-        <Style x:Key="PlantListBoxItemStyle" TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
-        <!-- For all "TextBlock". -->
-        <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{StaticResource ApricotFontPrimaryBrush}" />
-        </Style>
-        <!-- For all "ListView". -->
-        <Style TargetType="ListView">
-            <Setter Property="Background" Value="{x:Null}" />
-            <Setter Property="ItemTemplate" Value="{StaticResource PlantDataTemplate}" />
-            <Setter Property="ItemContainerStyle" Value="{StaticResource PlantListBoxItemStyle}" />
-        </Style>
-        <!-- For all "Button". -->
-        <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
-        <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
-        <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
-        <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
-        <Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
-        <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
-        <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
-        <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
-        <SolidColorBrush x:Key="ButtonDisabledBackgroundThemeBrush" Color="Transparent"/>
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="{ThemeResource PhoneForegroundBrush}"/>
-            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
-            <Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
-            <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
-            <Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}"/>
-            <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
-            <Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}"/>
-            <Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="Grid" Background="Transparent">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition From="Pressed" To="PointerOver">
-                                            <Storyboard>
-                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                            </Storyboard>
-                                        </VisualTransition>
-                                        <VisualTransition From="PointerOver" To="Normal">
-                                            <Storyboard>
-                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                            </Storyboard>
-                                        </VisualTransition>
-                                        <VisualTransition From="Pressed" To="Normal">
-                                            <Storyboard>
-                                                <PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
-                                            </Storyboard>
-                                        </VisualTransition>
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Normal"/>
-                                    <VisualState x:Name="PointerOver"/>
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Gray"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled" />
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
-                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
+		<!-- Styles. -->
+		<!-- For the plant list. -->
+		<Style x:Key="PlantListBoxItemStyle" TargetType="ListViewItem">
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		</Style>
+		<!-- For all "TextBlock". -->
+		<Style TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource ApricotFontPrimaryBrush}" />
+		</Style>
+		<!-- For all "ListView". -->
+		<Style TargetType="ListView">
+			<Setter Property="Background" Value="{x:Null}" />
+			<Setter Property="ItemTemplate" Value="{StaticResource PlantDataTemplate}" />
+			<Setter Property="ItemContainerStyle" Value="{StaticResource PlantListBoxItemStyle}" />
+		</Style>
+		<!-- For all "Button". -->
+		<Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
+		<FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
+		<FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
+		<x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
+		<Thickness x:Key="PhoneButtonContentPadding">9.5,0,9.5,3.5</Thickness>
+		<x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
+		<x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
+		<Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>
+		<Style TargetType="Button">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="{ThemeResource PhoneForegroundBrush}"/>
+			<Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+			<Setter Property="BorderThickness" Value="{ThemeResource PhoneBorderThickness}"/>
+			<Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}"/>
+			<Setter Property="FontWeight" Value="{ThemeResource PhoneButtonFontWeight}"/>
+			<Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}"/>
+			<Setter Property="Padding" Value="{ThemeResource PhoneButtonContentPadding}"/>
+			<Setter Property="MinHeight" Value="{ThemeResource PhoneButtonMinHeight}"/>
+			<Setter Property="MinWidth" Value="{ThemeResource PhoneButtonMinWidth}"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid x:Name="Grid" Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualStateGroup.Transitions>
+										<VisualTransition From="Pressed" To="PointerOver">
+											<Storyboard>
+												<PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+											</Storyboard>
+										</VisualTransition>
+										<VisualTransition From="PointerOver" To="Normal">
+											<Storyboard>
+												<PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+											</Storyboard>
+										</VisualTransition>
+										<VisualTransition From="Pressed" To="Normal">
+											<Storyboard>
+												<PointerUpThemeAnimation Storyboard.TargetName="Grid"/>
+											</Storyboard>
+										</VisualTransition>
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="PointerOver"/>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<PointerDownThemeAnimation Storyboard.TargetName="Grid"/>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="Gray"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="{ThemeResource PhoneTouchTargetOverhang}">
+								<ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
 
-    <Grid>
+	<Grid>
 		<Hub x:Uid="MyGarden" Header="Etiam eget">
 			<Hub.HeaderTemplate>
 				<DataTemplate>

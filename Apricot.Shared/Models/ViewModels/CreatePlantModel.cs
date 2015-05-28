@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Apricot.Shared.Models.Services;
-using GalaSoft.MvvmLight.Command;
 
 namespace Apricot.Shared.Models.ViewModels
 {

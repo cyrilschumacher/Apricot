@@ -25,6 +25,17 @@ namespace Apricot.Shared.Services.Apricot
         #region Methods.
 
         /// <summary>
+        ///     Gets the alert information by a plant identifier.
+        /// </summary>
+        /// <param name="plantIdentifier">The plant identifier.</param>
+        /// <returns>The alert information.</returns>
+        public async Task<AlertServiceModel> GetAlertAsync(int plantIdentifier)
+        {
+            var serviceUri = string.Format(GetAlertServiceName, plantIdentifier);
+            return await GetAsync<AlertServiceModel>(serviceUri);
+        }
+
+        /// <summary>
         ///     Gets the time remaining before the new watering is done.
         /// </summary>
         /// <param name="plantIdentifier">The plant identifier.</param>
@@ -33,13 +44,6 @@ namespace Apricot.Shared.Services.Apricot
         {
             var serviceUri = string.Format(GetTimeRemainingServiceName, plantIdentifier);
             return await GetAsync<RemainingTimeServiceModel>(serviceUri);
-        }
-
-        //todo: Add a documentation.
-        public async Task<AlertServiceModel> GetAlertAsync(int plantIdentifier)
-        {
-            var serviceUri = string.Format(GetAlertServiceName, plantIdentifier);
-            return await GetAsync<AlertServiceModel>(serviceUri);
         }
 
         #endregion Methods.

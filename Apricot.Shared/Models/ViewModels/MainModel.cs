@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace Apricot.Shared.Models.ViewModels
+﻿namespace Apricot.Shared.Models.ViewModels
 {
     /// <summary>
     ///     Model for main view.

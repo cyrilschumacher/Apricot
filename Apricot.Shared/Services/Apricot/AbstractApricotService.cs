@@ -35,7 +35,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     JSON serializer settings.
         /// </summary>
-        private JsonSerializerSettings _jsonSerializerSettings;
+        private readonly JsonSerializerSettings _jsonSerializerSettings;
 
         /// <summary>
         ///     Absolute URI server address.

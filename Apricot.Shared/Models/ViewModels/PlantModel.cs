@@ -103,7 +103,10 @@ namespace Apricot.Shared.Models.ViewModels
 
         #endregion Commands.
 
-        //todo: Add documentation.
+        /// <summary>
+        ///     Gets or sets a alert information.
+        /// </summary>
+        /// <value>The alert information.</value>
         public AlertServiceModel Alert
         {
             get

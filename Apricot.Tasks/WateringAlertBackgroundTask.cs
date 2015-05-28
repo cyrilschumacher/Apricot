@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Notifications;
-using Windows.UI.Xaml;
 using Apricot.Shared.Models.Services;
 using Apricot.Shared.Services.Apricot;
-using Microsoft.VisualBasic;
 
 namespace Apricot.Tasks
 {
     /// <summary>
     ///     Task for to verify if a plant needs to be watered.
     /// </summary>
-    [CLSCompliant(false)]
     public sealed class WateringAlertBackgroundTask : IBackgroundTask
     {
         #region Constants.

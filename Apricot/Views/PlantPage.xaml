@@ -36,11 +36,19 @@
 			</core:ChangePropertyAction>
 		</core:DataTriggerBehavior>
 		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
-			<core:ChangePropertyAction TargetObject="GoodHumidityTextBlock" PropertyName="Visibility" Value="Visible" />
-		</core:DataTriggerBehavior>
+            <core:ChangePropertyAction TargetObject="{Binding ElementName=GoodHumidityTextBlock}" PropertyName="Visibility">
+                <core:ChangePropertyAction.Value>
+                    <Visibility>Visible</Visibility>
+                </core:ChangePropertyAction.Value>
+            </core:ChangePropertyAction>
+        </core:DataTriggerBehavior>
 		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
-			<core:ChangePropertyAction TargetObject="BadHumidityTextBlock" PropertyName="Visibility" Value="Visible" />
-		</core:DataTriggerBehavior>
+            <core:ChangePropertyAction TargetObject="{Binding ElementName=BadHumidityTextBlock}" PropertyName="Visibility">
+                <core:ChangePropertyAction.Value>
+                    <Visibility>Visible</Visibility>
+                </core:ChangePropertyAction.Value>
+            </core:ChangePropertyAction>
+        </core:DataTriggerBehavior>
 	</interactivity:Interaction.Behaviors>
 
 	<Page.Resources>
@@ -194,7 +202,7 @@
 
 						<!-- Humidity. -->
 						<TextBlock x:Uid="GoodHumidity" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
-						<TextBlock x:Name="GoodHumidityTextBlock" x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
+						<TextBlock x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
 						<interactivity:Interaction.Behaviors>
 							<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
 								<core:ChangePropertyAction PropertyName="Visibility">
