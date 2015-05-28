@@ -81,13 +81,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\Apricot.Shared\Apricot.Shared.csproj">
-      <Project>{16200811-f7ae-47fc-a8a9-b5d37785af02}</Project>
-      <Name>Apricot.Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -194,7 +187,16 @@
       <Name>Behaviors SDK %28XAML%29</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Apricot.Shared\Apricot.Shared.csproj">
+      <Project>{16200811-f7ae-47fc-a8a9-b5d37785af02}</Project>
+      <Name>Apricot.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Apricot.Tasks\Apricot.Tasks.csproj">
+      <Project>{a4c83e61-a1dc-4cd4-8e07-6923d0500c1a}</Project>
+      <Name>Apricot.Tasks</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo\BadgeLogo.scale-100.png" />
     <Content Include="Assets\Logo\BadgeLogo.scale-140.png" />

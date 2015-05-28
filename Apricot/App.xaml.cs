@@ -1,7 +1,9 @@
 ﻿using Apricot.Views;
 using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -93,6 +95,9 @@ namespace Apricot
 
             // Ensure the current window is active
             Window.Current.Activate();
+
+            // Register all tasks.
+            _RegistersTasks();
         }
 
         /// <summary>
@@ -122,6 +127,34 @@ namespace Apricot
             if (deferral != null)
             {
                 deferral.Complete();
+            }
+        }
+
+
+        /// <summary>
+        ///     Registers tasks.
+        /// </summary>
+        private async void _RegistersTasks()
+        {
+            const string taskName = "WateringAlert";
+            if (BackgroundTaskRegistration.AllTasks.All(task => task.Value.Name != taskName))
+            {
+                // Windows Phone app must call this to use trigger types (see MSDN)
+                await BackgroundExecutionManager.RequestAccessAsync();
+
+                var taskBuilder = new BackgroundTaskBuilder
+                {
+                    Name = taskName,
+                    TaskEntryPoint = "Apricot.Tasks.WateringAlertBackgroundTask"
+                };
+
+
+                // Create a trigger for repeat the process several times.
+                var trigger = new TimeTrigger(15, false);
+                taskBuilder.SetTrigger(trigger);
+
+                // Register task.
+                taskBuilder.Register();
             }
         }
 

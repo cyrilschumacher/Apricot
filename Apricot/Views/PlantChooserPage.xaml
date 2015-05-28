@@ -218,7 +218,7 @@
 					</DataTemplate>
 				</HubSection.HeaderTemplate>
 				<DataTemplate>
-					<Grid >
+					<Grid>
 						<ListView x:Name="PlantListBox"
 								  ItemsSource="{Binding Model.Plant}">
 							<interactivity:Interaction.Behaviors>

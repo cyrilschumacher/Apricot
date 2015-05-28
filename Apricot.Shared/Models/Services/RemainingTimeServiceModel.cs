@@ -10,8 +10,9 @@ namespace Apricot.Shared.Models.Services
         #region Properties.
 
         /// <summary>
-        ///     Gets or sets a time remaining.
+        ///     Gets or sets a time remaining (in seconds).
         /// </summary>
+        /// <value>The time in seconds.</value>
         [JsonProperty("time")]
         public long LeftTime { get; set; }
 
