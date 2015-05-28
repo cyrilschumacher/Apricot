@@ -38,7 +38,7 @@
 		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
 			<core:ChangePropertyAction TargetObject="GoodHumidityTextBlock" PropertyName="Visibility" Value="Visible" />
 		</core:DataTriggerBehavior>
-		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+		<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
 			<core:ChangePropertyAction TargetObject="BadHumidityTextBlock" PropertyName="Visibility" Value="Visible" />
 		</core:DataTriggerBehavior>
 	</interactivity:Interaction.Behaviors>
