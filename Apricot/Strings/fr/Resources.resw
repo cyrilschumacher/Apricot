@@ -121,94 +121,94 @@
     <value>ACTIVE</value>
   </data>
   <data name="CreateNewPlant.Header" xml:space="preserve">
-    <value>New plant</value>
+    <value>Nouvelle plante</value>
   </data>
   <data name="Delete.Label" xml:space="preserve">
-    <value>Delete</value>
+    <value>Supprimer</value>
   </data>
   <data name="Device.Text" xml:space="preserve">
-    <value>Device</value>
+    <value>Matériel</value>
   </data>
   <data name="Favorites.Header" xml:space="preserve">
-    <value>Favorites</value>
+    <value>Favoris</value>
   </data>
   <data name="Graphs.Header" xml:space="preserve">
-    <value>Graphs</value>
+    <value>Graphiques</value>
   </data>
   <data name="HumidityGraph.Title" xml:space="preserve">
-    <value>Humidity</value>
+    <value>Humidité</value>
   </data>
   <data name="Inactive.Text" xml:space="preserve">
     <value>INACTIVE</value>
   </data>
   <data name="InRealTime.Header" xml:space="preserve">
-    <value>In real time</value>
+    <value>En temps réel</value>
   </data>
   <data name="LuminosityGraph.Title" xml:space="preserve">
-    <value>Luminosity</value>
+    <value>Luminosité</value>
   </data>
   <data name="AddNewPlant.Label" xml:space="preserve">
-    <value>Add a new plant</value>
+    <value>Ajouter une nouvelle plante</value>
   </data>
   <data name="NoCommunicationEstablished.Text" xml:space="preserve">
-    <value>No communication is established with the server.</value>
+    <value>Aucune communication est établie avec le serveur.</value>
   </data>
   <data name="Photo.Text" xml:space="preserve">
     <value>Photo</value>
   </data>
   <data name="Plant.Header" xml:space="preserve">
-    <value>Plant</value>
+    <value>Plante</value>
   </data>
   <data name="PlantName.Text" xml:space="preserve">
-    <value>Plant name</value>
+    <value>Nom de la plante</value>
   </data>
   <data name="PlantVariety.Text" xml:space="preserve">
-    <value>Variety</value>
+    <value>Variété</value>
   </data>
   <data name="SeeVarietyInformation.Label" xml:space="preserve">
-    <value>See variety information</value>
+    <value>Voir les détails sur la variété</value>
   </data>
   <data name="StopMeasures.Label" xml:space="preserve">
-    <value>Stop measures</value>
+    <value>Arrêt des mesures</value>
   </data>
   <data name="Summary.Header" xml:space="preserve">
-    <value>Summary</value>
+    <value>Description</value>
   </data>
   <data name="TemperatureGraph.Title" xml:space="preserve">
-    <value>Temperature</value>
+    <value>Température</value>
   </data>
   <data name="TryAgain.Content" xml:space="preserve">
-    <value>Try again</value>
+    <value>Ré-essayer</value>
   </data>
   <data name="NoPlantFavorites.Text" xml:space="preserve">
-    <value>No plants have been added to favorites.</value>
+    <value>Aucune plante n'ont été ajoutées en favoris.</value>
   </data>
   <data name="MyGarden.Header" xml:space="preserve">
-    <value>MY GARDEN</value>
+    <value>Mon jardin</value>
   </data>
   <data name="Luminosity.Text" xml:space="preserve">
-    <value>Luminosity</value>
+    <value>Luminosité</value>
   </data>
   <data name="Temperature.Text" xml:space="preserve">
-    <value>Temperature</value>
+    <value>Température</value>
   </data>
   <data name="LastDateMeasure.Text" xml:space="preserve">
-    <value>Last date of measure</value>
+    <value>Dernière date de mesure</value>
   </data>
   <data name="RefreshPlant.Label" xml:space="preserve">
-    <value>Refresh</value>
+    <value>Rafraîchir</value>
   </data>
   <data name="Chart.Header" xml:space="preserve">
-    <value>CHART</value>
+    <value>Graphique</value>
   </data>
   <data name="HumberHours.Text" xml:space="preserve">
-    <value>Number of hours</value>
+    <value>Nombre d'heures</value>
   </data>
   <data name="Variety.Title" xml:space="preserve">
-    <value>VARIETY</value>
+    <value>VARIÉTÉ</value>
   </data>
   <data name="Humidity.Text" xml:space="preserve">
-    <value>Humidity</value>
+    <value>Humidité</value>
   </data>
   <data name="Maximum.Text" xml:space="preserve">
     <value>Maximum</value>
@@ -217,18 +217,18 @@
     <value>Minimum</value>
   </data>
   <data name="Good.Text" xml:space="preserve">
-    <value>Good</value>
+    <value>Bon</value>
   </data>
   <data name="GoodHumidity.Text" xml:space="preserve">
-    <value>Good humidity</value>
+    <value>Bonne humidité</value>
   </data>
   <data name="GoodTemperature.Text" xml:space="preserve">
-    <value>Good temperature</value>
+    <value>Bonne température</value>
   </data>
   <data name="NoGood.Text" xml:space="preserve">
-    <value>No</value>
+    <value>Mauvais</value>
   </data>
   <data name="RemainingTime.Text" xml:space="preserve">
-    <value>Remaining time with next watering</value>
+    <value>Temps restant avec arrosage</value>
   </data>
 </root>

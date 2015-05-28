@@ -34,6 +34,11 @@ namespace Apricot.Shared.Models.ViewModels
         private bool _isActive;
 
         /// <summary>
+        ///    Value that indicates a loading.
+        /// </summary>
+        private bool _isLoading;
+
+        /// <summary>
         ///     Latest measure.
         /// </summary>
         private MeasureServiceModel _latestMeasure;
@@ -98,22 +103,6 @@ namespace Apricot.Shared.Models.ViewModels
 
         #endregion Commands.
 
-        /// <summary>
-        ///     Gets or sets a watering alert.
-        /// </summary>
-        /// <value>The watering alert.</value>
-        public RemainingTimeServiceModel RemainingTime
-        {
-            get
-            {
-                return _remainingTime;
-            }
-            set
-            {
-                SetValueProperty(ref _remainingTime, value);
-            }
-        }
-
         //todo: Add documentation.
         public AlertServiceModel Alert
         {
@@ -166,6 +155,22 @@ namespace Apricot.Shared.Models.ViewModels
         }
 
         /// <summary>
+        ///     Gets or sets a value that indicates a loading.
+        /// </summary>
+        /// <value>Tthe value that indicates a loading.</value>
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                SetValueProperty(ref _isLoading, value);
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets a latest measure.
         /// </summary>
         /// <value>The latest measure.</value>
@@ -212,6 +217,22 @@ namespace Apricot.Shared.Models.ViewModels
             set
             {
                 SetValueProperty(ref _name, value);
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets a watering alert.
+        /// </summary>
+        /// <value>The watering alert.</value>
+        public RemainingTimeServiceModel RemainingTime
+        {
+            get
+            {
+                return _remainingTime;
+            }
+            set
+            {
+                SetValueProperty(ref _remainingTime, value);
             }
         }
 

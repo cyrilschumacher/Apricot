@@ -11,6 +11,11 @@ namespace Apricot.Shared.Models.ViewModels
         #region Members.
 
         /// <summary>
+        ///     Hours.
+        /// </summary>
+        private int _hours;
+
+        /// <summary>
         ///    Value that indicates a loading.
         /// </summary>
         private bool _isLoading;
@@ -25,14 +30,25 @@ namespace Apricot.Shared.Models.ViewModels
         /// </summary>
         private string _name;
 
-        /// <summary>
-        ///     Hours.
-        /// </summary>
-        private int _hours;
-
         #endregion Members.
 
         #region Properties.
+
+        /// <summary>
+        ///     Gets or sets hours.
+        /// </summary>
+        /// <value>The hours.</value>
+        public int Hours
+        {
+            get
+            {
+                return _hours;
+            }
+            set
+            {
+                SetValueProperty(ref _hours, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a value that indicates a loading.
@@ -79,22 +95,6 @@ namespace Apricot.Shared.Models.ViewModels
             set
             {
                 SetValueProperty(ref _name, value);
-            }
-        }
-
-        /// <summary>
-        ///     Gets or sets hours.
-        /// </summary>
-        /// <value>The hours.</value>
-        public int Hours
-        {
-            get
-            {
-                return _hours;
-            }
-            set
-            {
-                SetValueProperty(ref _hours, value);
             }
         }
 

@@ -236,8 +236,21 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadAlertAsync()
         {
-            Model.RemainingTime = await _alertService.GetTimeRemainingAsync(Model.Identifier);
-            Model.Alert = await _alertService.GetAlertAsync(Model.Identifier);
+            Model.IsLoading = true;
+
+            try
+            {
+                Model.RemainingTime = await _alertService.GetTimeRemainingAsync(Model.Identifier);
+                Model.Alert = await _alertService.GetAlertAsync(Model.Identifier);
+            }
+            catch (Exception)
+            {
+                //todo: Manage errors.
+            }
+            finally
+            {
+                Model.IsLoading = false;
+            }
         }
 
         /// <summary>
