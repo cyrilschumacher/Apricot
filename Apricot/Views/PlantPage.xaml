@@ -260,6 +260,7 @@
 												Foreground="{StaticResource ApricotPrimaryBrush}"
 												Text="{Binding Model.LatestMeasure.Temperature, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:F1}'}" />
 								<TextBlock Grid.Row="0" Grid.Column="1"
+										   FontSize="24"
 										   Foreground="{StaticResource ApricotPrimaryBrush}"
 										   Text="°c"
 										   VerticalAlignment="Center" />

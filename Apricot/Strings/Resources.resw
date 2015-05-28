@@ -231,4 +231,7 @@
   <data name="RemainingTime.Text" xml:space="preserve">
     <value>Remaining time with next watering</value>
   </data>
+  <data name="MyGardenPivot.Title" xml:space="preserve">
+    <value>My garden</value>
+  </data>
 </root>

@@ -333,7 +333,7 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Pivot x:Uid="MyGarden" Title="Maecenas ut">
+    <Pivot x:Uid="MyGardenPivot" Title="Maecenas ut">
         <Pivot.TitleTemplate>
             <DataTemplate>
                 <StackPanel Orientation="Horizontal">
