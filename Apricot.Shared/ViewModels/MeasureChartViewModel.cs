@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -49,6 +50,28 @@ namespace Apricot.Shared.ViewModels
 
         #region Properties.
 
+        #region Commands.
+
+        /// <summary>
+        ///     Gets or sets a command for <code>OnLoaded</code> event.
+        /// </summary>
+        /// <value>The command for <code>OnLoaded</code> event.</value>
+        public ICommand OnLoadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for <code>OnUnloaded</code> event.
+        /// </summary>
+        /// <value>The command for <code>OnUnloaded</code> event.</value>
+        public ICommand OnUnloadedCommand { get; set; }
+
+        /// <summary>
+        ///     Gets or sets a command for refresh hours.
+        /// </summary>
+        /// <value>The command for refresh hours.</value>
+        public ICommand RefreshHoursCommand { get; set; }
+
+        #endregion Commands.
+
         /// <summary>
         ///     Gets or sets a model.
         /// </summary>
@@ -78,11 +101,11 @@ namespace Apricot.Shared.ViewModels
                 {
                     Hours = 1,
                     Measures = new List<MeasureServiceModel>(),
-                    Name = "Humidity",
-                    OnLoadedCommand = new RelayCommand(_OnLoaded),
-                    OnUnloadedCommand = new RelayCommand(_OnUnloaded),
-                    RefreshHoursCommand = new RelayCommand(_RefreshHours)
+                    Name = "Humidity"
                 };
+                OnLoadedCommand = new RelayCommand(_OnLoaded);
+                OnUnloadedCommand = new RelayCommand(_OnUnloaded);
+                RefreshHoursCommand = new RelayCommand(_RefreshHours);
 
                 // Register messengers.
                 MessengerInstance.Register<MeasureMessageModel>(this, _OnMeasureServiceMessage);
@@ -178,12 +201,26 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadMeasuresAsync()
         {
-            var measures = await _measureService.GetAll(_plantIdentifier, Model.Hours);
+            Model.IsLoading = true;
 
-            // Create a counter and
-            // and selects the requested property.
-            var i = 0;
-            Model.Measures = measures.Select(measure => new { X = i++, Y = measure.Measure.GetPropertyValue(Model.Name) });
+            try
+            {
+                var measures = await _measureService.GetAll(_plantIdentifier, Model.Hours);
+
+                // Create a counter and
+                // and selects the requested property.
+                var i = 0;
+                Model.Measures =
+                    measures.Select(measure => new {X = i++, Y = measure.Measure.GetPropertyValue(Model.Name)});
+            }
+            catch (Exception)
+            {
+                //todo: Manage errors.
+            }
+            finally
+            {
+                Model.IsLoading = false;
+            }
         }
 
         #endregion Methods.

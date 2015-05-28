@@ -20,8 +20,8 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Server address.
         /// </summary>
-        private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
-        //private const string ServerAddress = "http://192.168.154.134:3000/";
+        //private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
+        private const string ServerAddress = "http://192.168.154.134:3000/";
 
         #endregion Constants.
 
@@ -31,6 +31,11 @@ namespace Apricot.Shared.Services.Apricot
         ///     HTTP client.
         /// </summary>
         private readonly HttpClient _httpClient;
+
+        /// <summary>
+        ///     JSON serializer settings.
+        /// </summary>
+        private JsonSerializerSettings _jsonSerializerSettings;
 
         /// <summary>
         ///     Absolute URI server address.
@@ -48,7 +53,10 @@ namespace Apricot.Shared.Services.Apricot
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.IfModifiedSince = new DateTimeOffset(DateTime.UtcNow);
-
+            _jsonSerializerSettings = new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Ignore
+            };
             _serverUriAddress = new Uri(ServerAddress, UriKind.Absolute);
         }
 
@@ -74,7 +82,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="jsonData">The JSON data.</param>
         /// <returns>The model object.</returns>
-        private static TModel _JsonResponseToObject<TModel>(string jsonData)
+        private TModel _JsonResponseToObject<TModel>(string jsonData)
         {
             if (string.IsNullOrEmpty(jsonData))
             {
@@ -86,7 +94,7 @@ namespace Apricot.Shared.Services.Apricot
             }
 
             Debug.WriteLine("JSON received: {0}", jsonData);
-            return JsonConvert.DeserializeObject<TModel>(jsonData);
+            return JsonConvert.DeserializeObject<TModel>(jsonData, _jsonSerializerSettings);
         }
 
         /// <summary>
@@ -95,7 +103,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="httpResponse">The HTTP response message.</param>
         /// <returns>The model.</returns>
-        private static async Task<TModel> _ReadContentHttpResponse<TModel>(HttpResponseMessage httpResponse)
+        private async Task<TModel> _ReadContentHttpResponse<TModel>(HttpResponseMessage httpResponse)
         {
             Debug.WriteLine("HTTP status: {0}", httpResponse.StatusCode);
             if (httpResponse.StatusCode != HttpStatusCode.OK)

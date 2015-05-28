@@ -47,7 +47,8 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MeasureChartViewModel>();
+                var guid = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<MeasureChartViewModel>(guid);
             }
         }
 
@@ -83,7 +84,8 @@ namespace Apricot
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<VarietyDetailsViewModel>();
+                var guid = Guid.NewGuid().ToString();
+                return ServiceLocator.Current.GetInstance<VarietyDetailsViewModel>(guid);
             }
         }
 

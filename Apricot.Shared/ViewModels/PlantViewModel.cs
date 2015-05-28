@@ -214,9 +214,12 @@ namespace Apricot.Shared.ViewModels
             var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
             Model.Details = new PlantDetailsModel {Variety = details.Variety};
 
-            foreach (var photo in details.Photos)
+            if (details.Photos != null)
             {
-                _AddPhoto(photo);
+                foreach (var photo in details.Photos)
+                {
+                    _AddPhoto(photo);
+                }
             }
         }
 

@@ -15,10 +15,10 @@
 
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding Model.OnLoadedCommand}" />
+            <core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
         </core:EventTriggerBehavior>
         <core:EventTriggerBehavior EventName="Unloaded">
-            <core:InvokeCommandAction Command="{Binding Model.OnUnloadedCommand}" />
+            <core:InvokeCommandAction Command="{Binding OnUnloadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
@@ -254,11 +254,12 @@
                             TickFrequency="1000">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="ValueChanged">
-                                <core:InvokeCommandAction Command="{Binding Model.RefreshHoursCommand}" />
+                                <core:InvokeCommandAction Command="{Binding RefreshHoursCommand}" />
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                     </Slider>
                 </Grid>
+                <ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
             </Grid>
         </PivotItem>
     </Pivot>

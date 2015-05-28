@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Input;
 
 namespace Apricot.Shared.Models.ViewModels
 {
@@ -10,6 +9,11 @@ namespace Apricot.Shared.Models.ViewModels
     public class MeasureChartModel : NotifyPropertyChanged
     {
         #region Members.
+
+        /// <summary>
+        ///    Value that indicates a loading.
+        /// </summary>
+        private bool _isLoading;
 
         /// <summary>
         ///     Measures.
@@ -30,27 +34,21 @@ namespace Apricot.Shared.Models.ViewModels
 
         #region Properties.
 
-        #region Commands.
-
         /// <summary>
-        ///     Gets or sets a command for <code>OnLoaded</code> event.
+        ///     Gets or sets a value that indicates a loading.
         /// </summary>
-        /// <value>The command for <code>OnLoaded</code> event.</value>
-        public ICommand OnLoadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for <code>OnUnloaded</code> event.
-        /// </summary>
-        /// <value>The command for <code>OnUnloaded</code> event.</value>
-        public ICommand OnUnloadedCommand { get; set; }
-
-        /// <summary>
-        ///     Gets or sets a command for refresh hours.
-        /// </summary>
-        /// <value>The command for refresh hours.</value>
-        public ICommand RefreshHoursCommand { get; set; }
-
-        #endregion Commands.
+        /// <value>Tthe value that indicates a loading.</value>
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                SetValueProperty(ref _isLoading, value);
+            }
+        }
 
         /// <summary>
         ///     Gets or sets a measures.
