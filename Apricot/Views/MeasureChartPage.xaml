@@ -223,7 +223,7 @@
                                 </Style>
                             </chart:Chart.LegendStyle>
                         </chart:Chart>
-                        <ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
+                        <ProgressRing Width="360" HorizontalAlignment="Left" Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
                         <Grid Grid.Row="1" Width="360" HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*" />

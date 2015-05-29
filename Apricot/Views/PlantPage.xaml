@@ -262,7 +262,7 @@
 
 							<!-- Remaining time. -->
 							<TextBlock x:Uid="RemainingTime" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
-							<TextBlock FontSize="48" Text="{Binding Model.RemainingTime.LeftTime, ConverterParameter=d\\.hh\\:mm, Converter={StaticResource TimeSpanConverter}}" />
+							<TextBlock FontSize="48" Text="{Binding Model.RemainingTime.LeftTime, ConverterParameter=d\'j \'h\'h \'m\'mn\', Converter={StaticResource TimeSpanConverter}}" />
 						</StackPanel>
 						<StackPanel VerticalAlignment="Center">
 							<interactivity:Interaction.Behaviors>
