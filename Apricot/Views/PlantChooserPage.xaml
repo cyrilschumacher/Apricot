@@ -237,7 +237,7 @@
 									   FontSize="24"
 									   TextWrapping="Wrap"
 									   Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
-							<TextBlock FontSize="56" Foreground="#AAAAAA" TextAlignment="Center" Text=":(" />
+							<TextBlock FontSize="48" Foreground="#AAAAAA" FontWeight="Light" TextAlignment="Center" Text=":(" />
 						</StackPanel>
 						<ListView ItemsSource="{Binding Model.Favorites}" ItemTemplate="{StaticResource PlantDataTemplate}" />
 						<ProgressRing Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />

@@ -20,7 +20,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Request timeout (in milliseconds).
         /// </summary>
-        private const int HttpClientTimeout = 3000;
+        private const int DefaultHttpClientTimeout = 3000;
 
         /// <summary>
         ///     Server address.
@@ -56,7 +56,7 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         protected AbstractApricotService()
         {
-            _httpClient = new HttpClient {Timeout = TimeSpan.FromMilliseconds(HttpClientTimeout)};
+            _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.IfModifiedSince = new DateTimeOffset(DateTime.UtcNow);
             _jsonSerializerSettings = new JsonSerializerSettings
             {
@@ -127,11 +127,12 @@ namespace Apricot.Shared.Services.Apricot
         ///     Sends a GET request to the specified Uri as an asynchronous operation. 
         /// </summary>
         /// <param name="serviceUri">The service Uri.</param>
+        /// <param name="timeout">The request timeout.</param>
         /// <param name="cancellationToken">The token for the cancellation request.</param>
         /// <returns>The response of service.</returns>
-        protected async Task GetAsync(string serviceUri, CancellationToken? cancellationToken = null)
+        protected async Task GetAsync(string serviceUri, TimeSpan? timeout = null, CancellationToken? cancellationToken = null)
         {
-            await GetAsync<Object>(serviceUri, cancellationToken);
+            await GetAsync<Object>(serviceUri, timeout, cancellationToken);
         }
 
         /// <summary>
@@ -139,19 +140,23 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="serviceUri">The service Uri.</param>
+        /// <param name="timeout">The request timeout.</param>
         /// <param name="cancellationToken">The token for the cancellation request.</param>
         /// <returns>The response of service.</returns>
-        protected async Task<TModel> GetAsync<TModel>(string serviceUri, CancellationToken? cancellationToken = null)
+        protected async Task<TModel> GetAsync<TModel>(string serviceUri, TimeSpan? timeout = null, CancellationToken? cancellationToken = null)
         {
             // Creates a token if no token hasn't been defined.
             cancellationToken = cancellationToken ?? new CancellationToken();
 
-            // Obtains the absolute URL (with the URI address of service) and sends a HTTP request.
+            // Obtains the absolute URL (with the URI address of service) and sets the timeout.
             var requestUri = _GetServerAddress(serviceUri);
+            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultHttpClientTimeout);
 
             Debug.WriteLine("URI request: {0}", requestUri);
-            var response = await _httpClient.GetAsync(requestUri, cancellationToken.Value);
+            Debug.WriteLine("Timeout: {0}", timeout);
 
+            //  Sends a HTTP request and obtains the response.
+            var response = await _httpClient.GetAsync(requestUri, cancellationToken.Value);
             return await _ReadContentHttpResponse<TModel>(response);
         }
 
@@ -160,20 +165,26 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <param name="serviceUri">The service Uri.</param>
         /// <param name="content">The content.</param>
+        /// <param name="timeout">The request timeout.</param>
         /// <param name="cancellationToken">The token for the cancellation request.</param>
         /// <returns>The response of service.</returns>
-        protected async Task PostAsync(string serviceUri, string content, CancellationToken? cancellationToken = null)
+        protected async Task PostAsync(string serviceUri, string content, TimeSpan? timeout = null, CancellationToken? cancellationToken = null)
         {
             // Creates a token if no token hasn't been defined.
             cancellationToken = cancellationToken ?? new CancellationToken();
 
             // Obtains the absolute URL (with the URI address of service),
-            // adds content and sends a HTTP request.
+            // adds content and sets the timeout.
             var requestUri = _GetServerAddress(serviceUri);
+            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
+            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultHttpClientTimeout);
 
             Debug.WriteLine("URI request: {0}", requestUri);
-            var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
+            Debug.WriteLine("Timeout: {0}", timeout);
+            Debug.WriteLine("Content: {0}", content);
 
+            // Sends a HTTP request.
+            _httpClient.Timeout = timeout.Value;
             await _httpClient.PostAsync(requestUri, httpContent, cancellationToken.Value);
         }
 
