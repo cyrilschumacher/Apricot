@@ -136,24 +136,34 @@
 			</DataTemplate>
 		</Pivot.TitleTemplate>
 		<!-- In summary. -->
-		<PivotItem x:Uid="Summary"  Header="Volutpat">
+		<PivotItem x:Uid="Summary" Header="Volutpat">
 			<ScrollViewer>
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<Image Source="{Binding Model.Details.Photos[0]}" Margin="6" Height="175" Stretch="UniformToFill" Visibility="Collapsed">
-						<interactivity:Interaction.Behaviors>
-							<core:DataTriggerBehavior Binding="{Binding Model.Details.Photos.Count}" ComparisonCondition="GreaterThan" Value="0">
-								<core:ChangePropertyAction PropertyName="Visibility">
-									<core:ChangePropertyAction.Value>
-										<Visibility>Visible</Visibility>
-									</core:ChangePropertyAction.Value>
-								</core:ChangePropertyAction>
-							</core:DataTriggerBehavior>
-						</interactivity:Interaction.Behaviors>
-					</Image>
+					
+					<Grid Background="LightGray" Margin="0,0,0,12">
+						<TextBlock FontFamily="Segoe UI Symbol"
+									Foreground="White"
+									FontSize="56"
+									Text="&#xE114;"
+									TextAlignment="Center"
+									TextWrapping="Wrap"
+									VerticalAlignment="Center"/>
+						<Image Source="{Binding Model.Details.Photos[0]}" Height="175" Stretch="UniformToFill" Visibility="Collapsed">
+							<interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior Binding="{Binding Model.Details.Photos.Count}" ComparisonCondition="GreaterThan" Value="0">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
+						</Image>
+					</Grid>
 					<StackPanel Grid.Row="1" Visibility="Collapsed">
 						<interactivity:Interaction.Behaviors>
 							<core:DataTriggerBehavior Binding="{Binding Model.IsActive}" Value="True">
@@ -163,89 +173,122 @@
 									</core:ChangePropertyAction.Value>
 								</core:ChangePropertyAction>
 							</core:DataTriggerBehavior>
+							<core:DataTriggerBehavior Binding="{Binding Model.IsActive}" Value="False">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Collapsed</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
 						</interactivity:Interaction.Behaviors>
 						
 						<!-- Temperature. -->
 						<TextBlock x:Uid="GoodTemperature" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
 						<TextBlock x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
 							<interactivity:Interaction.Behaviors>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Visible</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Collapsed</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-						    </interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Collapsed</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
 						</TextBlock>
 						<TextBlock x:Uid="NoGood" FontSize="48" Foreground="#F44336" Visibility="Collapsed">
-						    <interactivity:Interaction.Behaviors>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Collapsed</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Visible</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-						    </interactivity:Interaction.Behaviors>
+							<interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="True">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Collapsed</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Temperature}" Value="False">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
 						</TextBlock>
 
 						<!-- Humidity. -->
 						<TextBlock x:Uid="GoodHumidity" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
 						<TextBlock x:Uid="Good" FontSize="48" Foreground="#8BC34A" Visibility="Collapsed">
-						    <interactivity:Interaction.Behaviors>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Visible</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Collapsed</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-						    </interactivity:Interaction.Behaviors>
+							<interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Collapsed</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
 						</TextBlock>
 						<TextBlock x:Uid="NoGood" FontSize="48" Foreground="#F44336" Visibility="Collapsed">
-						    <interactivity:Interaction.Behaviors>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Collapsed</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-							    <core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
-								    <core:ChangePropertyAction PropertyName="Visibility">
-									    <core:ChangePropertyAction.Value>
-										    <Visibility>Visible</Visibility>
-									    </core:ChangePropertyAction.Value>
-								    </core:ChangePropertyAction>
-							    </core:DataTriggerBehavior>
-						    </interactivity:Interaction.Behaviors>
+							<interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="True">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Collapsed</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+								<core:DataTriggerBehavior Binding="{Binding Model.Alert.Humidity}" Value="False">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
 						</TextBlock>
 
 						<!-- Remaining time. -->
 						<TextBlock x:Uid="RemainingTime" Style="{StaticResource ControlHeaderTextBlockStyle}" Text="Aenean enim nisi" />
 						<TextBlock FontSize="48" Text="{Binding Model.RemainingTime.LeftTime, ConverterParameter=d\\.hh\\:mm, Converter={StaticResource TimeSpanConverter}}" />
+					</StackPanel>
+					<StackPanel Grid.Row="1" VerticalAlignment="Center">
+						<interactivity:Interaction.Behaviors>
+							<core:DataTriggerBehavior Binding="{Binding Model.IsActive}" Value="True">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Collapsed</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+							<core:DataTriggerBehavior Binding="{Binding Model.IsActive}" Value="False">
+								<core:ChangePropertyAction PropertyName="Visibility">
+									<core:ChangePropertyAction.Value>
+										<Visibility>Visible</Visibility>
+									</core:ChangePropertyAction.Value>
+								</core:ChangePropertyAction>
+							</core:DataTriggerBehavior>
+						</interactivity:Interaction.Behaviors>
+						
+						<TextBlock x:Uid="NoAlert" 
+								   TextAlignment="Center"
+								   Foreground="#AAAAAA"
+								   FontSize="24"
+								   TextWrapping="Wrap"
+								   Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
+						<TextBlock FontSize="56" Foreground="#AAAAAA" TextAlignment="Center" Text=":)" />
 					</StackPanel>
 					<ProgressRing Grid.RowSpan="2" Foreground="{StaticResource ApricotFontPrimaryBrush}" IsActive="{Binding Model.IsLoading}" />
 				</Grid>

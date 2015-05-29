@@ -9,10 +9,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
+using System.Diagnostics;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
+//todo: Review the exceptions.
 namespace Apricot.Shared.ViewModels
 {
     /// <summary>
@@ -210,8 +212,16 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _AddPhoto(string photo)
         {
-            var bitmap = await BitmapImageExtensions.FromBase64(photo);
-            Model.Details.Photos.Add(bitmap);
+            try
+            {
+                var bitmap = await BitmapImageExtensions.FromBase64(photo);
+                Model.Details.Photos.Add(bitmap);
+            }
+            catch (Exception e)
+            {
+                // An exception can be launched if the Base64 value has an error
+                Debug.WriteLine(e);
+            }
         }
 
         /// <summary>
@@ -219,15 +229,22 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadDetailsAsync()
         {
-            var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
-            Model.Details = new PlantDetailsModel {Variety = details.Variety};
-
-            if (details.Photos != null)
+            try
             {
-                foreach (var photo in details.Photos)
+                var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
+                Model.Details = new PlantDetailsModel {Variety = details.Variety};
+
+                if (details.Photos != null)
                 {
-                    _AddPhoto(photo);
+                    foreach (var photo in details.Photos)
+                    {
+                        _AddPhoto(photo);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
             }
         }
 
@@ -258,7 +275,14 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadLatestMeasureAsync()
         {
-            Model.LatestMeasure = await _measureService.GetLast(Model.Identifier);
+            try
+            {
+                Model.LatestMeasure = await _measureService.GetLast(Model.Identifier);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
         /// <summary>

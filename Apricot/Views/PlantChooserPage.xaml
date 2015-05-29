@@ -11,13 +11,14 @@
 	  DataContext="{Binding PlantChooser, Source={StaticResource Locator}}"
 	  mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantChooserSampleData}">
 
-
+	<!-- Behaviors. -->
 	<interactivity:Interaction.Behaviors>
 		<core:EventTriggerBehavior EventName="Loaded">
 			<core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
 		</core:EventTriggerBehavior>
 	</interactivity:Interaction.Behaviors>
 
+	<!-- Application bar. -->
 	<Page.BottomAppBar>
 		<CommandBar Background="{StaticResource ApricotPrimaryBrush}"
 					Foreground="{StaticResource ApricotSecondaryBrush}">
@@ -36,6 +37,7 @@
 		</CommandBar>
 	</Page.BottomAppBar>
 
+	<!-- Resources. -->
 	<Page.Resources>
 		<!-- Converters. -->
 		<converters:InverterBooleanVisibilityConverter x:Key="InverterBooleanVisibilityConverter"/>
@@ -189,6 +191,7 @@
 		</Style>
 	</Page.Resources>
 
+	<!-- Content. -->
 	<Grid>
 		<Hub x:Uid="MyGarden" Header="Etiam eget">
 			<Hub.HeaderTemplate>
@@ -229,11 +232,11 @@
 					<Grid>
 						<StackPanel Margin="12" VerticalAlignment="Center" Visibility="{Binding Model.HasFavorites, Converter={StaticResource InverterBooleanVisibilityConverter}}">
 							<TextBlock x:Uid="NoPlantFavorites" 
-							TextAlignment="Center"
-							Foreground="#AAAAAA"
-							FontSize="24"
-							TextWrapping="Wrap"
-							Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
+									   TextAlignment="Center"
+									   Foreground="#AAAAAA"
+									   FontSize="24"
+									   TextWrapping="Wrap"
+									   Text="Aliquam nulla metus, sodales nec mi at, lobortis feugiat mi."/>
 							<TextBlock FontSize="56" Foreground="#AAAAAA" TextAlignment="Center" Text=":(" />
 						</StackPanel>
 						<ListView ItemsSource="{Binding Model.Favorites}" ItemTemplate="{StaticResource PlantDataTemplate}" />

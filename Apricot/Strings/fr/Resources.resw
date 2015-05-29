@@ -234,4 +234,7 @@
   <data name="MyGardenPivot.Title" xml:space="preserve">
     <value>Mon jardin</value>
   </data>
+  <data name="NoAlert.Text" xml:space="preserve">
+    <value>Aucune alerte pour le moment.</value>
+  </data>
 </root>
