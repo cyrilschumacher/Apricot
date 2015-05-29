@@ -237,4 +237,13 @@
   <data name="NoAlert.Text" xml:space="preserve">
     <value>Aucune alerte pour le moment.</value>
   </data>
+  <data name="_Humidity" xml:space="preserve">
+    <value>Humidité</value>
+  </data>
+  <data name="_Luminosity" xml:space="preserve">
+    <value>Luminosité</value>
+  </data>
+  <data name="_Temperature" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
 </root>

@@ -166,6 +166,22 @@
             </DataTemplate>
         </Hub.HeaderTemplate>
         <HubSection Width="800">
+            <HubSection.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Foreground="{StaticResource ApricotFontPrimaryBrush}" FontSize="32" Text="{Binding}"/>
+                </DataTemplate>
+            </HubSection.HeaderTemplate>
+            <interactivity:Interaction.Behaviors>
+                <core:DataTriggerBehavior Binding="{Binding Model.Name}" Value="Humidity">
+                    <core:ChangePropertyAction PropertyName="Header" Value="{Binding CommonResources.Humidity, Source={StaticResource LocalizedStrings}}"/>
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Model.Name}" Value="Luminosity">
+                    <core:ChangePropertyAction PropertyName="Header" Value="{Binding CommonResources.Luminosity, Source={StaticResource LocalizedStrings}}"/>
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Model.Name}" Value="Temperature">
+                    <core:ChangePropertyAction PropertyName="Header" Value="{Binding CommonResources.Temperature, Source={StaticResource LocalizedStrings}}"/>
+                </core:DataTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
             <HubSection.ContentTemplate>
                 <DataTemplate>
                     <Grid>
@@ -251,7 +267,7 @@
                                Text="Phasellus ligula mi" />
                             <Slider x:Name="HoursSlider"
                             Grid.Row="1" Grid.Column="1"
-                            Minimum="1" Maximum="72" LargeChange="6" Value="{Binding Model.Hours, Mode=TwoWay}"
+                            Minimum="1" Maximum="35" Value="{Binding Model.Hours, Mode=TwoWay}"
                             TickFrequency="1000">
                                 <interactivity:Interaction.Behaviors>
                                     <core:EventTriggerBehavior EventName="ValueChanged">

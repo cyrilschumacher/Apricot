@@ -20,7 +20,9 @@ namespace Apricot.Shared.Models.ViewModels
         /// </summary>
         private RemainingTimeServiceModel _remainingTime;
 
-        //todo: add documentation.
+        /// <summary>
+        ///     Temperature and humidity alerts.
+        /// </summary>
         private AlertServiceModel _alert;
 
         /// <summary>

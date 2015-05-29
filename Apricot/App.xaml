@@ -8,8 +8,9 @@
     	<ResourceDictionary>
     		<ResourceDictionary.MergedDictionaries>
     			<ResourceDictionary Source="Assets/Styles/ApricotDictionary.xaml"/>
-    		</ResourceDictionary.MergedDictionaries>
-    		<local:ViewModelLocator x:Key="Locator" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:LocalizedStrings x:Key="LocalizedStrings" />
+            <local:ViewModelLocator x:Key="Locator" />
     	</ResourceDictionary>
     </Application.Resources>
 </Application>

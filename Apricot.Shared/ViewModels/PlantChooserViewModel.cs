@@ -114,7 +114,9 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async Task _LoadPlantAsync()
         {
+            // Rearranges the list: active plants are positioned at the top of the list.
             var plant = await _plantService.GetPlantsAsync();
+            plant = plant.OrderBy(x => x.Identifier).Reverse().ToList();
 
             // Clear and adds existing plant.
             Model.Plant.Clear();
