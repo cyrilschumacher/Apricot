@@ -20,7 +20,7 @@ namespace Apricot.Tasks
         /// <summary>
         ///     Time limit (in seconds).
         /// </summary>
-        private const int TimeLimit = 3600;
+        private const int TimeLimit = (8 * 3600);
 
         #endregion Constants.
 

@@ -31,7 +31,7 @@ namespace Apricot.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             long timeStamp;
-            if (!long.TryParse(value.ToString(), out timeStamp))
+            if ((value == null) || !long.TryParse(value.ToString(), out timeStamp))
             {
                 return value;
             }

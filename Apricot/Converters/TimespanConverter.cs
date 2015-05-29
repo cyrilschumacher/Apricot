@@ -3,14 +3,21 @@ using Windows.UI.Xaml.Data;
 
 namespace Apricot.Converters
 {
-    //todo: Add documentation.
-    //todo: To fix
-    public class TimespanConverter : IValueConverter
+    /// <summary>
+    ///     Converter type to <see cref="TimeSpan"/> type.
+    /// </summary>
+    public class TimeSpanConverter : IValueConverter
     {
+        #region Constants.
+
         /// <summary>
         ///     Default format of <see cref="TimeSpan" />.
         /// </summary>
         private const string DefaultFormat = @"d\:hh\:mm";
+
+        #endregion Constants.
+
+        #region Methods.
 
         /// <summary>
         ///     Modifies the source data before passing it to the target for display in the UI.
@@ -46,5 +53,7 @@ namespace Apricot.Converters
         {
             throw new NotImplementedException();
         }
+
+        #endregion Methods.
     }
 }

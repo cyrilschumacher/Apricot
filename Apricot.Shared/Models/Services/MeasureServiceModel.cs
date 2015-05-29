@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace Apricot.Shared.Models.Services
 {
@@ -17,21 +18,24 @@ namespace Apricot.Shared.Models.Services
         ///     Gets or sets a humidity.
         /// </summary>
         /// <value>The humidity.</value>
-        [JsonProperty("humidity")]
+        [JsonProperty("humidity", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(0)]
         public double? Humidity { get; set; }
 
         /// <summary>
         ///     Gets or sets a luminosity.
         /// </summary>
         /// <value>The luminosity.</value>
-        [JsonProperty("sunny")]
+        [JsonProperty("sunny", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(0)]
         public double? Luminosity { get; set; }
 
         /// <summary>
         ///     Gets or sets a temperature.
         /// </summary>
         /// <value>The temperature.</value>
-        [JsonProperty("temp")]
+        [JsonProperty("temp", DefaultValueHandling = DefaultValueHandling.Populate)]
+        [DefaultValue(0)]
         public double? Temperature { get; set; }
     }
 }

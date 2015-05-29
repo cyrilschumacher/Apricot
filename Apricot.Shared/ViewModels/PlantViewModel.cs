@@ -306,6 +306,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _ResetDetails()
         {
+            Model.Alert = new AlertServiceModel();
             Model.Details = new PlantDetailsModel();
         }
 
