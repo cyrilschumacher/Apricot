@@ -45,15 +45,6 @@
 		<!-- DateTemplates. -->
 		<DataTemplate x:Key="PlantDataTemplate">
 			<ListViewItem Background="#F5F5F5" HorizontalContentAlignment="Stretch" Margin="0,3">
-				<interactivity:Interaction.Behaviors>
-					<core:DataTriggerBehavior  Binding="{Binding IsActive}" Value="False">
-						<core:ChangePropertyAction TargetObject="{Binding ElementName=ActiveBorder}" PropertyName="Visibility" Value="Collapsed" />
-					</core:DataTriggerBehavior>
-					<core:DataTriggerBehavior Binding="{Binding IsActive}" Value="True">
-						<core:ChangePropertyAction TargetObject="{Binding ElementName=InactiveBorder}" PropertyName="Visibility" Value="Collapsed" />
-					</core:DataTriggerBehavior>
-				</interactivity:Interaction.Behaviors>
-
 				<Grid Margin="12,3" HorizontalAlignment="Stretch">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="3*" />
@@ -65,6 +56,22 @@
 								Background="#8BC34A"
 								BorderBrush="#8BC34A"
 								BorderThickness="1">
+							<interactivity:Interaction.Behaviors>
+								<core:DataTriggerBehavior  Binding="{Binding IsActive}" Value="True">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Visible</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+								<core:DataTriggerBehavior Binding="{Binding IsActive}" Value="False">
+									<core:ChangePropertyAction PropertyName="Visibility">
+										<core:ChangePropertyAction.Value>
+											<Visibility>Collapsed</Visibility>
+										</core:ChangePropertyAction.Value>
+									</core:ChangePropertyAction>
+								</core:DataTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
 							<TextBlock x:Uid="Active"
 									   Style="{StaticResource TitleTextBlockStyle}"
 									   FontSize="15"
@@ -78,6 +85,22 @@
 								BorderBrush="#9E9E9E"
 								BorderThickness="1"
 								VerticalAlignment="Center">
+								<interactivity:Interaction.Behaviors>
+									<core:DataTriggerBehavior  Binding="{Binding IsActive}" Value="False">
+										<core:ChangePropertyAction PropertyName="Visibility">
+											<core:ChangePropertyAction.Value>
+												<Visibility>Visible</Visibility>
+											</core:ChangePropertyAction.Value>
+										</core:ChangePropertyAction>
+									</core:DataTriggerBehavior>
+									<core:DataTriggerBehavior Binding="{Binding IsActive}" Value="True">
+										<core:ChangePropertyAction PropertyName="Visibility">
+											<core:ChangePropertyAction.Value>
+												<Visibility>Collapsed</Visibility>
+											</core:ChangePropertyAction.Value>
+										</core:ChangePropertyAction>
+									</core:DataTriggerBehavior>
+								</interactivity:Interaction.Behaviors>
 							<TextBlock x:Uid="Inactive"
 								Style="{StaticResource TitleTextBlockStyle}"
 								FontSize="15"
@@ -202,6 +225,8 @@
 					</StackPanel>
 				</DataTemplate>
 			</Hub.HeaderTemplate>
+			
+			<!-- Plants. -->
 			<HubSection x:Uid="Plant" Header="Vestibulum">
 				<HubSection.HeaderTemplate>
 					<DataTemplate>
@@ -222,6 +247,8 @@
 					</Grid>
 				</DataTemplate>
 			</HubSection>
+			
+			<!-- Favorites. -->
 			<HubSection x:Uid="Favorites" Header="Ante">
 				<HubSection.HeaderTemplate>
 					<DataTemplate>

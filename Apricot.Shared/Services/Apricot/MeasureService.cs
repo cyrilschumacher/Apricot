@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Apricot.Shared.Models.Services;
 
@@ -45,7 +46,7 @@ namespace Apricot.Shared.Services.Apricot
         public async Task<List<AllMeasuresServiceModel>> GetAll(int plantIdentifier, int numberHours)
         {
             var serviceUri = string.Format(AllMeasureServiceName, plantIdentifier, numberHours);
-            return await GetAsync<List<AllMeasuresServiceModel>>(serviceUri);
+            return await GetAsync<List<AllMeasuresServiceModel>>(serviceUri, TimeSpan.FromSeconds(5));
         }
 
         #endregion Methods.
