@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Windows.Phone.UI.Input;
@@ -25,7 +26,7 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Duration before refreshing hours (to milliseconds).
         /// </summary>
-        private const int RefreshingHoursDuration = 150;
+        private const int RefreshingHoursDuration = 1000;
 
         #endregion Constants.
 
@@ -210,12 +211,11 @@ namespace Apricot.Shared.ViewModels
                 // Create a counter and
                 // and selects the requested property.
                 var i = 0;
-                Model.Measures =
-                    measures.Select(measure => new {X = i++, Y = measure.Measure.GetPropertyValue(Model.Name)});
+                Model.Measures = measures.Select(measure => new {X = i++, Y = measure.Measure.GetPropertyValue(Model.Name)});
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //todo: Manage errors.
+                Debug.WriteLine(e);
             }
             finally
             {

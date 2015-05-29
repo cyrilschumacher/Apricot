@@ -18,6 +18,11 @@ namespace Apricot.Shared.Services.Apricot
         #region Constants.
 
         /// <summary>
+        ///     Request timeout (in milliseconds).
+        /// </summary>
+        private const int HttpClientTimeout = 3000;
+
+        /// <summary>
         ///     Server address.
         /// </summary>
         //private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
@@ -51,7 +56,7 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         protected AbstractApricotService()
         {
-            _httpClient = new HttpClient();
+            _httpClient = new HttpClient {Timeout = TimeSpan.FromMilliseconds(HttpClientTimeout)};
             _httpClient.DefaultRequestHeaders.IfModifiedSince = new DateTimeOffset(DateTime.UtcNow);
             _jsonSerializerSettings = new JsonSerializerSettings
             {
@@ -144,7 +149,7 @@ namespace Apricot.Shared.Services.Apricot
             // Obtains the absolute URL (with the URI address of service) and sends a HTTP request.
             var requestUri = _GetServerAddress(serviceUri);
 
-            Debug.WriteLine("Require URI: {0}", requestUri);
+            Debug.WriteLine("URI request: {0}", requestUri);
             var response = await _httpClient.GetAsync(requestUri, cancellationToken.Value);
 
             return await _ReadContentHttpResponse<TModel>(response);
@@ -166,7 +171,7 @@ namespace Apricot.Shared.Services.Apricot
             // adds content and sends a HTTP request.
             var requestUri = _GetServerAddress(serviceUri);
 
-            Debug.WriteLine("Require URI: {0}", requestUri);
+            Debug.WriteLine("URI request: {0}", requestUri);
             var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
 
             await _httpClient.PostAsync(requestUri, httpContent, cancellationToken.Value);
