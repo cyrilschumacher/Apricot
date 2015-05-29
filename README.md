@@ -1,6 +1,21 @@
 # Apricot
-Application Windows Phone pour le projet **Développement Embarqué** dans le cadre de la 4ème année à l'exia.cesi de Nancy.
+Application Windows Phone pour le projet **Développement Embarqué** dans le cadre de la 4ème année à l'[exia.cesi](http://www.exia-nancy.com/) de Nancy.
 
+## Objectifs
+Les objectifs de cette application sont d'**afficher les plantes actives** (et inactives), les **mesures en temps réel** et selon 
+une période exprimées en heures et les **informations sur les variétés**.
+
+## Bibliothèques
+Plusieurs bibliothèques ont été utilisées pour le développement de cette application :
+
+### MVVM Light
+L'utilisation de cette bibliothèque a permis de construire une application qui se repose sur une architecture MVVM.
+
+### WinRT XAML Toolkit
+Les composants de la bibliothèque ont donné la possibilité d'afficher les mesures retournées par le service web sous forme graphique.
+
+### Json.NET
+Les bibliothèques de Windows Runtime fournissent des classes permettant la sérialisation et la déserialisation de données JSON. La bibliothèque apporte, en plus de la fonctionnalité de base, des convertisseurs. Elle sera utilisée pour l'échange de données JSON entre l'application mobile et les services web.
 
 ## Copyright
 
