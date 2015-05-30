@@ -12,12 +12,9 @@ using System.Windows.Input;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.Graphics.Imaging;
-using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Apricot.WebServices.Plant;
 
@@ -39,11 +36,6 @@ namespace Apricot.Shared.ViewModels
         #endregion Constants.
 
         #region Members.
-
-        /// <summary>
-        ///     Application windows (with its thread).
-        /// </summary>
-        private readonly CoreApplicationView _coreApplicationView;
 
         /// <summary>
         ///     Navigation service.
@@ -118,7 +110,6 @@ namespace Apricot.Shared.ViewModels
             if (!IsInDesignMode)
             {
                 // Initialize members.
-                _coreApplicationView = CoreApplication.GetCurrentView();
                 _navigationService = navigationService;
                 _plantService = new PlantService();
                 _varietyPlantService = new VarietyPlantService();
@@ -149,31 +140,13 @@ namespace Apricot.Shared.ViewModels
             // Test if the command of create a new plant is available.
             CreateCommand.RaiseCanExecuteChanged();
         }
-        
-        /// <summary>
-        ///     Occurs when the user presses the hardware Back button.
-        /// </summary>
-        /// <param name="sender">The object sender.</param>
-        /// <param name="e">The parameters.</param>
-        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
-        {
-            // Handles the back button for avoid a application suspension.
-            e.Handled = true;
-
-            // Navigates to the previous page if the root frame is obtained.
-            var rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null)
-            {
-                rootFrame.GoBack();
-            }
-        }
 
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
         {
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
+            // Initializes events.
             Model.PropertyChanged += _OnPropertyChanged;
 
             _LoadPlantVarietiesAsync();
@@ -184,28 +157,8 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private void _OnUnloaded()
         {
-            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
+            // Initializes events.
             Model.PropertyChanged -= _OnPropertyChanged;
-        }
-
-        /// <summary>
-        ///     Occurs when the view is activated.
-        /// </summary>
-        /// <param name="sender">The object sender.</param>
-        /// <param name="e">The parameters.</param>
-        private void _OnViewActivated(CoreApplicationView sender, IActivatedEventArgs e)
-        {
-            _coreApplicationView.Activated -= _OnViewActivated;
-
-            // Obtains all files and
-            // checks if, one at least file exists.
-            var fileOpenPickerEventArgs = e as FileOpenPickerContinuationEventArgs;
-            if ((fileOpenPickerEventArgs != null) && (fileOpenPickerEventArgs.Files.Count > 0))
-            {
-                // Obtains photo and adds its.
-                var file = fileOpenPickerEventArgs.Files.First();
-                _AddPhotoAsync(file);
-            }
         }
 
         #endregion Events.
@@ -312,10 +265,8 @@ namespace Apricot.Shared.ViewModels
         /// <summary>
         ///     Show the photos selector.
         /// </summary>
-        private void _ShowPhotosSelector()
+        private async void _ShowPhotosSelector()
         {
-            _coreApplicationView.Activated += _OnViewActivated;
-
             var filePicker = new FileOpenPicker
             {
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary,
@@ -323,7 +274,13 @@ namespace Apricot.Shared.ViewModels
             };
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
-            filePicker.PickSingleFileAndContinue();
+
+            var files = await filePicker.PickMultipleFilesAsync();
+            foreach (var file in files)
+            {
+                // Obtains photo and adds its.
+                _AddPhotoAsync(file);
+            }
         }
 
         #endregion Methods.

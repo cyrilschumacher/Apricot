@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
-using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Apricot.Shared.Extensions;
 using Apricot.WebServices.Models.Plant;
 using Apricot.WebServices.Plant;
@@ -120,30 +118,11 @@ namespace Apricot.Shared.ViewModels
         #region Events.
 
         /// <summary>
-        ///     Occurs when the user presses the hardware Back button.
-        /// </summary>
-        /// <param name="sender">The object sender.</param>
-        /// <param name="e">The parameters.</param>
-        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
-        {
-            // Handles the back button for avoid a application suspension.
-            e.Handled = true;
-
-            // Navigates to the previous page if the root frame is obtained.
-            var rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null)
-            {
-                rootFrame.GoBack();
-            }
-        }
-
-        /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
         {
             // Initializes events.
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
             _refreshTimer.Tick += _OnRefreshTimerTick;
 
             // Unregister messengers.
@@ -156,7 +135,6 @@ namespace Apricot.Shared.ViewModels
         private void _OnUnloaded()
         {
             // Initializes events.
-            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
             _refreshTimer.Tick -= _OnRefreshTimerTick;
         }
 

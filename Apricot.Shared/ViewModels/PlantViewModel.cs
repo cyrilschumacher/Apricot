@@ -8,9 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Diagnostics;
-using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Apricot.WebServices.Models.Plant;
 using Apricot.WebServices.Plant;
 
@@ -123,24 +121,6 @@ namespace Apricot.Shared.ViewModels
         #region Events.
 
         /// <summary>
-        ///     Occurs when the user presses the hardware Back button.
-        /// </summary>
-        /// <param name="sender">The object sender.</param>
-        /// <param name="e">The parameters.</param>
-        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
-        {
-            // Handles the back button for avoid a application suspension.
-            e.Handled = true;
-
-            // Navigates to the previous page if the root frame is obtained.
-            var rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null)
-            {
-                rootFrame.GoBack();
-            }
-        }
-
-        /// <summary>
         ///     Raises the Loaded event.
         /// </summary>
         private void _OnLoaded()
@@ -155,7 +135,6 @@ namespace Apricot.Shared.ViewModels
 
             // Initializes events.
             _realTimeMeasureTimer.Tick += _RefreshMeasure;
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
 
             // Reloads the latest measure by a duration.
             _realTimeMeasureTimer.Start();
@@ -185,7 +164,6 @@ namespace Apricot.Shared.ViewModels
         {
             // Removes events.
             _realTimeMeasureTimer.Tick -= _RefreshMeasure;
-            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
 
             // Stops the timer.
             _realTimeMeasureTimer.Stop();

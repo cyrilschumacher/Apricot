@@ -1,10 +1,6 @@
 ﻿using System.Windows.Input;
 using Apricot.Shared.Models.ViewModels;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using Windows.Phone.UI.Input;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Apricot.WebServices.Plant;
 
 namespace Apricot.Shared.ViewModels
@@ -66,8 +62,6 @@ namespace Apricot.Shared.ViewModels
 
                 // Initialize properties.
                 Model = new VarietyDetailsModel();
-                OnLoadedCommand = new RelayCommand(_OnLoaded);
-                OnUnloadedCommand = new RelayCommand(_OnUnloaded);
 
                 // Register messengers.
                 MessengerInstance.Register<int>(this, _OnPlantIdentifierMessage);
@@ -79,42 +73,6 @@ namespace Apricot.Shared.ViewModels
         #region Methods.
 
         #region Events.
-
-        /// <summary>
-        ///     Occurs when the user presses the hardware Back button.
-        /// </summary>
-        /// <param name="sender">The object sender.</param>
-        /// <param name="e">The parameters.</param>
-        private void _OnHardwareButtonsOnBackPressed(object sender, BackPressedEventArgs e)
-        {
-            // Handles the back button for avoid a application suspension.
-            e.Handled = true;
-
-            // Navigates to the previous page if the root frame is obtained.
-            var rootFrame = Window.Current.Content as Frame;
-            if (rootFrame != null)
-            {
-                rootFrame.GoBack();
-            }
-        }
-
-        /// <summary>
-        ///     Raises the Loaded event.
-        /// </summary>
-        private void _OnLoaded()
-        {
-            // Initializes events.
-            HardwareButtons.BackPressed += _OnHardwareButtonsOnBackPressed;
-        }
-
-        /// <summary>
-        ///     Raises the Unloaded event.
-        /// </summary>
-        private void _OnUnloaded()
-        {
-            // Removes events.
-            HardwareButtons.BackPressed -= _OnHardwareButtonsOnBackPressed;
-        }
 
         /// <summary>
         ///     Receives the plant identifier.

@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -34,12 +35,44 @@ namespace Apricot
         public App()
         {
             InitializeComponent();
+
+            // Initializes events.
             Suspending += OnSuspending;
+            HardwareButtons.BackPressed += OnBackPressed;
         }
 
         #endregion Constructors.
 
         #region Methods.
+
+        /// <summary>
+        ///     Raises when the back button is tapped.
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">The parameters.</param>
+        private void OnBackPressed(object sender, BackPressedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            if ((frame != null) && frame.CanGoBack)
+            {
+                e.Handled = true;
+                frame.GoBack();
+            }
+        }
+
+        /// <summary>
+        ///     Restores the content transitions after the app has launched.
+        /// </summary>
+        /// <param name="sender">The object where the handler is attached.</param>
+        /// <param name="e">Details about the navigation event.</param>
+        private void OnFirstNavigated(object sender, NavigationEventArgs e)
+        {
+            var rootFrame = sender as Frame;
+            if (rootFrame != null)
+            {
+                rootFrame.Navigated -= OnFirstNavigated;
+            }
+        }
 
         /// <summary>
         ///     Invoked when the application is launched normally by the end user.  Other entry points
@@ -82,7 +115,7 @@ namespace Apricot
                 }
 
                 rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += RootFrame_FirstNavigated;
+                rootFrame.Navigated += OnFirstNavigated;
 
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
@@ -101,20 +134,6 @@ namespace Apricot
         }
 
         /// <summary>
-        ///     Restores the content transitions after the app has launched.
-        /// </summary>
-        /// <param name="sender">The object where the handler is attached.</param>
-        /// <param name="e">Details about the navigation event.</param>
-        private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
-        {
-            var rootFrame = sender as Frame;
-            if (rootFrame != null)
-            {
-                rootFrame.Navigated -= RootFrame_FirstNavigated;
-            }
-        }
-
-        /// <summary>
         ///     Invoked when application execution is being suspended.  Application state is saved
         ///     without knowing whether the application will be terminated or resumed with the contents
         ///     of memory still intact.
@@ -129,7 +148,6 @@ namespace Apricot
                 deferral.Complete();
             }
         }
-
 
         /// <summary>
         ///     Registers tasks.
