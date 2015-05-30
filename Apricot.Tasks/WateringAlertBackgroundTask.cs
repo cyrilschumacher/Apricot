@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Resources;
+using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Apricot.WebServices.Models.Plant;
 using Apricot.WebServices.Plant;
@@ -20,8 +21,7 @@ namespace Apricot.Tasks
         /// <summary>
         ///     Time limit (in seconds).
         /// </summary>
-        //todo: Update value.
-        private const int TimeLimit = (3 * 86400);
+        private const int TimeLimit = (6*3600);
 
         #endregion Constants.
 
@@ -69,19 +69,37 @@ namespace Apricot.Tasks
         private async Task _CheckActivePlantAsync()
         {
             var activePlant = await _GetActivePlantsAsync();
-
             foreach (var plant in activePlant)
             {
                 var timeRemaining = await _alertService.GetTimeRemainingAsync(plant.Identifier);
-                var time = new TimeSpan(0, 0, (int)timeRemaining.LeftTime);
-                var timeLimit = new TimeSpan(0, 0, TimeLimit);
-
-                if (time.CompareTo(timeLimit) < 0)
+                if (_HasExceededThreshold((int) timeRemaining.LeftTime))
                 {
-                    _SendToast(plant);
+                    var toastTemplate = _CreateToastTemplate(plant);
+                    _SendToast(toastTemplate);
                 }
-
             }
+        }
+
+        /// <summary>
+        ///     Creates a toast template by a plant informations.
+        /// </summary>
+        /// <param name="plant">The plant informations.</param>
+        /// <returns>The toast template in XML format.</returns>
+        private XmlDocument _CreateToastTemplate(PlantServiceModel plant)
+        {
+            const ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
+            var template = ToastNotificationManager.GetTemplateContent(toastTemplate);
+            var textElements = template.GetElementsByTagName("text");
+
+            // Title.
+            var title = _resources.GetString("NeedWatering");
+            textElements[0].AppendChild(template.CreateTextNode(title));
+            // Description.
+            var description = _resources.GetString("NeedWatered");
+            description = string.Format(description, plant.Name);
+            textElements[1].AppendChild(template.CreateTextNode(description));
+
+            return template;
         }
 
         /// <summary>
@@ -95,32 +113,36 @@ namespace Apricot.Tasks
         }
 
         /// <summary>
+        ///     Determines whether the threshold has been exceeded.
+        /// </summary>
+        /// <param name="leftTime">The left time.</param>
+        /// <returns>True if the threshold has been exceeded, otherwise, False.</returns>
+        private static bool _HasExceededThreshold(int leftTime)
+        {
+            var time = new TimeSpan(0, 0, leftTime);
+            var timeLimit = new TimeSpan(0, 0, TimeLimit);
+
+            return (time.CompareTo(timeLimit) < 0);
+        }
+
+        /// <summary>
         ///     Sends the Toast notification.
         /// </summary>
-        private void _SendToast(PlantServiceModel plant)
+        private static void _SendToast(XmlDocument toastTemplate)
         {
-            const ToastTemplateType toastTemplate = ToastTemplateType.ToastText02;
-            var toastXml = ToastNotificationManager.GetTemplateContent(toastTemplate);
-            var textElements = toastXml.GetElementsByTagName("text");
-
-            // Title.
-            var title = _resources.GetString("NeedWatering");
-            textElements[0].AppendChild(toastXml.CreateTextNode(title));
-            // Description.
-            var description = _resources.GetString("NeedWatered");
-            description = string.Format(description, plant.Name);
-            textElements[1].AppendChild(toastXml.CreateTextNode(description));
-
-            ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(toastXml));
+            var notification = new ToastNotification(toastTemplate);
+            ToastNotificationManager.CreateToastNotifier().Show(notification);
         }
 
         #endregion Private methods.
 
         /// <summary>
-        ///     Performs the work of a background task. The system calls this method when the associated background task has been triggered.
+        ///     Performs the work of a background task. The system calls this method when the associated background task has been
+        ///     triggered.
         /// </summary>
         /// <param name="taskInstance">
-        ///     An interface to an instance of the background task. The system creates this instance when the task has been triggered to run.
+        ///     An interface to an instance of the background task. The system creates this instance when the task has been
+        ///     triggered to run.
         /// </param>
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
