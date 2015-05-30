@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Apricot.WebServices.Models.Plant
 {
     /// <summary>
+    ///     Model for obtains the measure.
     /// </summary>
     public class MeasureServiceModel
     {
@@ -20,7 +21,7 @@ namespace Apricot.WebServices.Models.Plant
         /// <value>The humidity.</value>
         [JsonProperty("humidity", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
-        public double? Humidity { get; set; }
+        public double Humidity { get; set; }
 
         /// <summary>
         ///     Gets or sets a luminosity.
@@ -28,7 +29,7 @@ namespace Apricot.WebServices.Models.Plant
         /// <value>The luminosity.</value>
         [JsonProperty("sunny", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
-        public double? Luminosity { get; set; }
+        public double Luminosity { get; set; }
 
         /// <summary>
         ///     Gets or sets a temperature.
@@ -36,6 +37,6 @@ namespace Apricot.WebServices.Models.Plant
         /// <value>The temperature.</value>
         [JsonProperty("temp", DefaultValueHandling = DefaultValueHandling.Populate)]
         [DefaultValue(0)]
-        public double? Temperature { get; set; }
+        public double Temperature { get; set; }
     }
 }

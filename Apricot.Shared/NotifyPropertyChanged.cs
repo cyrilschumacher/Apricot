@@ -10,64 +10,68 @@ namespace Apricot.Shared
     /// </summary>
     public abstract class NotifyPropertyChanged : INotifyPropertyChanged
     {
-        #region Événements.
+        #region Members.
 
         /// <summary>
-        ///     Se produit lorsqu'une valeur de propriété est modifiée.
+        ///     Raises when a property value is updated.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
+        #endregion Members.
 
-        #region Méthodes.
+        #region Methods.
 
         /// <summary>
-        /// 
-        ///     Notifie un changement selon le nom du composant.
+        ///     Notify a update by the component name.
         /// </summary>
-        /// <param name="propertyName">Nom de la propriété.</param>
+        /// <param name="propertyName">The property name. This parameter is optional: the name is obtained if this method is called in a property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName", "The parameter is null or empty.");
+            }
+
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>
-        ///     Notifie un changement selon un objet représentant le composant.
+        ///     Notify a update by a component object.
         /// </summary>
-        /// <param name="args">Composant.</param>
+        /// <param name="args">The component.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
         {
             try
             {
-                if (PropertyChanged == null) return;
-
-                Debug.WriteLine("Notification de changement sur la propriété : {0}", args.PropertyName);
-                PropertyChanged(this, args);
+                if (PropertyChanged != null)
+                {
+                    Debug.WriteLine("Update notification on the property: {0}", args.PropertyName);
+                    PropertyChanged(this, args);
+                }
             }
             catch (Exception e)
             {
-                Debug.WriteLine("La propriété n'a pas pu être notifiée : {0} suite à une erreur : {1}", args.PropertyName, e.Message);
-                Debug.WriteLine("StackTrace : {0}", e.StackTrace);
+                Debug.WriteLine("The property has couldn't be notified: {0} following an error: {1}", args.PropertyName, e.Message);
             }
         }
 
         /// <summary>
-        ///     Change la valeur et notifie un changement.
+        ///     Update and notify a value.
         /// </summary>
-        /// <typeparam name="T">Type générique.</typeparam>
-        /// <param name="property">Valeur de la propriété.</param>
-        /// <param name="value">Nouvelle valeur a affecter.</param>
-        /// <param name="propertyName">
-        ///     Nom de la propriété.
-        ///     Ce paramètre est facultatif et est marqué de l'attribut <see cref="System.Runtime.CompilerServices.CallerMemberNameAttribute"/>.
-        ///     En appelant cette méthode, le paramètre prend le nom de la propriété appelante.
-        /// </param>
-        /// <returns>True si la propriété a été notifiée et changée, False dans le cas contraire.</returns>
+        /// <typeparam name="T">The generic type.</typeparam>
+        /// <param name="property">The property value.</param>
+        /// <param name="value">The new value of the property.</param>
+        /// <param name="propertyName">The property name. This parameter is optional: the name is obtained if this method is called in a property.</param>
+        /// <returns>True if the property is update and notified, otherwise, False.</returns>
         protected bool SetValueProperty<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
         {
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException("propertyName", "The parameter is null or empty.");
+            }
             if (Equals(property, value) && (propertyName != null))
             {
-                Debug.WriteLine("La propriété n'a pas pu être notifiée : {0} car la valeur précédente est identique à la nouvelle valeur.", propertyName);
+                Debug.WriteLine("The property has couldn't be notified: {0} because the previous value is identical to the new value.", propertyName);
                 return false;
             }
 
@@ -76,6 +80,6 @@ namespace Apricot.Shared
             return true;
         }
 
-        #endregion
+        #endregion Methods.
     }
 }

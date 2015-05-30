@@ -61,6 +61,7 @@ namespace Apricot.Shared.Services
         /// <returns>The plant favorites.</returns>
         private IList<int> _GetFavorites()
         {
+            // Create a favorites list if it doesn't exists.
             _CreateFavorites();
 
             var favorites = _settingsDataContainer.Values[PlantFavoritesSettingsName] as string;

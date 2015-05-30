@@ -7,6 +7,8 @@ namespace Apricot.WebServices.Models.Plant
     /// </summary>
     public class VarietyDetailsServiceModel
     {
+        #region Properties.
+
         /// <summary>
         ///     Gets or sets a plant identifier.
         /// </summary>
@@ -42,5 +44,7 @@ namespace Apricot.WebServices.Models.Plant
         /// </summary>
         [JsonProperty("maxHumidityNeedPlant")]
         public int MaximumHumidity { get; set; }
+
+        #endregion Properties.
     }
 }
