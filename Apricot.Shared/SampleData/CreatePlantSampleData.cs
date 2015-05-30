@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
-using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
+using Apricot.WebServices.Models.Plant;
 
 namespace Apricot.Shared.SampleData
 {
@@ -45,9 +45,9 @@ namespace Apricot.Shared.SampleData
                 Name = "Etiam vulputate purus",
                 Varieties = new ObservableCollection<VarietiesServiceModel>
                 {
-                    new VarietiesServiceModel {Id = 0, Name = "velit et"},
-                    new VarietiesServiceModel {Id = 1, Name = "in est culpa amet"},
-                    new VarietiesServiceModel {Id = 2, Name = "veniam nulla"}
+                    new VarietiesServiceModel {Identifier = 0, Name = "velit et"},
+                    new VarietiesServiceModel {Identifier = 1, Name = "in est culpa amet"},
+                    new VarietiesServiceModel {Identifier = 2, Name = "veniam nulla"}
                 }
             };
 

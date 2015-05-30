@@ -1,4 +1,4 @@
-﻿namespace Apricot.Shared.Models.Services
+﻿namespace Apricot.WebServices.Models.Server
 {
     /// <summary>
     ///     Model for server health.

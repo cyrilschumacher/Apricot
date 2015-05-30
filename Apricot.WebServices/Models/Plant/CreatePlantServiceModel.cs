@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Apricot.Shared.Models.Services
+namespace Apricot.WebServices.Models.Plant
 {
     /// <summary>
     ///     Model for create a new plant.

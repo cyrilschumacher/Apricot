@@ -1,12 +1,12 @@
-﻿using Apricot.Shared.Models.Services;
-using Apricot.Shared.Services.Apricot;
+﻿using Apricot.Shared.Models.ViewModels;
+using Apricot.WebServices.Models.Server;
+using Apricot.WebServices.Server;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Apricot.Shared.Models.ViewModels;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -89,7 +89,7 @@ namespace Apricot.Shared.ViewModels
         {
             _navigationService.NavigateTo("PlantChooser");
         }
-    
+
         /// <summary>
         ///     Raises the Loaded event.
         /// </summary>

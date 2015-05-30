@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Apricot.Shared.Models.Services
+namespace Apricot.WebServices.Models.Plant
 {
     /// <summary>
     ///     Model for obtains the details of plant.
     /// </summary>
-    public class PlantDetailsServiceModel : NotifyPropertyChanged
+    public class PlantDetailsServiceModel
     {
         #region Properties.
 

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Apricot.WebServices.Models.Plant;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Apricot.Shared.Models.Services;
 
-namespace Apricot.Shared.Services.Apricot
+namespace Apricot.WebServices.Plant
 {
     /// <summary>
     ///     Service to manage plant varieties.
@@ -12,14 +12,14 @@ namespace Apricot.Shared.Services.Apricot
         #region Constants.
 
         /// <summary>
+        ///     Service name for obtains the information of variety.
+        /// </summary>
+        private const string DetailsServiceName = "getTypePlant/{0}";
+
+        /// <summary>
         ///     Service name for obtains the variety plant list.
         /// </summary>
         private const string VarietiesServiceName = "getTypePlant";
-
-        /// <summary>
-        ///     Service name for obtains the information of variety.
-        /// </summary>
-        private const string VarietyDetailsServiceName = "getTypePlant/{0}";
 
         #endregion Constants.
 
@@ -29,7 +29,7 @@ namespace Apricot.Shared.Services.Apricot
         ///     Get varieties.
         /// </summary>
         /// <returns>The varieties.</returns>
-        public async Task<List<VarietiesServiceModel>> GetVarieties()
+        public async Task<List<VarietiesServiceModel>> GetAsync()
         {
             return await GetAsync<List<VarietiesServiceModel>>(VarietiesServiceName);
         }
@@ -39,9 +39,9 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <param name="varietyIdentifier">The variety identifier.</param>
         /// <returns>The information variety of plant.</returns>
-        public async Task<VarietyDetailsServiceModel> GetVarietyDetails(int varietyIdentifier)
+        public async Task<VarietyDetailsServiceModel> GetDetailsAsync(int varietyIdentifier)
         {
-            var serviceUri = string.Format(VarietyDetailsServiceName, varietyIdentifier);
+            var serviceUri = string.Format(DetailsServiceName, varietyIdentifier);
             return await GetAsync<VarietyDetailsServiceModel>(serviceUri);
         }
 

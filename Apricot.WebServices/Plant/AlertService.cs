@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Apricot.Shared.Models.Services;
+﻿using Apricot.WebServices.Models.Plant;
+using System.Threading.Tasks;
 
-namespace Apricot.Shared.Services.Apricot
+namespace Apricot.WebServices.Plant
 {
     /// <summary>
     ///     Service for manage alert.
@@ -13,12 +13,12 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Service name for obtains the time remaining before the next watering is done.
         /// </summary>
-        private const string GetTimeRemainingServiceName = "getAlert/watering/{0}";
+        private const string AlertServiceName = "getAlert/Plant/{0}";
 
         /// <summary>
         ///     Service name for obtains the time remaining before the next watering is done.
         /// </summary>
-        private const string GetAlertServiceName = "getAlert/Plant/{0}";
+        private const string TimeRemainingServiceName = "getAlert/watering/{0}";
 
         #endregion Constants.
 
@@ -29,9 +29,9 @@ namespace Apricot.Shared.Services.Apricot
         /// </summary>
         /// <param name="plantIdentifier">The plant identifier.</param>
         /// <returns>The alert information.</returns>
-        public async Task<AlertServiceModel> GetAlertAsync(int plantIdentifier)
+        public async Task<AlertServiceModel> GetAsync(int plantIdentifier)
         {
-            var serviceUri = string.Format(GetAlertServiceName, plantIdentifier);
+            var serviceUri = string.Format(AlertServiceName, plantIdentifier);
             return await GetAsync<AlertServiceModel>(serviceUri);
         }
 
@@ -42,7 +42,7 @@ namespace Apricot.Shared.Services.Apricot
         /// <returns>The time remaining before watering.</returns>
         public async Task<RemainingTimeServiceModel> GetTimeRemainingAsync(int plantIdentifier)
         {
-            var serviceUri = string.Format(GetTimeRemainingServiceName, plantIdentifier);
+            var serviceUri = string.Format(TimeRemainingServiceName, plantIdentifier);
             return await GetAsync<RemainingTimeServiceModel>(serviceUri);
         }
 

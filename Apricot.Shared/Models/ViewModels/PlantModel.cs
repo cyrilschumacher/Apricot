@@ -1,9 +1,9 @@
 ﻿using System;
-using Apricot.Shared.Models.Services;
 using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Apricot.WebServices.Models.Plant;
 
 namespace Apricot.Shared.Models.ViewModels
 {

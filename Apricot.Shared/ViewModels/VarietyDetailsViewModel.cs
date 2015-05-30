@@ -1,11 +1,11 @@
 ﻿using System.Windows.Input;
 using Apricot.Shared.Models.ViewModels;
-using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Apricot.WebServices.Plant;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -133,7 +133,7 @@ namespace Apricot.Shared.ViewModels
         /// <param name="varietyIdentifier">The variety identifier.</param>
         private async void _LoadVarietyInformationAsync(int varietyIdentifier)
         {
-            Model.Details = await _varietyPlantService.GetVarietyDetails(varietyIdentifier);
+            Model.Details = await _varietyPlantService.GetDetailsAsync(varietyIdentifier);
         }
 
         #endregion Methods.

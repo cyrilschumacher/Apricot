@@ -1,7 +1,6 @@
 ﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.ViewModels;
-using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -20,6 +19,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Apricot.WebServices.Plant;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -149,7 +149,7 @@ namespace Apricot.Shared.ViewModels
             // Test if the command of create a new plant is available.
             CreateCommand.RaiseCanExecuteChanged();
         }
-
+        
         /// <summary>
         ///     Occurs when the user presses the hardware Back button.
         /// </summary>
@@ -258,13 +258,13 @@ namespace Apricot.Shared.ViewModels
         {
             // Obtains, only, the photos in Base64 format.
             var photoList = new List<PlantPhotoModel> { Model.Photo };
-            var photos = photoList.Select(photo => photo.Base64Data);
+            var photos = photoList.Select(photo => photo.Base64Data).ToList();
 
             try
             {
                 // Create a new plant by user informations.
                 await
-                    _plantService.CreateNewPlantAsync(Model.Name, Model.SelectedDevice.Identifier, Model.SelectedVariety.Id, photos);
+                    _plantService.CreateAsync(Model.Name, Model.SelectedDevice.Identifier, Model.SelectedVariety.Identifier, photos);
                 // Return to the previous page.
                 _GoToPreviousPage();
             }
@@ -297,7 +297,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _LoadPlantVarietiesAsync()
         {
-            var varieties = await _varietyPlantService.GetVarieties();
+            var varieties = await _varietyPlantService.GetAsync();
             Model.Varieties.AddRange(varieties);
         }
 

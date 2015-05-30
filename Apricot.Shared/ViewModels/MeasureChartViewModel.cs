@@ -1,7 +1,5 @@
 ﻿using Apricot.Shared.Models.Messages;
-using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
-using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -13,6 +11,8 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Apricot.Shared.Extensions;
+using Apricot.WebServices.Models.Plant;
+using Apricot.WebServices.Plant;
 
 namespace Apricot.Shared.ViewModels
 {

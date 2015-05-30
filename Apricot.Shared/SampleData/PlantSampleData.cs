@@ -1,8 +1,8 @@
 ﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
-using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
 using System;
+using Apricot.WebServices.Models.Plant;
 
 namespace Apricot.Shared.SampleData
 {

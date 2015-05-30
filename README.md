@@ -1,4 +1,6 @@
 # Apricot
+[![Build status](https://ci.appveyor.com/api/projects/status/usb0wn7ahy97fqhu?svg=true)](https://ci.appveyor.com/project/cyrilschumacher/apricot)
+
 Application Windows Phone pour le projet **Développement Embarqué** dans le cadre de la 4ème année à l'[exia.cesi](http://www.exia-nancy.com/) de Nancy.
 
 ## Objectifs

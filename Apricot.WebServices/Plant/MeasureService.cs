@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Apricot.WebServices.Models.Plant;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Apricot.Shared.Models.Services;
 
-namespace Apricot.Shared.Services.Apricot
+namespace Apricot.WebServices.Plant
 {
     /// <summary>
     ///     Service for manage measures.

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Notifications;
-using Apricot.Shared.Models.Services;
-using Apricot.Shared.Services.Apricot;
+using Apricot.WebServices.Models.Plant;
+using Apricot.WebServices.Plant;
 
 namespace Apricot.Tasks
 {
@@ -90,7 +90,7 @@ namespace Apricot.Tasks
         /// <returns>The active plantes.</returns>
         private async Task<IEnumerable<PlantServiceModel>> _GetActivePlantsAsync()
         {
-            var plants = await _plantService.GetPlantsAsync();
+            var plants = await _plantService.GetAsync();
             return plants.Where(plant => plant.IsActive);
         }
 

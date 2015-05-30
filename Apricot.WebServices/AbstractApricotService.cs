@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Apricot.WebServices.Extensions;
+using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Apricot.Shared.Extensions;
-using Newtonsoft.Json;
 
-namespace Apricot.Shared.Services.Apricot
+namespace Apricot.WebServices
 {
     /// <summary>
     ///     Abstract Apricot Service.
@@ -20,13 +20,12 @@ namespace Apricot.Shared.Services.Apricot
         /// <summary>
         ///     Request timeout (in milliseconds).
         /// </summary>
-        private const int DefaultHttpClientTimeout = 3000;
+        private const int DefaultTimeout = 3000;
 
         /// <summary>
         ///     Server address.
         /// </summary>
-        //private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
-        private const string ServerAddress = "http://192.168.154.134:3000/";
+        private const string ServerAddress = "http://private-04cb2-apricot2.apiary-mock.com/";
 
         #endregion Constants.
 
@@ -93,7 +92,7 @@ namespace Apricot.Shared.Services.Apricot
             {
                 throw new ArgumentNullException("jsonData", "The parameter is null or empty.");
             }
-            if (!jsonData.IsJsonValue())
+            if (!jsonData.IsValidJson())
             {
                 throw new ArgumentException("The data isn't a JSON data valid.", "jsonData");
             }
@@ -124,7 +123,7 @@ namespace Apricot.Shared.Services.Apricot
         #endregion Private methods.
 
         /// <summary>
-        ///     Sends a GET request to the specified Uri as an asynchronous operation. 
+        ///     Sends a GET request to the specified Uri as an asynchronous operation.
         /// </summary>
         /// <param name="serviceUri">The service Uri.</param>
         /// <param name="timeout">The request timeout.</param>
@@ -136,7 +135,7 @@ namespace Apricot.Shared.Services.Apricot
         }
 
         /// <summary>
-        ///     Sends a GET request to the specified Uri as an asynchronous operation. 
+        ///     Sends a GET request to the specified Uri as an asynchronous operation.
         /// </summary>
         /// <typeparam name="TModel">The model type.</typeparam>
         /// <param name="serviceUri">The service Uri.</param>
@@ -150,7 +149,7 @@ namespace Apricot.Shared.Services.Apricot
 
             // Obtains the absolute URL (with the URI address of service) and sets the timeout.
             var requestUri = _GetServerAddress(serviceUri);
-            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultHttpClientTimeout);
+            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultTimeout);
 
             Debug.WriteLine("URI request: {0}", requestUri);
             Debug.WriteLine("Timeout: {0}", timeout);
@@ -177,7 +176,7 @@ namespace Apricot.Shared.Services.Apricot
             // adds content and sets the timeout.
             var requestUri = _GetServerAddress(serviceUri);
             var httpContent = new StringContent(content, Encoding.UTF8, "application/json");
-            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultHttpClientTimeout);
+            timeout = timeout ?? TimeSpan.FromMilliseconds(DefaultTimeout);
 
             Debug.WriteLine("URI request: {0}", requestUri);
             Debug.WriteLine("Timeout: {0}", timeout);

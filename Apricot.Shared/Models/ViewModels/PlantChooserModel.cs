@@ -1,5 +1,5 @@
-﻿using Apricot.Shared.Models.Services;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Apricot.WebServices.Models.Plant;
 
 namespace Apricot.Shared.Models.ViewModels
 {

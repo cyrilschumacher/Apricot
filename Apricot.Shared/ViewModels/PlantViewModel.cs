@@ -1,10 +1,8 @@
 ﻿using Apricot.Shared.Extensions;
 using Apricot.Shared.Models;
 using Apricot.Shared.Models.Messages;
-using Apricot.Shared.Models.Services;
 using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services;
-using Apricot.Shared.Services.Apricot;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -13,6 +11,8 @@ using System.Diagnostics;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Apricot.WebServices.Models.Plant;
+using Apricot.WebServices.Plant;
 
 //todo: Review the exceptions.
 namespace Apricot.Shared.ViewModels
@@ -231,7 +231,7 @@ namespace Apricot.Shared.ViewModels
         {
             try
             {
-                var details = await _plantService.GetDetailsPlantAsync(Model.Identifier);
+                var details = await _plantService.GetDetailsAsync(Model.Identifier);
                 Model.Details = new PlantDetailsModel {Variety = details.Variety};
 
                 if (details.Photos != null)
@@ -258,7 +258,7 @@ namespace Apricot.Shared.ViewModels
             try
             {
                 Model.RemainingTime = await _alertService.GetTimeRemainingAsync(Model.Identifier);
-                Model.Alert = await _alertService.GetAlertAsync(Model.Identifier);
+                Model.Alert = await _alertService.GetAsync(Model.Identifier);
             }
             catch (Exception)
             {
@@ -339,7 +339,7 @@ namespace Apricot.Shared.ViewModels
         /// </summary>
         private async void _StopMeasuresAsync()
         {
-            await _plantService.StopPlantAsync(Model.Identifier);
+            await _plantService.StopAsync(Model.Identifier);
 
             Model.IsActive = false;
             Model.StopCommand.RaiseCanExecuteChanged();

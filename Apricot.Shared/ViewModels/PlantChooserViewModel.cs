@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Apricot.Shared.Extensions;
+﻿using Apricot.Shared.Extensions;
+using Apricot.Shared.Models.ViewModels;
 using Apricot.Shared.Services;
-using Apricot.Shared.Services.Apricot;
+using Apricot.WebServices.Models.Plant;
+using Apricot.WebServices.Plant;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using Apricot.Shared.Models.Services;
-using Apricot.Shared.Models.ViewModels;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Apricot.Shared.ViewModels
 {
@@ -115,7 +115,7 @@ namespace Apricot.Shared.ViewModels
         private async Task _LoadPlantAsync()
         {
             // Rearranges the list: active plants are positioned at the top of the list.
-            var plant = await _plantService.GetPlantsAsync();
+            var plant = await _plantService.GetAsync();
             plant = plant.OrderBy(x => x.Identifier).Reverse().ToList();
 
             // Clear and adds existing plant.

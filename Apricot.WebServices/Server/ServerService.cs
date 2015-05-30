@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Apricot.Shared.Models.Services;
+﻿using Apricot.WebServices.Models.Server;
+using System.Threading.Tasks;
 
-namespace Apricot.Shared.Services.Apricot
+namespace Apricot.WebServices.Server
 {
     /// <summary>
     ///     Server service.
