@@ -7,6 +7,13 @@ Application Windows Phone pour le projet **Développement Embarqué** dans le ca
 Les objectifs de cette application sont d'**afficher les plantes actives** (et inactives), les **mesures en temps réel** et selon 
 une période exprimées en heures et les **informations sur les variétés**.
 
+## Architecture
+Le projet se repose sur une architecture MVVM qui est découpé en plusieurs sous-projets :
+
+- **Apricot.Share**, projet de type *Portable Library*, contient les modèles de vue ainsi que leurs modèles respectives.
+- **Apricot.WebServices**, projet de type *Portable Library*, contient les services web.
+- **Apricot.Windows** et **Apricot.WindowsPhone**, projet de type *application Windows Phone* et *application Windows 8* contiennent les vues.
+
 ## Bibliothèques
 Plusieurs bibliothèques ont été utilisées pour le développement de cette application :
 
@@ -18,6 +25,11 @@ Les composants de la bibliothèque ont donné la possibilité d'afficher les mes
 
 ### Json.NET
 Les bibliothèques de Windows Runtime fournissent des classes permettant la sérialisation et la déserialisation de données JSON. La bibliothèque apporte, en plus de la fonctionnalité de base, des convertisseurs. Elle sera utilisée pour l'échange de données JSON entre l'application mobile et les services web.
+
+## FAQ
+### Pourquoi Apricot ?
+Le nom de *Apricot* n'a pas été choisi par hasard. Il s'agit d'un acronyme de : 
+> A plant who wants to be a connected object
 
 ## Copyright
 
