@@ -1,9 +1,9 @@
 using Apricot.Shared.ViewModels;
-using Apricot.Views;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using System;
+using Apricot.Views;
 
 namespace Apricot
 {
@@ -120,6 +120,8 @@ namespace Apricot
         private static INavigationService _InitializeNavigationService()
         {
             var navigationService = new NavigationService();
+            navigationService.Configure("PlantChooser", typeof(PlantChooserPage));
+
             return navigationService;
         }
 

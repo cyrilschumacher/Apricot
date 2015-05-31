@@ -1,0 +1,32 @@
+﻿<Page
+	x:Class="Apricot.Views.PlantChooserPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+	xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+	xmlns:sampleData="using:Apricot.Shared.SampleData"
+	Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	DataContext="{Binding PlantChooser, Source={StaticResource Locator}}"
+	mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:PlantChooserSampleData}">
+
+	<!-- Behaviors. -->
+	<interactivity:Interaction.Behaviors>
+		<core:EventTriggerBehavior EventName="Loaded">
+			<core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
+		</core:EventTriggerBehavior>
+	</interactivity:Interaction.Behaviors>
+	
+	<!-- Content. -->
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<ListView ItemsSource="{Binding Model.Plant}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+	</Grid>
+</Page>

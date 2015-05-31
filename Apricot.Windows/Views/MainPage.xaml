@@ -2,12 +2,23 @@
     x:Class="Apricot.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Apricot"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:sampleData="using:Apricot.Shared.SampleData"
+    DataContext="{Binding Main, Source={StaticResource Locator}}"
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=sampleData:MainSampleData}">
 
+    <!-- Behaviors. -->
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding OnLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+
+    <!-- Content. -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <ProgressRing IsActive="{Binding Model.IsLoading}" />
     </Grid>
 </Page>
