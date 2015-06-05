@@ -29,7 +29,7 @@ Les bibliothèques de Windows Runtime fournissent des classes permettant la sér
 ## FAQ
 ### Pourquoi Apricot ?
 Le nom de *Apricot* n'a pas été choisi par hasard. Il s'agit d'un acronyme de : 
-> A plant who wants to be a connected object
+> A plant which wants to be a connected object
 
 ## Copyright
 
